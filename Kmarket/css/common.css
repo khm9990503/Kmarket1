@@ -255,7 +255,7 @@
       /*display: none; */
       width: 42px;
       height: 42px;
-      background-image: url(/Kmarket1/img/top.png);
+      background-image: url(../img/top.png);
       border: none;
       font-size: 0;
       cursor: pointer;
