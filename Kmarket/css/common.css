@@ -196,6 +196,13 @@
       text-decoration: underline;
   }
 
+  main > section {
+    float: right;
+    width: 985px;
+    height: auto;
+    box-sizing: border-box;
+}
+
   /* 푸터 */
   footer {
       width: 100%;
@@ -259,5 +266,6 @@
       border: none;
       font-size: 0;
       cursor: pointer;
+
   }
 
