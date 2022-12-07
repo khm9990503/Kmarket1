@@ -321,7 +321,7 @@ footer p:nth-of-type(2) {
 }
 #member > .signup h3 > span.optional {
     color: #01c1c4;
-    margin-top: 5px;
+    margin-right: 5px;
 }
 #member > .signup textarea {
     width: 100%;
