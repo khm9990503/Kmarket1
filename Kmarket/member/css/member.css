@@ -550,3 +550,442 @@ footer p:nth-of-type(2) {
     border-radius: 2px;
     cursor: pointer;        
 }
+
+/*findId*/
+#member > .findId {
+    width: 900px;
+    height: auto;
+    margin: 0 auto;
+}
+#member > .findId > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+#member > .findId > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+#member > .findId > nav > p {
+    float: right;
+    font-size: 11px;
+    margin-top: -20px;
+    color: #888;
+}
+#member > .findId > nav > p > strong {
+    font-weight: bold;
+}
+
+#member > .findId table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#member > .findId table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#member > .findId table *{}
+#member > .findId table tr {}
+#member > .findId table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#member > .findId table .essential {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#member > .findId table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#member > .findId button {
+    padding: 4px;
+    margin-left: 2px;
+    position: relative;
+    top: 5px;
+}
+
+#member > .findId table input {
+    padding: 0 8px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+}
+
+#member > .findId table .email input {
+    margin-top: 6px;
+}
+
+#member > .findId .findIdNext {
+    margin: 60px;
+    text-align: center;
+}
+
+#member > .findId .btnNext{
+    background: #0E6AD3;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;        
+}
+
+#member > .findId .explain {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #888;
+}
+
+#member > .findId .explain > strong {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/*findPw*/
+#member > .findPw {
+    width: 900px;
+    height: auto;
+    margin: 0 auto;
+}
+#member > .findPw > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+#member > .findPw > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+#member > .findPw > nav > p {
+    float: right;
+    font-size: 11px;
+    margin-top: -20px;
+    color: #888;
+}
+#member > .findPw > nav > p > strong {
+    font-weight: bold;
+}
+
+#member > .findPw table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#member > .findPw table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#member > .findPw table *{}
+#member > .findPw table tr {}
+#member > .findPw table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#member > .findPw table .essential {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#member > .findPw table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#member > .findPw button {
+    padding: 4px;
+    margin-left: 2px;
+    position: relative;
+    top: 5px;
+}
+
+#member > .findPw table input {
+    padding: 0 8px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+}
+
+#member > .findPw table .email input {
+    margin-top: 6px;
+}
+
+#member > .findPw .findPwNext {
+    margin: 60px;
+    text-align: center;
+}
+
+#member > .findPw .btnNext{
+    background: #0E6AD3;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;        
+}
+
+#member > .findPw .explain {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #888;
+}
+
+#member > .findPw .explain > strong {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/*findIdResult*/
+#member > .findIdResult {
+    width: 900px;
+    height: auto;
+    margin: 0 auto;
+}
+#member > .findIdResult > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+#member > .findIdResult > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+#member > .findIdResult > nav > p {
+    float: right;
+    font-size: 11px;
+    margin-top: -20px;
+    color: #888;
+}
+#member > .findIdResult > nav > p > strong {
+    font-weight: bold;
+}
+
+#member > .findIdResult table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#member > .findIdResult table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#member > .findIdResult table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#member > .findIdResult table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#member > .findIdResult .btns {
+    padding: 40px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+#member > .findIdResult .btnCancel{
+    background: #0E6AD3;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;        
+}
+#member > .findIdResult .btnNext{
+    background: #0E6AD3;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;        
+}
+
+/*findPwResult*/
+
+#member > .findPwResult {
+    width: 900px;
+    height: auto;
+    margin: 0 auto;
+}
+#member > .findPwResult > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+#member > .findPwResult > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+#member > .findPwResult > nav > p {
+    float: right;
+    font-size: 11px;
+    margin-top: -20px;
+    color: #888;
+}
+#member > .findPwResult > nav > p > strong {
+    font-weight: bold;
+}
+
+#member > .findPwResult table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#member > .findPwResult table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#member > .findPwResult table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#member > .findPwResult table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#member > .findPwResult .btns {
+    padding: 40px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+#member > .findPwResult .btnCancel{
+    background: #0E6AD3;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;        
+}
+#member > .findPwResult .btnNext{
+    background: #0E6AD3;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;        
+}
+
+#member > .findPwResult form input[type="password"]{
+    width: 200px;
+    height: 30px;
+    border: 1px solid #e4eaec;
+    background: #f7f7f7;
+    text-indent: 6px;
+}
