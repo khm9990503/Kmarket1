@@ -55,36 +55,49 @@ header>.logo > div > a {
 header>.logo > div > a:last-child {
     border-right: 1px solid #e9e9e9;
 }
-header>.logo > div > form{
+header>.logo > div > .head-search {
     position: absolute;
-    left: 50%;
+    left: 44%;
     top: 50%;
     margin-left: -185px;
     margin-top: -22px;
     display: inline-block;
-    width: 370px;
-    height: 45px;
-}
-header>.logo > div > form > input {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #e9e9e9;
-    border-radius: 5px;
-    font-size: 20px;
-    padding-left: 10px;
-    padding-right: 30px;
+    width: 553px;
+    height: 48px;
+    border-radius: 24px;
+    border: 2px solid #067dfd;
     box-sizing: border-box;
 }
-header>.logo > div > form > button {
+header>.logo > div > .head-search form {
+    width: 100%;
+    height: 100%;
+}
+header>.logo > div > .head-search form > input {
     position: absolute;
-    right: 6px;
+    top: 3px;
+    left: 20px;
+    width: 85%;
+    height: 90%;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding:0;
+    outline: 0;
+    box-sizing: border-box;
+}
+header>.logo > div > .head-search form > button {
+    position: absolute;
+    right: 13px;
     top: 10px;
     background: #fff;
     border: none;
     font-size: 20px;
     color: #333;
     outline: none;
+}
+header>.logo > div > .head-search form > button > img {
+    width: 23px;
+    height: 23px;
 }
 
 header>.menu{height: 46px; background: #f2f2f2; border-bottom: 1px solid #ddd;}
