@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>케이마켓::대한민국 1등 온라인 쇼핑</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/Java1_Kmarket1/img/favicon.ico">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="/Java1_Kmarket1/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -62,7 +62,7 @@
                         <form action="">
                             <input type="text" name="" id="">
                             <button>
-                                <img src="./img/image__header-search.png" alt="검색돋보기">
+                                <img src="/Java1_Kmarket1/img/image__header-search.png" alt="검색돋보기">
                             </button>
                         </form>
                     </div>
@@ -887,7 +887,7 @@
             </ul>
             <div>
                 <p>
-                    <img src="./img/footer_logo.png" alt="logo">
+                    <img src="/Java1_Kmarket1/img/footer_logo.png" alt="logo">
                 </p>
                 <p>
                     <strong>(주)KMARKET</strong>
