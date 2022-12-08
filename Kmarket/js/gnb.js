@@ -1,3 +1,17 @@
+/*
+$(document).ready(function(){
+       
+        $('#gnb').hover(function(){
+            $(this).animate({'height':'0'}, 1000);
+        });
+        $('#gnb').hover(function(){
+            $(this).animate({'height':'200px'}, 1000);
+        });
+});
+*/
+
+
+
 $(document).ready(function(){
     var gnb = $('#gnb > li > a');
 
