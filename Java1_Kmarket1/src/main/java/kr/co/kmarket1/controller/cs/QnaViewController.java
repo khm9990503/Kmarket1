@@ -1,4 +1,4 @@
-package kr.co.kmarket1.controller;
+package kr.co.kmarket1.controller.cs;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/index.do")
-public class IndexContoller extends HttpServlet{
+@WebServlet("/cs/qna/view.do")
+public class QnaViewController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -23,8 +23,8 @@ public class IndexContoller extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
-		dispatcher.forward(req, resp);
+		RequestDispatcher Dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
+		Dispatcher.forward(req, resp);
 	}
 	
 	@Override
