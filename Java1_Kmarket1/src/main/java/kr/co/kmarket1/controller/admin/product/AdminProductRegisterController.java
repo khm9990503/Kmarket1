@@ -80,7 +80,6 @@ public class AdminProductRegisterController extends HttpServlet{
 		String duty		= req.getParameter("duty");
 		String receipt	= req.getParameter("receipt");
 		String origin	= req.getParameter("origin");
-		String bizType	= req.getParameter("bizType");
 		String ip		= req.getRemoteAddr();
 		
 		// VO 데이터 생성
@@ -101,7 +100,6 @@ public class AdminProductRegisterController extends HttpServlet{
 		vo.setDuty(duty);
 		vo.setReceipt(receipt);
 		vo.setOrigin(origin);
-		vo.setBizType(bizType);
 		vo.setIp(ip);
 
 		// 데이터베이스 처리
