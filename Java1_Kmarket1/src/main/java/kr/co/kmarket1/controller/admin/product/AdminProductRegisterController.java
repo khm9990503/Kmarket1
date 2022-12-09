@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.ProductDao;
+import kr.co.kmarket1.vo.ProductVO;
 
 
 @WebServlet("/admin/product/register.do")
@@ -34,45 +35,54 @@ public class AdminProductRegisterController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// 데이터 수신
-/*		String prodCate1 = req.getParameter("category1");
+		String prodCate1 = req.getParameter("category1");
 		String prodCate2 = req.getParameter("category2");
 		String prodName  = req.getParameter("prodName");
 		String descript  = req.getParameter("descript");
-		String company   = req.getParameter("company");
+		String company	 = req.getParameter("company");
+		String price	 = req.getParameter("price");
+		String discount  = req.getParameter("discount");
+		String point	 = req.getParameter("point");
+		String stock	 = req.getParameter("stock");
+		String delivery	 = req.getParameter("delivery");
+		String thumb1	= req.getParameter("thumb1");
+		String thumb2	= req.getParameter("thumb2");
+		String thumb3	= req.getParameter("thumb3");
+		String detail	= req.getParameter("detail");
+		String status	= req.getParameter("status");
+		String duty		= req.getParameter("duty");
+		String receipt	= req.getParameter("receipt");
+		String origin	= req.getParameter("origin");
+		String bizType	= req.getParameter("bizType");
+		String ip		= req.getRemoteAddr();
 		
-		
-		
-		
-		
-		String seller	= req.getParameter("");
-		int price		= req.getParameter("");
-		int discount	= req.getParameter("");
-		int point		= req.getParameter("");
-		int stock		= req.getParameter("");
-		int sold		= req.getParameter("");
-		int delivery	= req.getParameter("");
-		int hit			= req.getParameter("");
-		int score		= req.getParameter("");
-		int review		= req.getParameter("");
-		String thumb1	= req.getParameter("");
-		String thumb2	= req.getParameter("");
-		String thumb3	= req.getParameter("");
-		String detail	= req.getParameter("");
-		String status	= req.getParameter("");
-		String duty		= req.getParameter("");
-		String receipt	= req.getParameter("");
-		String bizType	= req.getParameter("");
-		String origin	= req.getParameter("");
-		String ip		= req.getParameter("");
-		
-		
+		// VO 데이터 생성
+		ProductVO vo = new ProductVO();
+		vo.setProdName(prodName);
+		vo.setDescript(descript);
+		vo.setCompany(company);
+		vo.setPrice(price);
+		vo.setDiscount(discount);
+		vo.setPoint(point);
+		vo.setStock(stock);
+		vo.setDelivery(delivery);
+		vo.setThumb1(thumb1);
+		vo.setThumb2(thumb2);
+		vo.setThumb3(thumb3);
+		vo.setDetail(detail);
+		vo.setStatus(status);
+		vo.setDuty(duty);
+		vo.setReceipt(receipt);
+		vo.setOrigin(origin);
+		vo.setBizType(bizType);
+		vo.setIp(ip);
 
 		// 데이터베이스 처리
-		ProductDao.getInstance().insertUser(vo);
+		ProductDao.getInstance().insertProduct(vo);
 			
 		// 리다이렉트
 		resp.sendRedirect("/Java1_Kmarket1/admin/product/list.do");
 		
-*/		
+		
 	}
 }
