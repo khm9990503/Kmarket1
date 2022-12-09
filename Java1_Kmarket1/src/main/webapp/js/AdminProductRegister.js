@@ -39,6 +39,7 @@ $(function(){
 			
 			$('.register > form').submit(function(){
 					
+
 			if(!isProdNameOk){
 				alert('동일한 상품명이 존재합니다.');
 				return false;
@@ -48,3 +49,4 @@ $(function(){
 			return true;
 			});
 		});
+
