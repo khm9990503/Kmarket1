@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="./css/member.css">
+    <link rel="stylesheet" href="/Java1_Kmarket1/member/css/member.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
@@ -19,8 +19,8 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="./member/login.html">로그인</a>
-                    <a href="#">회원가입</a>
+                    <a href="/Java1_Kmarket1/member/login.do">로그인</a>
+                    <a href="/Java1_Kmarket1/member/join.do">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a href="#">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니
@@ -29,8 +29,8 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="../index.html">
-                        <img src="../img/header_logo.png" alt="로고">
+                    <a href="/Java1_Kmarket1/index.do">
+                        <img src="/Java1_Kmarket1/member/img/header_logo.png" alt="로고">
                     </a>
                 </div>
             </div>

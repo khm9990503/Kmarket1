@@ -35,8 +35,8 @@
                  </table>
 
                  <div class="btns">
-                     <a href="#" class="btn btnCancel">취소</a>
-                     <a href="#" class="btn btnNext">다음</a>
+                     <a href="/Java1_Kmarket1/index.do" class="btn btnCancel">취소</a>
+                     <a href="/Java1_Kmarket1/member/login.do" class="btn btnNext">다음</a>
                  </div>
 
 
