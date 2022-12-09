@@ -5,6 +5,7 @@ public class SQL {
 	// select , insert , update , delete 순으로 뭉쳐서 작성해주면 보기 편해요.
 	
 	
+
 	
 	
 	// Admin\ProductDao
@@ -31,7 +32,26 @@ public class SQL {
 												
 	
 	
+
+	//member
+	// terms 불러오기
+	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
 	
+	// 회원가입 - 개인 구매자 (insertMember)
+	public static final String INSERT_MEMBER_NORMAL = "INSERT INTO `km_member` SET "
+													+ "`uid`=?,"
+													+ "`pass`='SHA2(?, 256)',"
+													+ "`name`=?,"
+													+ "`gender`=?,"
+													+ "`email`=?,"
+													+ "`type`=?,"
+													+ "`hp`=?,"
+													+ "`zip`=?,"
+													+ "`addr1`=?,"
+													+ "`addr2`=?,"
+													+ "`regip`=?,"
+													+ "`rdate`= NOW()";
+
 	
 	
 }
