@@ -56,6 +56,23 @@ public class ProductVO {
 	private String origin;
 	private String ip;
 	private String rdate;
+	
+	public void setPrice(String price) {
+		this.price = Integer.parseInt(price);
+	}
+	public void setDiscount(String discount) {
+	this.discount = Integer.parseInt(discount);
+	}
+	public void setStock(String stock) {
+		this.stock = Integer.parseInt(stock);
+	}
+	public void setPoint(String point) {
+		this.point = Integer.parseInt(point);
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = Integer.parseInt(delivery);
+	}
+	
 	public int getProdNo() {
 		return prodNo;
 	}
