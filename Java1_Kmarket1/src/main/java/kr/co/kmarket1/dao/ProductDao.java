@@ -13,7 +13,7 @@ public class ProductDao extends DBHelper{
  
 	private ProductDao () {}
 	
-  // 로거 생성
+	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
   
 	public void selectProduct () {}
