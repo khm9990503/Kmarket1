@@ -50,5 +50,3 @@ $(function(){
 		// 최종 전송
 		return true;
 	});
-	
-});
