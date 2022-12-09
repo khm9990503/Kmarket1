@@ -47,7 +47,7 @@
              </p>
 
              <div class="findPwNext">
-                 <a href="#" class="btn btnNext">비밀번호 찾기</a>
+                 <a href="/Java1_Kmarket1/member/findPwResult.do" class="btn btnNext">비밀번호 찾기</a>
              </div>
          </form>
      </div>

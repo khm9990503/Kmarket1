@@ -10,7 +10,7 @@
             </p>
         </nav>
 
-     <form action="#" method="post">
+     <form action="/Java1_Kmarket1/member/findIdResult" method="post">
         <section>
             <table>
                 <caption>고객님의 정보와 일치하는 아이디 입니다.</caption>
@@ -36,8 +36,8 @@
         </section>
 
         <div class="btns">
-            <a href="#" class="btn btnCancel">로그인</a>
-            <a href="#" class="btn btnNext">비밀번호 찾기</a>
+            <a href="/Java1_Kmarket1/member/login.do" class="btn btnCancel">로그인</a>
+            <a href="/Java1_Kmarket1/member/findPw.do" class="btn btnNext">비밀번호 찾기</a>
         </div>
 
      </form>

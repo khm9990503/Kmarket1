@@ -16,7 +16,7 @@
             </ul>
             <div>
                 <p>
-                    <img src="../img/footer_logo.png" alt="로고">
+                    <img src="/Java1_Kmarket1/member/img/footer_logo.png" alt="로고">
                 </p>
                 <p>
                     <strong>(주)KMARKET</strong>

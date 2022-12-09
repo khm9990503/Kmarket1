@@ -5,7 +5,7 @@
         <nav>
             <h1>판매자 회원가입</h1>
         </nav>
-        <form action="#" method="post">
+        <form action="/Java1_Kmarket1/member/registerSeller.do" method="post">
             <section>
                 <table>
                     <caption>필수 정보입력</caption>

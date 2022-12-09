@@ -9,7 +9,7 @@
                 <strong>아이디찾기</strong>
             </p>
         </nav>
-        <form action="#" method="post">
+        <form action="/Java1_Kmarket1/member/findId.do" method="post">
             <section>
                 <table>
                     <caption>이메일로 찾기</caption>
@@ -46,7 +46,7 @@
             </p>
 
             <div class="findIdNext">
-                <a href="#" class="btn btnNext">아이디 찾기</a>
+                <a href="/Java1_Kmarket1/member/findIdResult.do" class="btn btnNext">아이디 찾기</a>
             </div>
         </form>
     </div>

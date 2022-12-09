@@ -9,7 +9,7 @@
                         <strong>로그인</strong>
                     </p>
                 </nav>
-                <form action="#">
+                <form action="/Java1_Kmarket1/member/login.do">
                     <table border="0">
                         <tbody>
                             <tr>
@@ -29,15 +29,15 @@
                     <input type="submit" value="로그인">
                     <span>
                         <label><input type="checkbox" name="auto">자동 로그인</label>
-                        <a href="#">아이디찾기</a>
-                        <a href="#">비밀번호찾기</a>
-                        <a href="#">회원가입</a>
+                        <a href="/Java1_Kmarket1/member/findId.do">아이디찾기</a>
+                        <a href="/Java1_Kmarket1/member/findPw.do">비밀번호찾기</a>
+                        <a href="/Java1_Kmarket1/member/join.do">회원가입</a>
                     </span>
                     <a href="#" class="banner">
-                        <img src="./img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기">
+                        <img src="/Java1_Kmarket1/member/img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기">
                     </a>
                 </form>
-                <img src="./img/member_certifi_logo.gif" alt="banner">                
+                <img src="/Java1_Kmarket1/member/img/member_certifi_logo.gif" alt="banner">                
             </div>
         </main>
 <jsp:include page="/member/_footer.jsp"/>
