@@ -24,7 +24,8 @@ $(function(){
 		dataType: 'json',
 		success: function(data){
 			
-			if(data.result == 0){
+      
+		if(data.result == 0){
 				isProdNameOk = true;
 				$('.resultprodName').css('color', 'green').text('');
 			}else{
@@ -46,3 +47,4 @@ $(function(){
 	});
 			
 });
+

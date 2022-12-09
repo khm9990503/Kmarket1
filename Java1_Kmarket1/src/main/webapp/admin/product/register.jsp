@@ -6,21 +6,21 @@
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
-			let cate1 = $(this).val();
+			let cate1 = $(this).val(); // 선택된 option의 value = select의 value
 			let jsonData = {
 					"cate1":cate1
 			}
-			
+			$('.opt').remove(); // cate1 다시 선택 시 이전 cate2를 지우기 위해
 			$.ajax({
-				url:'/Java1_Kmarket1/admin/product/register.do',
+				url:'/Java1_Kmarket1/admin/product/cate2List.do',
 				method:'POST',
 				data:jsonData,
 				dataType:'json',
 				success:function(data){
 					console.log(data)
-					for(let cate2 of data){
-                        let tag = "<option>"+cate2.c2Name+"</option>";
-                        $('select[name=category2]').append(tag);
+					for(let vo of data){
+                        let tag = "<option class='opt' value="+vo.cate2+">"+vo.c2Name+"</option>";
+                        $('select[name=category2]').append(tag); // select에 option을 뒤에 붙임
                     }
 				}
 			});
