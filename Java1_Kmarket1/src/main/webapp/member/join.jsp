@@ -8,7 +8,7 @@
                         <img src="/Java1_Kmarket1/member/img/member_join_tit_normal.gif" alt="구매회원가입">
                         <div class="txt">
                             <img src="/Java1_Kmarket1/member/img/member_join_txt_normal.gif" alt="개인구매회원">
-                            <a href="/Java1_Kmarket1/member/signup.do?type=nomal">
+                            <a href="/Java1_Kmarket1/member/signup.do?type=normal">
                                 <img src="/Java1_Kmarket1/member/img/member_join_btn1.gif" alt="회원가입">
                             </a>
                         </div>
