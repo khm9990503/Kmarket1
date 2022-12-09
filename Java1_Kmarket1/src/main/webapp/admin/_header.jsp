@@ -10,13 +10,13 @@
         <script src="../js/gnb.js"></script>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="../css/admin.css">
+		<link rel="stylesheet" href="/Java1_Kmarket1/css/admin.css">
 	</head>
 	<body>
 		<div id="admin-warpper">
 			<header>
 				<div>
-					<a href="../admin/index.html" class="logo">
+					<a href="/Java1_Kmarket1/admin/index.do" class="logo">
 						<img src="/Java1_Kmarket1/img/admin_logo.png" alt="admin_logo">
 					</a>
 		            <p>
