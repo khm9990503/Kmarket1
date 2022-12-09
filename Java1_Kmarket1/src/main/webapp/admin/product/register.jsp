@@ -105,18 +105,18 @@
                 <table>
                     <tr>
                         <td>상품명</td>
-                        <td><input type="text" name="#"/></td>
+                        <td><input type="text" name="prodName"/>의류</td>
                     </tr>
                     <tr>
                         <td>기본설명</td>
                         <td>
                             <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
-                            <input type="text" name="#"/>
+                            <input type="text" name="descript"/>
                         </td>
                     </tr>
                     <tr>
                         <td>제조사</td>
-                        <td><input type="text" name="#"/></td>
+                        <td><input type="text" name="company"/></td>
                     </tr>
                     <tr>
                         <td>판매가격</td>

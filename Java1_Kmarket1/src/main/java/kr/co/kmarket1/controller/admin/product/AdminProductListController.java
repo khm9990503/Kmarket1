@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/product/list.do")
-public class ListController extends HttpServlet{
+public class AdminProductListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
