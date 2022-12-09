@@ -36,19 +36,15 @@ $(function(){
 				});
 				
 			}, 500);
-		});
-	
-	
-	
-	$('.register > form').submit(function(){
+			
+			$('.register > form').submit(function(){
 					
-		if(!isProdNameOk){
-			alert('동일한 상품명이 존재합니다.');
-			return false;
-		}
-		
-		// 최종 전송
-		return true;
-	});
-	
-});
+			if(!isProdNameOk){
+				alert('동일한 상품명이 존재합니다.');
+				return false;
+			}
+			
+			// 최종 전송
+			return true;
+			});
+		});

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
-<script src="/Java1_Kmarket1/js/AdminProductRegister.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
@@ -9,16 +8,16 @@
 			let jsonData = {
 					"cate1":cate1
 			}
-			
+			$(".opt").remove();
 			$.ajax({
-				url:'/Java1_Kmarket1/admin/product/register.do',
+				url:'/Java1_Kmarket1/admin/product/cate2List.do',
 				method:'POST',
 				data:jsonData,
 				dataType:'json',
 				success:function(data){
 					console.log(data)
 					for(let cate2 of data){
-                        let tag = "<option>"+cate2.c2Name+"</option>";
+                        let tag = "<option class='opt'>"+cate2.c2Name+"</option>";
                         $('select[name=category2]').append(tag);
                     }
 				}
