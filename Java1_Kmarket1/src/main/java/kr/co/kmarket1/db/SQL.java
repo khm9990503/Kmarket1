@@ -26,7 +26,6 @@ public class SQL {
 												+ "`duty` = ?, "
 												+ "`receipt` = ?, "
 												+ "`origin` = ?, "
-												+ "`biztype` = ?, "
 												+ "`ip` = ?, "
 												+ "`rdate`=NOW()";
 												

@@ -44,8 +44,7 @@ public class ProductDao extends DBHelper{
 			psmt.setString(14, vo.getDuty());
 			psmt.setString(15, vo.getReceipt());
 			psmt.setString(16, vo.getOrigin());
-			psmt.setString(17, vo.getBizType());
-			psmt.setString(18, vo.getIp());
+			psmt.setString(17, vo.getIp());
 			psmt.executeUpdate();
 			close();
 			

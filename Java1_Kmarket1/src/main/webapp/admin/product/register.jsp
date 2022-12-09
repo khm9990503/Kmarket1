@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
+<!-- 제품명 중복성 검사 -->
+<!-- <script src="/Java1_Kmarket1/js/AdminProductRegister.js"></script> -->
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
