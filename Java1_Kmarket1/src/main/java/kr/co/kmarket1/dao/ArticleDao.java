@@ -9,6 +9,7 @@ public class ArticleDao extends DBHelper{
 	}
 	public ArticleDao () {}
 	
+	// 기본 CRUD
 	public void selectArticle() {}
 	public void selectArticles() {}
 	public void insertArticle() {}
