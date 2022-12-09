@@ -1,5 +1,30 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
+<script type="text/javascript">
+	$(function(){
+		$("select[name=category1]").click(function(){
+			let cate1 = $(this).val();
+			let jsonData = {
+					"cate1":cate1
+			}
+			
+			$.ajax({
+				url:'/Java1_Kmarket1/admin/product/register.do',
+				method:'POST',
+				data:jsonData,
+				dataType:'json',
+				success:function(data){
+					console.log(data)
+					for(let cate2 of data){
+                        let tag = "<option>"+cate2.c2Name+"</option>";
+                        $('select[name=category2]').append(tag);
+                    }
+				}
+			});
+		});
+	});
+</script>
 <main>
     <aside>
         <ul id="gnb">
@@ -74,10 +99,9 @@
                                 <td>
                                     <select name="category1">
                                         <option value="cate0">1차 분류 선택</option>
-                                        <option value="cate11">패션·의류·뷰티</option>
-                                        <option value="cate12">가전·디지털</option>
-                                        <option value="cate13">식품·생필품</option>
-                                        <option value="cate14">홈·문구·취미</option>
+                                        <c:forEach var="c1" items="${cate1s}">
+                                        <option value="${c1.cate1 }">${c1.c1Name}</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -86,10 +110,7 @@
                                 <td>
                                     <select name="category2">
                                         <option value="cate0">2차 분류 선택</option>
-                                        <option value="cate21">남성의류</option>
-                                        <option value="cate22">여성의류</option>
-                                        <option value="cate23">잡화</option>
-                                        <option value="cate24">뷰티</option>
+                                        <!-- ajax로 cate2 넣을자리 -->
                                     </select>
                                 </td>
                             </tr>
