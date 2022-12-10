@@ -5,6 +5,33 @@ public class SQL {
 	// select , insert , update , delete 순으로 뭉쳐서 작성해주면 보기 편해요.
 	
 	
+
+	
+	
+	// Admin\ProductDao
+	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
+												+ "`prodname` = ?, "
+												+ "`descript` = ?, "
+												+ "`company` = ?, "
+												+ "`price` = ?, "
+												+ "`discount` = ?, "
+												+ "`point` = ?, "
+												+ "`stock` = ?, "
+												+ "`delivery` = ?, "
+												+ "`thumb1` = ?, "
+												+ "`thumb2` = ?, "
+												+ "`thumb3` = ?, "
+												+ "`detail` = ?, "
+												+ "`status` = ?, "
+												+ "`duty` = ?, "
+												+ "`receipt` = ?, "
+												+ "`origin` = ?, "
+												+ "`ip` = ?, "
+												+ "`rdate`=NOW()";
+												
+	
+	
+
 	//member
 	// terms 불러오기
 	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
@@ -25,8 +52,7 @@ public class SQL {
 													+ "`regip`=?, "
 													+ "`locationTerms`=?, "
 													+ "`rdate`= NOW()";
-													
-	
+
 	
 	
 }
