@@ -10,9 +10,12 @@ public class SQL {
 	
 	// Admin\ProductDao
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
-												+ "`prodname` = ?, "
+												+ "`prodCate1` = ?, "
+												+ "`prodCate2` = ?, "
+												+ "`prodName` = ?, "
 												+ "`descript` = ?, "
 												+ "`company` = ?, "
+												+ "`seller` = ?, "
 												+ "`price` = ?, "
 												+ "`discount` = ?, "
 												+ "`point` = ?, "
@@ -25,6 +28,7 @@ public class SQL {
 												+ "`status` = ?, "
 												+ "`duty` = ?, "
 												+ "`receipt` = ?, "
+												+ "`bizType` = ?, "
 												+ "`origin` = ?, "
 												+ "`ip` = ?, "
 												+ "`rdate`=NOW()";

@@ -85,11 +85,17 @@ public class ProductVO {
 	public void setProdCate1(int prodCate1) {
 		this.prodCate1 = prodCate1;
 	}
+	public void setProdCate1(String prodCate1) { // string을 매개변수로 받기위해 오버로딩
+		this.prodCate1 = Integer.parseInt(prodCate1);
+	}
 	public int getProdCate2() {
 		return prodCate2;
 	}
 	public void setProdCate2(int prodCate2) {
 		this.prodCate2 = prodCate2;
+	}
+	public void setProdCate2(String prodCate2) { // string을 매개변수로 받기위해 오버로딩
+		this.prodCate2 = Integer.parseInt(prodCate2);
 	}
 	public String getProdName() {
 		return prodName;
