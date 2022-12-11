@@ -51,6 +51,9 @@ public class MemberVO {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
+	public void setGender(String gender) {
+		this.gender = Integer.parseInt(gender);
+	}
 	public String getHp() {
 		return hp;
 	}
@@ -69,6 +72,9 @@ public class MemberVO {
 	public void setType(int type) {
 		this.type = type;
 	}
+	public void setType(String type) {
+		this.type = Integer.parseInt(type);
+	}
 	public String getPoint() {
 		return point;
 	}
@@ -80,6 +86,9 @@ public class MemberVO {
 	}
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	public void setLevel(String level) {
+		this.level = Integer.parseInt(level);
 	}
 	public String getZip() {
 		return zip;
@@ -170,6 +179,9 @@ public class MemberVO {
 	}
 	public void setLocationTerms(int locationTerms) {
 		this.locationTerms = locationTerms;
+	}
+	public void setLocationTerms(String locationTerms) {
+		this.locationTerms = Integer.parseInt(locationTerms);
 	}
 	
 	

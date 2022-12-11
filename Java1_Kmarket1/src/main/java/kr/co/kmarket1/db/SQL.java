@@ -10,9 +10,12 @@ public class SQL {
 	
 	// Admin\ProductDao
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
-												+ "`prodname` = ?, "
+												+ "`prodCate1` = ?, "
+												+ "`prodCate2` = ?, "
+												+ "`prodName` = ?, "
 												+ "`descript` = ?, "
 												+ "`company` = ?, "
+												+ "`seller` = ?, "
 												+ "`price` = ?, "
 												+ "`discount` = ?, "
 												+ "`point` = ?, "
@@ -25,8 +28,8 @@ public class SQL {
 												+ "`status` = ?, "
 												+ "`duty` = ?, "
 												+ "`receipt` = ?, "
+												+ "`bizType` = ?, "
 												+ "`origin` = ?, "
-												+ "`biztype` = ?, "
 												+ "`ip` = ?, "
 												+ "`rdate`=NOW()";
 												
@@ -39,17 +42,19 @@ public class SQL {
 	
 	// 회원가입 - 개인 구매자 (insertMember)
 	public static final String INSERT_MEMBER_NORMAL = "INSERT INTO `km_member` SET "
-													+ "`uid`=?,"
-													+ "`pass`='SHA2(?, 256)',"
-													+ "`name`=?,"
-													+ "`gender`=?,"
-													+ "`email`=?,"
-													+ "`type`=?,"
-													+ "`hp`=?,"
-													+ "`zip`=?,"
-													+ "`addr1`=?,"
-													+ "`addr2`=?,"
-													+ "`regip`=?,"
+													+ "`uid`=?, "
+													+ "`pass`=SHA2(?, 256), "
+													+ "`name`=?, "
+													+ "`gender`=?, "
+													+ "`email`=?, "
+													+ "`type`=?, "
+													+ "`level`=?, "
+													+ "`hp`=?, "
+													+ "`zip`=?, "
+													+ "`addr1`=?, "
+													+ "`addr2`=?, "
+													+ "`regip`=?, "
+													+ "`locationTerms`=?, "
 													+ "`rdate`= NOW()";
 
 	

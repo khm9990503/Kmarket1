@@ -1,14 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
+<!-- 제품명 중복성 검사 -->
+<!-- <script src="/Java1_Kmarket1/js/AdminProductRegister.js"></script> -->
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
-			let cate1 = $(this).val();
+			let cate1 = $(this).val(); // 선택된 option의 value = select의 value
 			let jsonData = {
 					"cate1":cate1
 			}
-			$(".opt").remove();
+			$('.opt').remove(); // cate1 다시 선택 시 이전 cate2를 지우기 위해
 			$.ajax({
 				url:'/Java1_Kmarket1/admin/product/cate2List.do',
 				method:'POST',
@@ -16,13 +18,25 @@
 				dataType:'json',
 				success:function(data){
 					console.log(data)
-					for(let cate2 of data){
-                        let tag = "<option class='opt'>"+cate2.c2Name+"</option>";
-                        $('select[name=category2]').append(tag);
+					for(let vo of data){
+                        let tag = "<option class='opt' value="+vo.cate2+">"+vo.c2Name+"</option>";
+                        $('select[name=category2]').append(tag); // select에 option을 뒤에 붙임
                     }
 				}
 			});
 		});
+	});
+</script>
+<script>
+	// 상품 등록 개발이 끝나면 list.do에서 성공여부 알람 실행 예정
+	$(function() {
+		let success = $('.suc').val();
+		
+		if(success == "101"){
+			alert('상품 등록 성공!');
+		}else if(success == "201"){
+			alert('상품 등록 실패!/n유효성 : 할인율은 3자리수까지,나머지는 10자리까지');
+		}
 	});
 </script>
 <main>
@@ -87,8 +101,8 @@
             </p>
         </nav>
         <!--상품등록 컨텐츠 시작-->
-        <article>
-            <form action="/Java1_Kmarket1/admin/product/register.do" method="post">
+        <article><!-- [insert type="file"]이 있는 경우 enctype="multipart/form-data" 필요하다.-->
+            <form action="/Java1_Kmarket1/admin/product/register.do" method="post" enctype="multipart/form-data">
                 <section>
                     <h4>상품분류</h4>
                     <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
@@ -141,6 +155,10 @@
                         <td><input type="text" name="company"/></td>
                     </tr>
                     <tr>
+                        <td>판매자</td>
+                        <td><input type="text" name="seller"/></td><!-- 필수라 추가함 : 구홍모-->
+                    </tr>
+                    <tr>
                         <td>판매가격</td>
                         <td><input type="text" name="price"/>원</td>
                     </tr>                                    
@@ -148,14 +166,14 @@
                         <td>할인율</td>
                         <td>
                             <span>0을 입력하면 할인율 없음</span>
-                            <input type="text" name="discount"/>원
+                            <input type="text" name="discount" placeholder="0~100까지 입력"/>원
                         </td>
                     </tr>
                     <tr>
                         <td>포인트</td>
                         <td>
                             <span>0을 입력하면 포인트 없음</span>
-                            <input type="text" name="point"/>점
+                            <input type="text" name="point" placeholder="price의 1%(나중엔 유효성으로 자동입력되게)"/>점
                         </td>
                     </tr>
                     <tr>
@@ -173,20 +191,21 @@
                         <td>상품 썸네일</td>
                         <td>
                             <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
-                            <input type="file" name="thumb1"/>
+                            <input type="file" name="thumb1" accept="image/gif,image/jpeg,image/png"/> <!-- 이미지만 업로드 가능하게 -->
 
                             <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
-                            <input type="file" name="thumb2"/>
+                            <input type="file" name="thumb2" accept="image/gif,image/jpeg,image/png"/>
 
                             <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
-                            <input type="file" name="thumb3"/>
+                            <input type="file" name="thumb3" accept="image/gif,image/jpeg,image/png"/>
                         </td>
                     </tr>
                     <tr>
                         <td>상세 상품정보</td>
                         <td>
                             <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                            <input type="file" name="detail"/>
+                            <input type="file" name="detail" accept="image/gif,image/jpeg,image/png"/>
+                            <input type="hidden" class="suc" value="${success}">
                         </td>
                     </tr>
                 </table>                                
@@ -201,23 +220,23 @@
                 <table>
                     <tr>
                         <td>상품상태</td>
-                        <td><input type="text" name="status" placeholder="새상품"/></td>
+                        <td><input type="text" name="status" value="새상품"/></td>
                     </tr>
                     <tr>
                         <td>부가세 면세여부</td>
-                        <td><input type="text" name="duty" placeholder="과세상품"/></td>
+                        <td><input type="text" name="duty" value="과세상품"/></td>
                     </tr>
                     <tr>
                         <td>영수증발행</td>
-                        <td><input type="text" name="receipt" placeholder="발행가능 - 신용카드 전표, 온라인 현금영수증"/></td>
+                        <td><input type="text" name="receipt" value="발행가능 - 신용카드 전표, 온라인 현금영수증"/></td>
                     </tr>
                     <tr>
                         <td>사업자구분</td>
-                        <td><input type="text" name="bizType" placeholder="사업자 판매자"/></td>
+                        <td><input type="text" name="bizType" value="사업자 판매자"/></td><!-- 테이블에 있어서 추가함 : 구홍모 -->
                     </tr>
                     <tr>
                         <td>원산지</td>
-                        <td><input type="text" name="origin" placeholder="국내산"/></td>
+                        <td><input type="text" name="origin" value="국내산"/></td>
                     </tr>
                 </table>                                
             </section>

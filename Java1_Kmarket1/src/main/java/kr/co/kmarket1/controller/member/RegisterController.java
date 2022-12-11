@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket1.dao.MemberDao;
+import kr.co.kmarket1.vo.MemberVO;
+
 @WebServlet("/member/register.do")
 public class RegisterController extends HttpServlet {
 
@@ -21,25 +24,50 @@ public class RegisterController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String locationTerms = req.getParameter("locationTerms");
+		req.setAttribute("locationTerms", locationTerms);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/register.jsp");
 		dispatcher.forward(req, resp);
+		
+		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String uid = req.getParameter("uid");
 		String pass1 = req.getParameter("pass1");
 		String pass2 = req.getParameter("pass2");
 		String name = req.getParameter("name");
 		String gender = req.getParameter("gender");
 		String email = req.getParameter("email");
+		String type = req.getParameter("type");
+		String level = req.getParameter("level");
 		String hp = req.getParameter("hp");
 		String zip = req.getParameter("zip");
 		String addr1 = req.getParameter("addr1");
 		String addr2 = req.getParameter("addr2");
-		String regip = req.getParameter("regip");
+		String regip = req.getRemoteAddr();
+		String locationTerms = req.getParameter("locationTerms");
 		
+		MemberVO vo = new MemberVO();
+		vo.setUid(uid);
+		vo.setPass(pass1);
+		vo.setName(name);
+		vo.setGender(gender);
+		vo.setEmail(email);
+		vo.setType(type);
+		vo.setLevel(level);
+		vo.setHp(hp);
+		vo.setZip(zip);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setRegip(regip);
+		vo.setLocationTerms(locationTerms);
 		
+		MemberDao.getInstance().insertMember(vo);
+		
+		resp.sendRedirect("/Java1_Kmarket1/member/login.do");
 		
 	}
 	

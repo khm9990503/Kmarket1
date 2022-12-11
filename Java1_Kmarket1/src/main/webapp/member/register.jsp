@@ -1,11 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/member/_header.jsp"/>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Java1_Kmarket1/js/postcode.js"></script>
+<style>
+#member > .register table .addr input {
+    margin-top: 6px;
+}
+
+#member > .register table #btnZip {
+    position: relative;
+    top: 5px;
+    padding: 5px;
+}
+
+#member > .register table #btnUidCheck{
+	position: relative;
+	top: 2px;
+	padding: 5px
+}
+</style>
 <main id="member">
     <div class="register">
         <nav>
             <h1>일반 회원가입</h1>
         </nav>
         <form action="/Java1_Kmarket1/member/register.do" method="post">
+      
             <section>
                 <table>
                     <caption>필수 정보입력</caption>
@@ -16,6 +36,10 @@
                             </th>
                             <td><input type="text" name="uid" placeholder="아이디를 입력" required><span class="msgId">
                                 영문, 숫자로 4~12자까지 설정해 주세요.
+                                  <input type="hidden" name="type" value="1">
+        						  <input type="hidden" name="level" value="1">
+        						  <input type="hidden" name="locationTerms" value="${locationTerms}">
+        						  
                             </span>
                             </td>
                         </tr>
@@ -82,13 +106,14 @@
                             <th>주소</th>
                             <td>
                                 <div>
-                                    <input type="text" name="zip" id="zip" placeholder="우편번호 입력 클릭" readonly>
+                                    <input type="text" name="zip" id="zip" placeholder="우편번호를 검색하세요." readonly/>
+                    				<button type="button" id="btnZip" onclick="postcode()">우편번호 찾기</button>
                                 </div>
                                 <div>
-                                    <input type="text" name="addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly>
+                                   <input type="text" name="addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly/>
                                 </div>
                                 <div>
-                                    <input type="text" name="addr2" id="addr2" size="50" placeholder="상세주소를 입력하세요." readonly>
+                                    <input type="text" name="addr2" id="addr2" size="50" placeholder="상세주소를 입력하세요.">
                                 </div>
                             </td>
                         </tr>
