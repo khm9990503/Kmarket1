@@ -43,6 +43,28 @@ public class CateDao extends DBHelper{
 		return cate1s;
 	}
 	// cate1에 해당하는 cate2 리스트 불러오기 - 구홍모 12/09
+	public List<Cate2VO> selectCates_2() {
+		List<Cate2VO> cate2s = new ArrayList<>();
+		try {
+			logger.info("selectCate_2 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_product_cate2`");
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				Cate2VO cate2 = new Cate2VO();
+				cate2.setCate1(rs.getInt(1));
+				cate2.setCate2(rs.getInt(2));
+				cate2.setC2Name(rs.getString(3));
+				
+				cate2s.add(cate2);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cate2s;
+	}
+	// cate1에 해당하는 cate2 리스트 불러오기 - 구홍모 12/09
 	public List<Cate2VO> selectCates_2(String cate1) {
 		List<Cate2VO> cate2s = new ArrayList<>();
 		try {

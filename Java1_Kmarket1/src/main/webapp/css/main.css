@@ -192,9 +192,14 @@ main > aside > .category ol {
 }
 main > aside > .category ol > li {
     width: 100%;
-    height: 24px;
+    height: 33px;
     padding: 10px;
     box-sizing: border-box;
+}
+main > aside > .category ol > li a {
+	color: #ccc;
+	font-weight: bold;
+	font-size: 1em;
 }
 
 main > aside > .best {
