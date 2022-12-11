@@ -1,6 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/member/_header.jsp"/>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Java1_Kmarket1/js/postcode.js"></script>
+<style>
+#member > .register table .addr input {
+    margin-top: 6px;
+}
+
+#member > .register table #btnZip {
+    position: relative;
+    top: 5px;
+    padding: 5px;
+}
+
+#member > .register table #btnUidCheck{
+	position: relative;
+	top: 2px;
+	padding: 5px
+}
+</style>
 <main id="member">
     <div class="register">
         <nav>
@@ -88,11 +106,11 @@
                             <th>주소</th>
                             <td>
                                 <div>
-                                    <input type="text" name="zip" id="zip" placeholder="우편번호 입력 클릭">
-                                    <button type="button" onclick="postcode()" ><img src="/Java1_Kmarket1/member/img/chk_post.gif" alt="우편번호찾기"/></button>
+                                    <input type="text" name="zip" id="zip" placeholder="우편번호를 검색하세요." readonly/>
+                    				<button type="button" id="btnZip" onclick="postcode()">우편번호 찾기</button>
                                 </div>
                                 <div>
-                                    <input type="text" name="addr1" id="addr1" size="50" placeholder="주소를 검색하세요.">
+                                   <input type="text" name="addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly/>
                                 </div>
                                 <div>
                                     <input type="text" name="addr2" id="addr2" size="50" placeholder="상세주소를 입력하세요.">
