@@ -2,23 +2,6 @@
 <jsp:include page="/member/_header.jsp"/>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Java1_Kmarket1/js/postcode.js"></script>
-<style>
-#member > .register table .addr input {
-    margin-top: 6px;
-}
-
-#member > .register table #btnZip {
-    position: relative;
-    top: 5px;
-    padding: 5px;
-}
-
-#member > .register table #btnUidCheck{
-	position: relative;
-	top: 2px;
-	padding: 5px
-}
-</style>
 <main id="member">
     <div class="register">
         <nav>
