@@ -17,24 +17,25 @@
 			console.log('here2');
 			
 			if(isCheck1 && isCheck2 && isCheck3){
-				console.log('here3');
 				
-				if(type == 'normal'){
-					console.log('here4');
-					location.href='/Java1_Kmarket1/member/register.do?locationTerms=0';	
+				if(isCheck4){
+					if(type == 'normal'){
+						console.log('here3');
+						location.href='/Java1_Kmarket1/member/register.do?locationTerms=1';	
+					}else{
+						console.log('here4');
+						location.href='/Java1_Kmarket1/member/registerSeller.do?locationTerms=1';
+					}
 				}else{
-					console.log('here5');
-					location.href='/Java1_Kmarket1/member/registerSeller.do?locationTerms=0';
+					if(type == 'normal'){
+						console.log('here5');
+						location.href='/Java1_Kmarket1/member/register.do?locationTerms=0';	
+					}else{
+						console.log('here6');
+						location.href='/Java1_Kmarket1/member/registerSeller.do?locationTerms=0';
+					}
 				}
-								
-			}if(isCheck1 && isCheck2 && isCheck3 && isCheck4){
-				if(type == 'normal'){
-					console.log('here6');
-					location.href='/Java1_Kmarket1/member/register.do?locationTerms=1';	
-				}else{
-					console.log('here7');
-					location.href='/Java1_Kmarket1/member/registerSeller.do?locationTerms=1';
-				}
+				
 			}else{
 				console.log('here8');
 				alert('동의 체크를 하셔야 합니다.');

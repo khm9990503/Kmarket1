@@ -473,6 +473,23 @@ footer p:nth-of-type(2) {
     cursor: pointer;        
 }
 
+#member > .register table .addr input {
+    margin-top: 6px;
+}
+
+#member > .register table #btnZip {
+    position: relative;
+    top: 5px;
+    padding: 5px;
+}
+
+#member > .register table #btnUidCheck{
+	position: relative;
+	top: 2px;
+	padding: 5px
+}
+
+
 /*registerSeller*/
 
 #member > .registerSeller {
