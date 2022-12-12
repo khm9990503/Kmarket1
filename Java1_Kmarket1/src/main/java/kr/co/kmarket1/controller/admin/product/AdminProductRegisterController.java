@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.RequestDispatcher;
@@ -74,10 +75,9 @@ public class AdminProductRegisterController extends HttpServlet{
 		int idx = Fname.lastIndexOf(".");
 		String ext = Fname.substring(idx);//ext는 확장자 ex)txt,jpg,gif
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss_");
-		String now = sdf.format(new Date());
-		int random = ThreadLocalRandom.current().nextInt(10000, 100000); // 5자리 무작위 수
-		String newName = now + random + ext; // 202210261113_5자리 무작위 수.jpg
+		String random = UUID.randomUUID().toString();
+		String newName = random + ext;
+		
 		
 		File oriFile = new File(savePath+"/"+Fname);
 		File newFile = new File(savePath+"/"+newName);

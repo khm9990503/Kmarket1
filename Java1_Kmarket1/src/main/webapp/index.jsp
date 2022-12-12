@@ -9,7 +9,6 @@
                     <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
                     <c:forEach var="ca1" items="${cate1s}">
                     <li>
-                    	
                         <a href="#">
                         	<c:choose>
                         	<c:when test="${ca1.cate1 == 10 }">

@@ -240,7 +240,7 @@
                     </tr>
                 </table>                                
             </section>
-            
+            <img alt="" src="/Java1_Kmarket1/thumb/20221210133441_51376.jpg">
             <input type="submit" value="등록하기"/>
         </form>
     </article>
