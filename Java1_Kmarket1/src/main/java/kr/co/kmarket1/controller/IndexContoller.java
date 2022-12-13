@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.CateDao;
+import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
+import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/index.do")
 public class IndexContoller extends HttpServlet{
@@ -34,6 +36,20 @@ public class IndexContoller extends HttpServlet{
 		List<Cate2VO> cate2s = CD.selectCates_2();
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
+		
+		// 상품 불러오기
+		ProductDao PD = ProductDao.getInstance();
+		List<ProductVO> bests = PD.selectProductsSold();		 // 베스트 상품 리스트
+		List<ProductVO> hits = PD.selectProductsHit();			 // 히트 상품 리스트
+		List<ProductVO> scores = PD.selectProductsScore();		 // 추천 상품 리스트
+		List<ProductVO> lates = PD.selectProductsLates();		 // 최신 상품 리스트
+		List<ProductVO> discounts = PD.selectProductsDiscount();	 // 할인 상품 리스트
+		
+		req.setAttribute("bests", bests);
+		req.setAttribute("hits", hits);
+		req.setAttribute("scores", scores);
+		req.setAttribute("lates", lates);
+		req.setAttribute("discounts", discounts);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);

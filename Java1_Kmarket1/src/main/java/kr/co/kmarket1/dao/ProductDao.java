@@ -6,6 +6,9 @@ import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.db.SQL;
 import kr.co.kmarket1.vo.ProductVO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class ProductDao extends DBHelper{
@@ -20,7 +23,135 @@ public class ProductDao extends DBHelper{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
   
 	public void selectProduct () {}
-	public void selectProducts () {}
+	
+	// 메인 상품 리스트 작업 ////////////// 시작 12/13 - 홍모
+	// 베스트 상품 리스트 TOP5
+	public List<ProductVO> selectProductsSold () {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProductsSold start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1` FROM `km_product` ORDER BY `sold` DESC LIMIT 5");
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(2));
+				product.setPrice(rs.getInt(3));
+				product.setDiscount(rs.getInt(4));
+				product.setThumb1(rs.getString(5));
+				
+				products.add(product);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	// 히트 상품 리스트 TOP8
+	public List<ProductVO> selectProductsHit () {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProductsSold start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `hit` DESC LIMIT 8");
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(2));
+				product.setPrice(rs.getInt(3));
+				product.setDiscount(rs.getInt(4));
+				product.setThumb1(rs.getString(5));
+				product.setDelivery(rs.getInt(6));
+				
+				products.add(product);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	// 추천 상품 리스트 TOP8
+	public List<ProductVO> selectProductsScore () {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProductsSold start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `score` DESC LIMIT 8");
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(2));
+				product.setPrice(rs.getInt(3));
+				product.setDiscount(rs.getInt(4));
+				product.setThumb1(rs.getString(5));
+				product.setDelivery(rs.getInt(6));
+				
+				products.add(product);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	// 최신 상품 리스트 TOP8
+	public List<ProductVO> selectProductsLates () {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProductsSold start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `prodNo` DESC LIMIT 8");
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(2));
+				product.setPrice(rs.getInt(3));
+				product.setDiscount(rs.getInt(4));
+				product.setThumb1(rs.getString(5));
+				product.setDelivery(rs.getInt(6));
+				
+				products.add(product);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	// 할인 상품 리스트 TOP8
+	public List<ProductVO> selectProductsDiscount () {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.info("selectProductsSold start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `discount` DESC LIMIT 8");
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(2));
+				product.setPrice(rs.getInt(3));
+				product.setDiscount(rs.getInt(4));
+				product.setThumb1(rs.getString(5));
+				product.setDelivery(rs.getInt(6));
+				
+				products.add(product);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	// 메인 상품 리스트 작업 ////////////// 끝 - 홍모
+	
+	
 	// RegisterController doPost데이터베이스
 	public int insertProduct (ProductVO vo) {
 		int result = 0;
