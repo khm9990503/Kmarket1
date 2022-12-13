@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
-<!-- 제품명 중복성 검사 -->
-<!-- <script src="/Java1_Kmarket1/js/AdminProductRegister.js"></script> -->
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
@@ -25,6 +23,22 @@
 				}
 			});
 		});
+	});
+</script>
+<script>
+	// 판매가격의 1%를 포인트로 자동 계상
+	$(function(){
+		$('input[name=price]').focusout(function(){
+			autoPoint();
+		});
+		
+		function autoPoint(){
+			let price = $('input[name=price]').val();
+			console.log(price);
+			let point = price/100;
+			console.log(point);
+			$('input[name=point]').val(point);
+		}
 	});
 </script>
 <script>
@@ -143,6 +157,7 @@
                         <td><input type="text" name="prodName"/></td>
                         <span class="resultprodName"></span>
                     </tr>
+                    
                     <tr>
                         <td>기본설명</td>
                         <td>
@@ -166,14 +181,15 @@
                         <td>할인율</td>
                         <td>
                             <span>0을 입력하면 할인율 없음</span>
-                            <input type="text" name="discount" placeholder="0~100까지 입력"/>원
+                            <input type="text" name="discount" placeholder="0~100까지 입력"/>%
                         </td>
                     </tr>
                     <tr>
                         <td>포인트</td>
                         <td>
                             <span>0을 입력하면 포인트 없음</span>
-                            <input type="text" name="point" placeholder="price의 1%(나중엔 유효성으로 자동입력되게)"/>점
+                            <input type="text" name="point"/>%
+                            <a id="point">[판매가격의 1% 자동적립]</a>
                         </td>
                     </tr>
                     <tr>
