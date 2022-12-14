@@ -59,9 +59,15 @@ public class SQL {
 													+ "`regip`=?, "
 													+ "`locationTerms`=?, "
 													+ "`rdate`= NOW()";
+
 	
 	// 회원가입 - uid 중복체크 
 	public static final String SELECT_COUNT_UID = "select count('uid') from `km_member` where `uid`=?";
 	
+
+
+	//product
+	public static final String SELECT_COUNT_TOTAL = "select count(`prodNo`) from `km_product` where `prodCate1`=? and `prodCate2`=?";
+
 	
 }
