@@ -40,6 +40,9 @@ public class SQL {
 	// terms 불러오기
 	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
 	
+	// 로그인 
+	public static final String SELECT_USER = "select * from `km_member` where `uid`=? and `pass`=SHA2(?,256)";
+	
 	// 회원가입 - 개인 구매자 (insertMember)
 	public static final String INSERT_MEMBER_NORMAL = "INSERT INTO `km_member` SET "
 													+ "`uid`=?, "
@@ -56,7 +59,9 @@ public class SQL {
 													+ "`regip`=?, "
 													+ "`locationTerms`=?, "
 													+ "`rdate`= NOW()";
-
+	
+	// 회원가입 - uid 중복체크 
+	public static final String SELECT_COUNT_UID = "select count('uid') from `km_member` where `uid`=?";
 	
 	
 }

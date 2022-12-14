@@ -9,7 +9,7 @@
                         <strong>로그인</strong>
                     </p>
                 </nav>
-                <form action="/Java1_Kmarket1/member/login.do">
+                <form action="/Java1_Kmarket1/member/login.do" method="post">
                     <table border="0">
                         <tbody>
                             <tr>
@@ -33,7 +33,7 @@
                         <a href="/Java1_Kmarket1/member/findPw.do">비밀번호찾기</a>
                         <a href="/Java1_Kmarket1/member/join.do">회원가입</a>
                     </span>
-                    <a href="#" class="banner">
+                    <a href="https://promotion.gmarket.co.kr/Event/CouponZone.asp" class="banner">
                         <img src="/Java1_Kmarket1/member/img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기">
                     </a>
                 </form>
