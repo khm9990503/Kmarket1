@@ -76,7 +76,7 @@ public class ProductDao extends DBHelper{
 	public List<ProductVO> selectProductsHit () {
 		List<ProductVO> products = new ArrayList<>();
 		try {
-			logger.info("selectProductsSold start...");
+			logger.info("selectProductsHit start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `hit` DESC LIMIT 8");
@@ -101,7 +101,7 @@ public class ProductDao extends DBHelper{
 	public List<ProductVO> selectProductsScore () {
 		List<ProductVO> products = new ArrayList<>();
 		try {
-			logger.info("selectProductsSold start...");
+			logger.info("selectProductsScore start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `score` DESC LIMIT 8");
@@ -126,7 +126,7 @@ public class ProductDao extends DBHelper{
 	public List<ProductVO> selectProductsLates () {
 		List<ProductVO> products = new ArrayList<>();
 		try {
-			logger.info("selectProductsSold start...");
+			logger.info("selectProductsLates start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `prodNo` DESC LIMIT 8");
@@ -151,7 +151,7 @@ public class ProductDao extends DBHelper{
 	public List<ProductVO> selectProductsDiscount () {
 		List<ProductVO> products = new ArrayList<>();
 		try {
-			logger.info("selectProductsSold start...");
+			logger.info("selectProductsDiscount start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `discount` DESC LIMIT 8");

@@ -407,6 +407,15 @@ main > section .dis_price .free {
     height: 13px;
     background: url('../img/ico_freeshipping.gif') no-repeat;
 }
+main > section .dis_price .deli {
+	color: #417adb;
+}
+main > section .dis_price .deli:before {
+	content: '배송비:';
+}
+main > section .dis_price .deli:after {
+	content: '원';
+}
 
 /*푸터*/
 footer{

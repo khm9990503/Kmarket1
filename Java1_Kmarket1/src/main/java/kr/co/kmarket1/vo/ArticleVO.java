@@ -6,6 +6,7 @@ public class ArticleVO {
 	private int comment;
 	private String cate;
 	private String title;
+	private String group;
 	private String content;
 	private int file;
 	private int hit;
@@ -128,5 +129,13 @@ public class ArticleVO {
 	
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+	
+	public String getGroup() {
+		return group;
+	}
+	
+	public void setGroup(String group) {
+		this.group = group;
 	}
 }
