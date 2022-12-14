@@ -32,6 +32,9 @@ public class ListController extends HttpServlet {
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
 		
+		String pg = req.getParameter("pg");
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp");
 		dispatcher.forward(req, resp);
 	}
