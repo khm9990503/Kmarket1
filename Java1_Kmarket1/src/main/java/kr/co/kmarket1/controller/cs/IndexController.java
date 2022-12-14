@@ -1,6 +1,7 @@
 package kr.co.kmarket1.controller.cs;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kr.co.kmarket1.dao.ArticleDao;
+import kr.co.kmarket1.vo.ArticleVO;
 
 @WebServlet("/cs/index.do")
 public class IndexController extends HttpServlet{
@@ -23,6 +27,13 @@ public class IndexController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ArticleDao ad = ArticleDao.getInstance();
+		List<ArticleVO> notices = ad.selectArticlesByGroup("notice",5);
+		List<ArticleVO> qnas = ad.selectArticlesByGroup("qna",5);
+		
+		req.setAttribute("notices", notices);
+		req.setAttribute("qnas", qnas);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
 		dispatcher.forward(req, resp);
 	}

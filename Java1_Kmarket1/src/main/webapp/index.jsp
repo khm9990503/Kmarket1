@@ -1,6 +1,83 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
+<script type="text/javascript">
+	$(function(){
+		// ori price 숫자 , 붙이기
+		for(let i=1;i<6;i++){		
+			let cls = ".best"+i.toString()+"Ori";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".hit"+i.toString()+"Ori";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".score"+i.toString()+"Ori";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".late"+i.toString()+"Ori";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".discount"+i.toString()+"Ori";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		// 최종 price 숫자 , 붙이기
+		for(let i=1;i<6;i++){		
+			let cls = ".best"+i.toString();
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".hit"+i.toString();
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".score"+i.toString();
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".late"+i.toString();
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".discount"+i.toString();
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		// 배송비 숫자 , 붙이기
+		for(let i=1;i<9;i++){		
+			let cls = ".hit"+i.toString()+"d";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".score"+i.toString()+"d";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".late"+i.toString()+"d";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+		for(let i=1;i<9;i++){		
+			let cls = ".discount"+i.toString()+"d";
+			let price = $(cls).text();
+			$(cls).text(Number(price).toLocaleString());
+		}
+	});
+</script>
         <main>
             <!--사이드-->
             <aside>
@@ -56,7 +133,7 @@
                         <i class="fas fa-crown" aria-hidden="true"></i>베스트상품
                     </h1>
                     <ol>
-                    	<c:forEach var="best" items="${bests}">
+                    	<c:forEach var="best" items="${bests}" varStatus="b">
                         <li>
                             <a href="/Java1_Kmarket1/product/view.do?prodNo=${best.prodNo}">
                                 <div class="thumb">
@@ -66,17 +143,17 @@
                                 <h2>${best.prodName}</h2>
                                 <c:if test="${best.discount != '0'}">
                                 <div class="org_price">
-                                    <del>${best.price}</del>
+                                    <del class="best${bcount}Ori">${best.price}</del>
                                     <span>${best.discount}%</span>
                                 </div>
                                 </c:if>
                                 <div class="dis_price">
                                 	<c:choose>
                                 		<c:when test="${best.discount == '0'}">
-	                                    	<ins>${best.price}</ins>
+	                                    	<ins class="best${b.count}">${best.price}</ins>
 	                                    </c:when>
                                 		<c:when test="${best.discount != '0'}">
-	                                    	<ins>${Math.round(best.price*(100-best.discount)/100)}</ins>
+	                                    	<ins class="best${b.count}">${Math.round(best.price*(100-best.discount)/100)}</ins>
 	                                    </c:when>
                                     </c:choose>
                                 </div>
@@ -102,7 +179,7 @@
                     <h3>
                         <span>히트상품</span>
                     </h3>
-                    <c:forEach var="hit" items="${hits}">
+                    <c:forEach var="hit" items="${hits}" varStatus="h">
                     <article>
                         <a href="/Java1_Kmarket1/product/view.do?prodNo=${hit.prodNo}">
                             <div class="thumb">
@@ -114,17 +191,17 @@
                             </c:if>
                             <c:if test="${hit.discount != '0'}">
                             <div class="org_price">
-                                <del>${hit.price}</del>
+                                <del class="hit${h.count}Ori">${hit.price}</del>
                                 <span>${hit.discount}%</span>
                             </div>
                             </c:if>
                             <div class="dis_price">
                             	<c:choose>
 	                            	<c:when test="${hit.discount == '0'}">
-	                                <ins>${hit.price}</ins>
+	                                <ins class="hit${h.count}">${hit.price}</ins>
 	                                </c:when>
 	                             	<c:when test="${hit.discount != '0'}">
-	                                <ins>${Math.round(hit.price*(100-hit.discount)/100)}</ins>
+	                                <ins class="hit${h.count}">${Math.round(hit.price*(100-hit.discount)/100)}</ins>
 	                                </c:when>
                                 </c:choose>
                                 <c:choose>
@@ -132,7 +209,7 @@
                                 		<span class="free">무료배송</span>
                                 	</c:when>
                                 	<c:when test="${hit.delivery != '0' }">
-                                		<span>배송비 : ${hit.delivery}원</span>
+                                		<span class="deli hit${h.count}d">${hit.delivery}</span>
                                 	</c:when>
                                 </c:choose>
                             </div>
@@ -145,7 +222,7 @@
                     <h3>
                         <span>추천상품</span>
                     </h3>
-                    <c:forEach var="score" items="${scores}">
+                    <c:forEach var="score" items="${scores}" varStatus="s">
                     <article>
                         <a href="/Java1_Kmarket1/product/view.do?prodNo=${score.prodNo}">
                             <div class="thumb">
@@ -157,17 +234,17 @@
                             </c:if>
                             <c:if test="${score.discount != '0'}">
                             <div class="org_price">
-                                <del>${score.price}</del>
+                                <del class="score${s.count}Ori">${score.price}</del>
                                 <span>${score.discount}%</span>
                             </div>
                             </c:if>
                             <div class="dis_price">
                             	<c:choose>
 	                            	<c:when test="${score.discount == '0'}">
-	                                <ins>${score.price}</ins>
+	                                <ins class="score${s.count}">${score.price}</ins>
 	                                </c:when>
 	                             	<c:when test="${score.discount != '0'}">
-	                                <ins>${Math.round(score.price*(100-score.discount)/100)}</ins>
+	                                <ins class="score${s.count}">${Math.round(score.price*(100-score.discount)/100)}</ins>
 	                                </c:when>
                                 </c:choose>
                                 <c:choose>
@@ -175,7 +252,7 @@
                                 		<span class="free">무료배송</span>
                                 	</c:when>
                                 	<c:when test="${score.delivery != '0' }">
-                                		<span>배송비 : ${score.delivery}원</span>
+                                		<span class="deli score${s.count}d">${score.delivery}</span>
                                 	</c:when>
                                 </c:choose>
                             </div>
@@ -188,7 +265,7 @@
                     <h3>
                         <span>최신상품</span>
                     </h3>
-                    <c:forEach var="late" items="${lates}">
+                    <c:forEach var="late" items="${lates}" varStatus="l">
                     <article>
                         <a href="/Java1_Kmarket1/product/view.do?prodNo=${late.prodNo}">
                             <div class="thumb">
@@ -200,17 +277,17 @@
                             </c:if>
                             <c:if test="${late.discount != '0'}">
                             <div class="org_price">
-                                <del>${late.price}</del>
+                                <del class="late${l.count}Ori">${late.price}</del>
                                 <span>${late.discount}%</span>
                             </div>
                             </c:if>
                             <div class="dis_price">
                             	<c:choose>
 	                            	<c:when test="${late.discount == '0'}">
-	                                <ins>${late.price}</ins>
+	                                <ins class="late${l.count}">${late.price}</ins>
 	                                </c:when>
 	                             	<c:when test="${late.discount != '0'}">
-	                                <ins>${Math.round(late.price*(100-late.discount)/100)}</ins>
+	                                <ins class="late${l.count}">${Math.round(late.price*(100-late.discount)/100)}</ins>
 	                                </c:when>
                                 </c:choose>
                                 <c:choose>
@@ -218,7 +295,7 @@
                                 		<span class="free">무료배송</span>
                                 	</c:when>
                                 	<c:when test="${late.delivery != '0' }">
-                                		<span>배송비 : ${late.delivery}원</span>
+                                		<span class="deli late${l.count}d">${late.delivery}</span>
                                 	</c:when>
                                 </c:choose>
                             </div>
@@ -231,7 +308,7 @@
                     <h3>
                         <span>할인상품</span>
                     </h3>
-                    <c:forEach var="discount" items="${discounts}">
+                    <c:forEach var="discount" items="${discounts}" varStatus="d">
                     <article>
                         <a href="/Java1_Kmarket1/product/view.do?prodNo=${discount.prodNo}">
                             <div class="thumb">
@@ -243,17 +320,17 @@
                             </c:if>
                             <c:if test="${discount.discount != '0'}">
                             <div class="org_price">
-                                <del>${discount.price}</del>
+                                <del class="discount${d.count}Ori">${discount.price}</del>
                                 <span>${discount.discount}%</span>
                             </div>
                             </c:if>
                             <div class="dis_price">
                             	<c:choose>
 	                            	<c:when test="${discount.discount == '0'}">
-	                                <ins>${discount.price}</ins>
+	                                <ins class="discount${d.count}">${discount.price}</ins>
 	                                </c:when>
 	                             	<c:when test="${discount.discount != '0'}">
-	                                <ins>${Math.round(discount.price*(100-discount.discount)/100)}</ins>
+	                                <ins class="discount${d.count}">${Math.round(discount.price*(100-discount.discount)/100)}</ins>
 	                                </c:when>
                                 </c:choose>
                                 <c:choose>
@@ -261,7 +338,7 @@
                                 		<span class="free">무료배송</span>
                                 	</c:when>
                                 	<c:when test="${discount.delivery != '0' }">
-                                		<span>배송비 : ${discount.delivery}원</span>
+                                		<span class="deli discount${d.count}d">${discount.delivery}</span>
                                 	</c:when>
                                 </c:choose>
                             </div>
