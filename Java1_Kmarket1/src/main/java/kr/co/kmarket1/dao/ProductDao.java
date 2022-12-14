@@ -25,6 +25,29 @@ public class ProductDao extends DBHelper{
 	public void selectProduct () {}
 	
 	// 메인 상품 리스트 작업 ////////////// 시작 12/13 - 홍모
+	
+	
+	// 전체 게시물 카운트
+	public int selectCountTotal() {
+		int total = 0;
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(SQL.SELECT_COUNT_TOTAL);
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return total;		
+	}
+	
 	// 베스트 상품 리스트 TOP5
 	public List<ProductVO> selectProductsSold () {
 		List<ProductVO> products = new ArrayList<>();

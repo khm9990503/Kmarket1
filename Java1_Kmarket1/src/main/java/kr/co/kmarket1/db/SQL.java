@@ -57,6 +57,7 @@ public class SQL {
 													+ "`locationTerms`=?, "
 													+ "`rdate`= NOW()";
 
-	
+	//product
+	public static final String SELECT_COUNT_TOTAL = "select count(`prodNo`) from `km_product` where `prodCate1`=? and `prodCate2`=?";
 	
 }

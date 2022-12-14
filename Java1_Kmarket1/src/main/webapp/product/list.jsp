@@ -25,7 +25,7 @@
        <table border="0">
            <tr>
                <td>
-                   <a href="/Java1_Kmarket1/product/view.do" class="thumb">
+                   <a href="/Java1_Kmarket1/product/view.do?prodNo=${prodNo}" class="thumb">
                        <img src="https://via.placeholder.com/120x120" alt="상품이미지">
                    </a>
                </td>
