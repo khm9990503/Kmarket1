@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../_header.jsp"/>
     <section id="cs">
         <div class="notice">
@@ -13,87 +14,76 @@
                 <aside>
                     <h2>공지사항</h2>
                     <ul>
-                        <li class="on"><a href="#">전체</a></li>
-                        <li><a href="#">고객서비스</a></li>
-                        <li><a href="#">안전거래</a></li>
-                        <li><a href="#">위해상품</a></li>
-                        <li><a href="#">이벤트당첨</a></li>
+                        <li class="${cate == null ?'on':'off'}"><a href="/Java1_Kmarket1/cs/notice/list.do">전체</a></li>
+                        <li class="${cate.equals('service') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/notice/list.do?cate=service">고객서비스</a></li>
+                        <li class="${cate.equals('deal') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/notice/list.do?cate=deal">안전거래</a></li>
+                        <li class="${cate.equals('danger') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/notice/list.do?cate=danger">위해상품</a></li>
+                        <li class="${cate.equals('lucky') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/notice/list.do?cate=lucky">이벤트당첨</a></li>
                     </ul>
                 </aside>
                 <article>
                     <nav>
+                    	<c:choose>
+                    	<c:when test="${cate == null}">
                         <h1>전체</h1>
                         <h2>공지사항 전체 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('service')}">
+                        <h1>고객서비스</h1>
+                        <h2>고객서비스 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('deal')}">
+                        <h1>안전거래</h1>
+                        <h2>안전거래 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('danger')}">
+                        <h1>위해상품</h1>
+                        <h2>위해상품 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('lucky')}">
+                        <h1>이벤트당첨</h1>
+                        <h2>이벤트당첨 내용입니다.</h2>
+                        </c:when>
+                        </c:choose>
                     </nav>
                     <table>
+                    	<c:forEach var="article" items="${articles}">
                         <tr>
                             <td>
-                                <a href="#">[안내] 해외결제 사칭 문자 주의</a>
+                                <a href="/Java1_Kmarket1/cs/notice/view.do?no=${article.no}&cate=${article.cate}">${article.title}</a>
                             </td>
-                            <td>2022.11.21</td>
+                            <td>${article.rdate}</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[발표]『G.Live X SK스토아(하남쭈꾸미)』 이벤트 당첨자</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[안내] 로젠택배 반품/교환 수거지시 지연 안내</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[안내] 해외직구셀러 특별약관 개정</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[안내] 위치정보이용 약관 개정 공지</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[발표]『써모스 상품 구매』 이벤트 당첨자</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[안내] 한국소비자원, '22년 OECD 글로벌 제품안전 캠페인'</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[점검] G마켓 사이트 이용 일시 중단</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[안내] 구매회원 이용약관 개정</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">[안내] 씨티은행 시스템 점검에 따른 계좌, 체크카드결제 서비스 일시 중단</a>
-                            </td>
-                            <td>2022.11.21</td>
-                        </tr>
+                        </c:forEach>
                     </table>
                     <div class="page">
-                        <a href="#" class="prev">이전</a>
-                        <a href="#" class="num on">1</a>
-                        <a href="#" class="num">2</a>
-                        <a href="#" class="num">3</a>
-                        <a href="#" class="next">다음</a>
-                    </div>
+                    <c:choose>
+		            <c:when test="${pageGroupStart gt 1 && cate != null}">
+		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}&cate=${cate}" class="prev">이전</a>
+		            </c:when>
+		            <c:when test="${pageGroupStart gt 1 && cate == null}">
+		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
+		            </c:when>
+		            </c:choose>
+		            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd }">
+		            <c:choose>
+		            <c:when test="${cate != null}">
+		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${i}&cate=${cate}" class="num ${i==currentPage?'current':'off'} ${i==currentPage?'on':'off'}">${i}</a>
+		            </c:when>
+		            <c:when test="${cate == null}">
+		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${i}" class="num ${i==currentPage?'current':'off'} ${i==currentPage?'on':'off'}">${i}</a>
+		            </c:when>
+		            </c:choose>
+		            </c:forEach>
+		            <c:choose>
+		            <c:when test="${pageGroupEnd lt lastPageNum && cate != null}">
+		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}&cate=${cate}" class="next">다음</a>
+		            </c:when>
+		            <c:when test="${pageGroupEnd lt lastPageNum && cate == null}">
+		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+		            </c:when>
+		            </c:choose>
+	        	</div>
                 </article>
             </section>
         </div>

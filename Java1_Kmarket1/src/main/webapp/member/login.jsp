@@ -1,5 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/member/_header.jsp"/>
+<script>
+
+	$(function(){
+		$('#eye').click(function() {
+			
+		$('input').toggleClass('active');
+		
+		  if($('input').hasClass('active')){
+	            $(this).attr('class',"fa fa-eye-slash fa-lg")
+	            .prev('input').attr('type',"text");
+	        }else{
+	            $(this).attr('class',"fa fa-eye fa-lg")
+	            .prev('input').attr('type','password');
+	        }
+		});
+		
+	});
+
+</script>
         <main id="member">
             <div class="login">
                 <nav>
@@ -22,6 +41,7 @@
                                 <td>비밀번호</td>
                                 <td>
                                     <input type="password" name="pass" placeholder="비밀번호 입력">
+                                    <i class="fa fa-eye fa-lg" id="eye"></i>
                                 </td>
                             </tr>
                         </tbody>
