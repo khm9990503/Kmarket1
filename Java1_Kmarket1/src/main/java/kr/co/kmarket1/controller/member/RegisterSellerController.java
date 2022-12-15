@@ -21,6 +21,8 @@ public class RegisterSellerController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String locationTerms = req.getParameter("locationTerms");
+		req.setAttribute("locationTerms", locationTerms);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/registerSeller.jsp");
 		dispatcher.forward(req, resp);
 	}
