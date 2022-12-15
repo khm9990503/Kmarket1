@@ -147,7 +147,7 @@
     text-align: center;
     text-decoration: none;
 }
-#product > .list > .paging > .num > a.on {
+#product > .list > .paging > .num > .current {
     color: #fe434c;
     font-weight: bold;
 }
