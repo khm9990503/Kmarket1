@@ -83,8 +83,8 @@
             <li>
                 <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol>
-                    <li><a href="#">상품현황</a></li>
-                    <li><a href="#">상품등록</a></li>
+                    <li><a href="/Java1_Kmarket1/admin/product/list/do">상품현황</a></li>
+                    <li><a href="/Java1_Kmarket1/admin/product/register/do">상품등록</a></li>
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
@@ -190,7 +190,7 @@
 									$('#discount').focusout(function(){
 										let price = $('input[name=price]').val();
 										let dis = $(this).val();
-										$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
+										$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(price/100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
 									});
 								});
 							</script>
@@ -201,7 +201,7 @@
                         <td>포인트</td>
                         <td>
                             <span>0을 입력하면 포인트 없음</span>
-                            <input type="text" name="point"/>%
+                            <input type="text" name="point"/>원
                             <a id="point">[판매가격의 1% 자동적립]</a>
                         </td>
                     </tr>

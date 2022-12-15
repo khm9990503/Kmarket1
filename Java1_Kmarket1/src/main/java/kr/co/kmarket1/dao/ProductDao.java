@@ -4,6 +4,8 @@ package kr.co.kmarket1.dao;
 
 import kr.co.kmarket1.db.DBHelper;
 import kr.co.kmarket1.db.SQL;
+import kr.co.kmarket1.vo.Cate1VO;
+import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.ProductVO;
 
 import java.util.ArrayList;
@@ -214,5 +216,144 @@ public class ProductDao extends DBHelper{
 	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
-
+	
+	
+	
+	
+	public List<ProductVO> selectProductList (String cate1, String cate2, int start) {
+		logger.info("selectProductList");
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCT_LIST);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getInt(1));
+				vo.setProdCate1(rs.getInt(2));
+				vo.setProdCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				vo.setDuty(rs.getString(22));
+				vo.setReceipt(rs.getString(23));
+				vo.setBizType(rs.getString(24));
+				vo.setOrigin(rs.getString(25));
+				vo.setIp(rs.getString(26));
+				vo.setRdate(rs.getString(27));
+				products.add(vo);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	
+	// 카테고리 1 출력
+	public List<Cate1VO> selectCategory1(){
+		logger.info("selectCategory1");
+		List<Cate1VO> categories = new ArrayList<>();
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_CATEGORY1);
+			while(rs.next()) {
+				Cate1VO vo = new Cate1VO();
+				vo.setCate1(rs.getInt(1));
+				vo.setC1Name(rs.getString(2));
+				categories.add(vo);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("categories :" + categories);
+		return categories;
+	}
+	
+	// 카테고리 2 출력
+	public List<Cate2VO> selectCategory2(){
+		logger.info("selectCategory2");
+		List<Cate2VO> categories2 = new ArrayList<>();
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_CATEGORY2);
+			while(rs.next()) {
+				Cate2VO vo = new Cate2VO();
+				vo.setCate1(rs.getInt(1));
+				vo.setCate2(rs.getInt(2));
+				vo.setC2Name(rs.getString(3));
+				categories2.add(vo);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("categories :" + categories2);
+		return categories2;
+	}
+	
+	// 상품 갯수 출력
+	public int selectListCountTotal(String cate1, String cate2) {
+		logger.info("selectListCountTotal");
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_LIST_COUNT_TOTAL);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) result = rs.getInt(1);
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result :" + result);
+		return result;
+	}
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
