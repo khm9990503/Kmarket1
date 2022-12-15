@@ -9,7 +9,7 @@
             <section class="notice">
                 <h1>
                     공지사항
-                    <a href="/Java1_Kmarket1/cs/notice/list.do?group=notice">전체보기</a>
+                    <a href="/Java1_Kmarket1/cs/notice/list.do">전체보기</a>
                 </h1>
                 <ul>
                 	<c:forEach var="notice" items="${notices}">
