@@ -27,8 +27,8 @@
         </div>
         <div class="logo">
             <div>
-                <a href="#">
-                    <img src="/Java1_Kmarket1/img/header_logo.png" alt="로고">
+                <a href="/Java1_Kmarket1/cs/index.do">
+                    <img src="/Java1_Kmarket1/cs/img/logo.png" alt="로고">
                     고객센터
                 </a>
             </div>

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket1.dao.ArticleDao;
+import kr.co.kmarket1.vo.ArticleVO;
+
 @WebServlet("/cs/notice/view.do")
 public class NoticeViewController extends HttpServlet{
 	/**
@@ -23,7 +26,14 @@ public class NoticeViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 수신
+		String no = req.getParameter("no");
+		String cate = req.getParameter("cate");
 		
+		ArticleVO article = ArticleDao.getInstance().selectArticle(no);
+		
+		req.setAttribute("cate", cate);
+		req.setAttribute("article", article);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/view.jsp");
 		dispatcher.forward(req, resp);
