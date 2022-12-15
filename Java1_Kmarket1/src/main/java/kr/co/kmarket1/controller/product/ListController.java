@@ -21,7 +21,7 @@ import kr.co.kmarket1.vo.ProductVO;
 @WebServlet("/product/list.do")
 public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProductService service = ProductService.INSTANCE;
+	private ProductService service = ProductService.instance;
 	
 	@Override
 	public void init() throws ServletException {
