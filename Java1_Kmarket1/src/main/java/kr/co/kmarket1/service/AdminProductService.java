@@ -1,25 +1,36 @@
 package kr.co.kmarket1.service;
 
-import kr.co.kmarket1.dao.ProductDao;
+import java.util.List;
 
-public enum ProductService {
-		
-	instance;
-	private ProductDao dao = ProductDao.getInstance();
+import kr.co.kmarket1.dao.AdminProductListDao;
+import kr.co.kmarket1.vo.ProductVO;
+
+
+
+public enum AdminProductService {
+	INSTANCE;
 	
-	public int selectCountTotal(String prodCate1, String prodCate2) {
-		return dao.selectCountTotal(prodCate1, prodCate2);
+	AdminProductListDao dao = AdminProductListDao.getInstance();
+	
+	// admin list 출력
+	public List<ProductVO> selectAdminProductList(String uid){
+		return dao.selectAdminProductList(uid);
 	}
+
+	// list 페이지 번호
+	public int selectListCountTotal() {
+		return dao.selectListCountTotal();
+	}
+		
+		
+		
 	public int getLastPageNum(int total) {
-		
 		int lastPageNum = 0;
-		
 		if(total % 10 == 0){
 			lastPageNum = total / 10;
 		}else{
 			lastPageNum = total / 10 + 1;
 		}
-		
 		return lastPageNum;
 	}
 	
@@ -27,13 +38,10 @@ public enum ProductService {
 		int currentPageGroup = (int)Math.ceil(currentPage / 10.0);
 		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
 		int pageGroupEnd = currentPageGroup * 10;
-		
 		if(pageGroupEnd > lastPageNum){
 			pageGroupEnd = lastPageNum;
 		}
-		
 		int[] result = {pageGroupStart, pageGroupEnd};
-		
 		return result;
 	}
 	
@@ -44,16 +52,45 @@ public enum ProductService {
 	
 	public int getCurrentPage(String pg) {
 		int currentPage = 1;
-		
-		if(pg != null){
+		if(pg != null && !pg.equals("")){
 			currentPage = Integer.parseInt(pg);	
 		}
-		
 		return currentPage;
 	}
 	
 	public int getStartNum(int currentPage) {
 		return (currentPage - 1) * 10;
 	}
-
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

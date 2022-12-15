@@ -21,9 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.kmarket1.dao.ProductDao;
-import kr.co.kmarket1.vo.ProductVO;
+import kr.co.kmarket1.dao.AdminProductRegisterDao;
 import kr.co.kmarket1.dao.CateDao;
+import kr.co.kmarket1.vo.ProductVO;
 import kr.co.kmarket1.vo.Cate1VO;
 
 
@@ -135,7 +135,7 @@ public class AdminProductRegisterController extends HttpServlet{
 		
 		
 		// 데이터베이스 처리
-		int result = ProductDao.getInstance().insertProduct(vo);
+		int result = AdminProductRegisterDao.getInstance().insertProduct(vo);	// 12.15 중현 ProductDao > AdminProductRegisterDao 수정
 			
 		// 리다이렉트 - 구홍모 12/10
 		if(result > 0) {
