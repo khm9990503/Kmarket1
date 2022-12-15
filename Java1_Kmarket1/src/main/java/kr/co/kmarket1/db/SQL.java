@@ -32,6 +32,19 @@ public class SQL {
 												+ "`origin` = ?, "
 												+ "`ip` = ?, "
 												+ "`rdate`=NOW()";
+	
+	
+	
+	public static final String SELECT_PRODUCT_LIST = "SELECT * FROM `km_product`"
+													+ "WHERE `prodCate1` = ? AND `prodCate2` = ? "
+													+ "ORDER BY ? "
+													+ "LIMIT ?, 10;";
+	// 1차 카테고리
+	public static final String SELECT_CATEGORY1 = "SELECT * FROM `km_product_cate1`";
+	// 2차 카테고리
+	public static final String SELECT_CATEGORY2 = "SELECT * FROM `km_product_cate2`";
+	// 상품 갯수 출력
+	public static final String SELECT_LIST_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` WHERE `prodCate1` = ? AND `prodCate2` = ?";
 												
 	
 	
