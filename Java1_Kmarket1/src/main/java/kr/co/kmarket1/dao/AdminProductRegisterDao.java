@@ -13,13 +13,13 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-public class ProductDao extends DBHelper{
-	private static ProductDao instance = new ProductDao();
-	public static ProductDao getInstance () {
+public class AdminProductRegisterDao extends DBHelper{
+	private static AdminProductRegisterDao instance = new AdminProductRegisterDao();
+	public static AdminProductRegisterDao getInstance () {
 		return instance;
 	}
  
-	private ProductDao () {}
+	private AdminProductRegisterDao () {}
 	
 	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -78,28 +78,7 @@ public class ProductDao extends DBHelper{
 		return products;
 	}
 	
-	// 전체 게시물 카운트
-	public int selectCountTotal(String prodCate1, String prodCate2) {
-		
-		int total = 0;
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
-			psmt.setString(1, prodCate1);
-			psmt.setString(2, prodCate2);
-			
-			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
-				total = rs.getInt(1);
-			}
-			close();
-			
-		}catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		return total;		
-	}
+	
 	
 	// 베스트 상품 리스트 TOP5
 	public List<ProductVO> selectProductsSold () {
@@ -267,6 +246,7 @@ public class ProductDao extends DBHelper{
 	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
+	
 	
 	
 	
