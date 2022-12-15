@@ -13,13 +13,13 @@
                 <aside>
                     <h2>자주묻는 질문</h2>
                     <ul>
-                        <li class="on"><a href="#">회원</a></li>
-                        <li><a href="#">쿠폰/이벤트</a></li>
-                        <li><a href="#">주문/결제</a></li>
-                        <li><a href="#">배송</a></li>
-                        <li><a href="#">취소/반품/교환</a></li>
-                        <li><a href="#">여행/숙박/항공</a></li>
-                        <li><a href="#">안전거래</a></li>
+                        <li class="${cate.equals('member') ?'on':'off'}"><a href="#">회원</a></li>
+                        <li class="${cate.equals('event') ?'on':'off'}"><a href="#">쿠폰/이벤트</a></li>
+                        <li class="${cate.equals('order') ?'on':'off'}"><a href="#">주문/결제</a></li>
+                        <li class="${cate.equals('deli') ?'on':'off'}"><a href="#">배송</a></li>
+                        <li class="${cate.equals('cancle') ?'on':'off'}"><a href="#">취소/반품/교환</a></li>
+                        <li class="${cate.equals('trip') ?'on':'off'}"><a href="#">여행/숙박/항공</a></li>
+                        <li class="${cate.equals('safe') ?'on':'off'}"><a href="#">안전거래</a></li>
                     </ul>
                 </aside>
                 <article>

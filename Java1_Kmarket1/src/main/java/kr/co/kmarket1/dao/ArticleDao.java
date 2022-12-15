@@ -18,7 +18,35 @@ public class ArticleDao extends DBHelper{
 	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 기본 CRUD
-	public void selectArticle() {}
+	public ArticleVO selectArticle(String no) {
+		logger.info("selectArticle start...");
+		ArticleVO article = new ArticleVO();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_article` where `no`=?");
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setComment(rs.getInt(3));
+				article.setGroup(rs.getString(4));
+				article.setCate(rs.getString(5));
+				article.setCate2(rs.getString(6));
+				article.setTitle(rs.getString(7));
+				article.setContent(rs.getString(8));
+				article.setFile(rs.getInt(9));
+				article.setHit(rs.getInt(10));
+				article.setUid(rs.getString(11));
+				article.setRegip(rs.getString(12));
+				article.setRdate(rs.getString(13));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectArticle end...");
+		}
+		return article;
+	}
 	public List<ArticleVO> selectArticlesByGroup(String group,int start) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
@@ -79,6 +107,33 @@ public class ArticleDao extends DBHelper{
 			psmt = conn.prepareStatement("select * from `km_article` where `group`=? AND `cate`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10;");
 			psmt.setString(1, group);
 			psmt.setString(2, cate);
+			psmt.setInt(3, top);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO article = new ArticleVO();
+				article.setNo(rs.getInt(1));
+				article.setGroup(rs.getString(4));
+				article.setCate(rs.getString(5));
+				article.setTitle(rs.getString(7));
+				article.setUid(rs.getString(11).substring(0,3));
+				article.setRdate(rs.getString(13).substring(2,10));
+				
+				articles.add(article);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	public List<ArticleVO> selectArticlesByCate2(String group,String cate, String cate2, int top) {
+		List<ArticleVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesByGroup start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_article` where `group`=? AND `cate`=? AND `cate2`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10;");
+			psmt.setString(1, group);
+			psmt.setString(2, cate2);
 			psmt.setInt(3, top);
 			rs = psmt.executeQuery();
 			while(rs.next()) {

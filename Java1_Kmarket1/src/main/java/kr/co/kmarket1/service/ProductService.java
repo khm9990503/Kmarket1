@@ -7,7 +7,13 @@ public enum ProductService {
 	instance;
 	private ProductDao dao = ProductDao.getInstance();
 	
-	public int selectCountTotal(String prodCate1, String prodCate2) {
+
+	// 게시물 갯수 cate1, cate2
+	public int selectListCountTotal(String cate1, String cate2) { // 중현
+		return dao.selectListCountTotal(cate1, cate2);
+   }
+	public int selectCountTotal(String prodCate1, String prodCate2) { 
+
 		return dao.selectCountTotal(prodCate1, prodCate2);
 	}
 	public int getLastPageNum(int total) {
@@ -54,6 +60,7 @@ public enum ProductService {
 	
 	public int getStartNum(int currentPage) {
 		return (currentPage - 1) * 10;
+
 	}
 
 }

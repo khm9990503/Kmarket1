@@ -5,6 +5,7 @@ public class ArticleVO {
 	private int parent; 
 	private int comment;
 	private String cate;
+	private String cate2;
 	private String title;
 	private String group;
 	private String content;
@@ -137,5 +138,13 @@ public class ArticleVO {
 	
 	public void setGroup(String group) {
 		this.group = group;
+	}
+	
+	public String getCate2() {
+		return cate2;
+	}
+	
+	public void setCate2(String cate2) {
+		this.cate2 = cate2;
 	}
 }
