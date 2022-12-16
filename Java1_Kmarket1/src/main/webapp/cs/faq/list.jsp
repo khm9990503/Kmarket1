@@ -3,12 +3,17 @@
 <jsp:include page="../_header.jsp"/>
 <script type="text/javascript">
 $(function() {
-	// 더보기 클릭 시
-	$('.more').click(function() {
-		$(this).parentNode.child
-		// 더보기 열기
-		$().css("display:block")
-
+	// 더보기 클릭 시 더보거나 닫기
+	$('.more').click(function(e) {
+		e.preventDefault();
+		let isblock = $(this).prev().is(':visible');
+		if(isblock){
+			// 더보기 닫기
+			$(this).parent().children('li:nth-child(n+4)').css("display","none");
+		}else{
+			// 더보기 열기
+			$(this).parent().children().css("display","block");
+		}
 	});
 });
 </script>
