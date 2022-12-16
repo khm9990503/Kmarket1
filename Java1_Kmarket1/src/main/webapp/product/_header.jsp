@@ -21,16 +21,16 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="#">로그인</a>
-                    <a href="#">회원가입</a>
+                    <a href="/Java1_Kmarket1/member/login.do">로그인</a>
+                    <a href="/Java1_Kmarket1/member/register.do">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a href="/Java1_Kmarket1/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
                 </div>
             </div>
             <div class="logo">
                 <div>
-                    <a href="#">
-                        <img src="/Java1_Kmarket1/img/header_logo.png" alt="로고">
+                    <a href="/Java1_Kmarket1/index.do">
+                        <img src="/Java1_Kmarket1/product/img/header_logo.png" alt="로고">
                     </a>
                     <form action="#">
                         <input type="text" name="keyword">

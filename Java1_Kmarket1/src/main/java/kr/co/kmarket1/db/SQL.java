@@ -77,7 +77,10 @@ public class SQL {
 	//product
 	public static final String SELECT_COUNT_TOTAL = "select count(`prodNo`) from `km_product` where `prodCate1`=? and `prodCate2`=?";
 
-	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
+	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodNo`=?";
+	public static final String SELECT_PRODUCTS_BY_SOLD = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
 													+ "order by `sold` desc limit ?, 10";
+	public static final String SELECT_PRODUCTS_BY_LOW_PRICE = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
+			+ "order by `price` asc limit ?, 10";
 	
 }

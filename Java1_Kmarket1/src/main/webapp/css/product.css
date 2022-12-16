@@ -111,6 +111,11 @@
     background-repeat: no-repeat;
 }
 #product .badge.power {background-image: url(/Java1_Kmarket1/img/ico_power_dealer.gif);}
+#product .badge.great {background-image: url(/Java1_Kmarket1/img/ico_great_seller.gif);}
+#product .badge.power.great {
+    background: url('/Java1_Kmarket1/img/ico_power_dealer.gif') no-repeat, url('../img/ico_great_seller.gif') no-repeat 63px;
+    width: 160px;
+}
 #product h6.rating {
     font-size: 11px;
     background-image: url(/Java1_Kmarket1/img/rating_star.png);
@@ -123,6 +128,22 @@
 #product h6.rating.star3 {width: 85px;}
 #product h6.rating.star4 {width: 100px;}
 #product h6.rating.star5 {width: 115px;}
+
+#product h5.rating {
+    width: 150px;
+    height: 20px;
+    font-size: 0px;
+    background-image: url(../img/ico_rating_star.png);
+    background-repeat: no-repeat;
+    background-position: 36px 0px;
+    text-indent: 86px;
+}
+#product h5.rating.star1 {background-position: 0 -40px;}
+#product h5.rating.star2 {background-position: 0 -80px;}
+#product h5.rating.star3 {background-position: 0 -120px;}
+#product h5.rating.star4 {background-position: 0 -160px;}
+#product h5.rating.star5 {background-position: 0 -200px;}
+
 #product > .list > table .rating {margin-top: 12px;}
 
 #product > .list > .paging {
@@ -225,18 +246,7 @@
     line-height: 36px;
     letter-spacing: -1px;
 }
-#product h5.rating {
-    width: 150px;
-    height: 20px;
-    font-size: 0px;
-    background-image: url(/Java1_Kmarket1/img/ico_rating_star.png);
-    background-repeat: no-repeat;
-    background-position: 36px 0px;
-    text-indent: 86px;
-}
-#product h5.rating.star4 {
-    background-position: 0 -160px;
-}
+
 #product > .view > .info > .summary .rating > a {
     color: #346aff;
     text-decoration: underline;
@@ -341,7 +351,7 @@
     background-position: -48px -74px;
 }
 #product > .view > .info > .summary .count > .increase:hover {
-    background-position: -24px -74px;
+    background-position: -72px -74px;
 }
 #product > .view > .info > .summary .total {
     overflow: hidden;
