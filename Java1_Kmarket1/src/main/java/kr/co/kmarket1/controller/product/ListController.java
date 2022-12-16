@@ -41,6 +41,7 @@ public class ListController extends HttpServlet {
 		String prodCate2 = req.getParameter("prodCate2");
 		String prodNo = req.getParameter("prodNo");
 		String pg = req.getParameter("pg");
+		String type = req.getParameter("type");
 		
 		ProductDao PD = ProductDao.getInstance();
 		
@@ -55,8 +56,7 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage); // 시작 인덱스
 		
 		// 카테고리별 리스트 불러오기
-		List<ProductVO> products = null;
-		products = PD.selectProducts(prodCate1, prodCate2, start);
+		List<ProductVO> products = PD.selectProductsBySold(prodCate1, prodCate2, start);
 		
 		req.setAttribute("products", products);
 		req.setAttribute("lastPageNum", lastPageNum);		

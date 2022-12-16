@@ -1,4 +1,8 @@
+<%@page import="org.apache.naming.java.javaURLContextFactory"%>
+<%@page import="java.util.Date"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp" />
     <section class="view">
         <!-- 제목, 페이지 네비게이션 -->
@@ -9,34 +13,53 @@
             </p>
         </nav>
 
-        <!-- 상품 전체 정보 내용 -->                
+        <!-- 상품 전체 정보 내용 -->
+        
         <article class="info">
             <div class="image">
-                <img src="https://via.placeholder.com/460x460" alt="상품이미지"/>
+                <img src="${product.thumb3}" alt="상품이미지"/>
             </div>
             <div class="summary">
                 <nav>
-                    <h1>(주)판매자명</h1>
-                    <h2>상품번호&nbsp;:&nbsp;<span>10010118412</span></h2>
+                    <h1>${product.seller}</h1>
+                    <h2>상품번호&nbsp;:&nbsp;<span>${product.prodNo}</span></h2>
                 </nav>                        
                 <nav>
-                    <h3>상품명</h3>
-                    <p>상품설명 출력</p>
-                    <h5 class="rating star4"><a href="#">상품평보기</a></h5>
+                    <h3>${product.prodName}</h3>
+                    <p>${product.descript}</p>
+                    <h5 class="rating star${product.score}"><a href="#">상품평보기</a></h5>
                 </nav>
                 <nav>
                     <div class="org_price">
-                        <del>30,000</del>
-                        <span>10%</span>
+                    <c:if test="${product.discount != '0'}">
+                        <del>${product.price}</del>
+                        <span>${product.discount}%</span>
+                    </c:if>
                     </div>
                     <div class="dis_price">
-                        <ins>27,000</ins>
+                       <c:choose>
+                       	<c:when test="${product.discount == '0'}">
+                           <ins class="dis-price">${product.price}</ins>
+                        </c:when>
+                       	<c:when test="${product.discount != '0'}">
+                           <ins class="dis-price">${Math.round(product.price*(100-product.discount)/100)}</ins>
+                        </c:when>
+                       </c:choose>
                     </div>
                 </nav>
                 <nav>
-                    <span class="delivery">무료배송</span>
-                    <span class="arrival">모레(금) 7/8 도착예정</span>
-                    <span class="desc">본 상품은 국내배송만 가능합니다.</span>
+                     <c:choose>
+	                       	<c:when test="${product.delivery == '0' }">
+	                       		<span class="delivery">무료배송</span>
+	                       	</c:when>
+	                       	<c:when test="${product.delivery != '0' }">
+	                       		<span class="delivery">배송비 : ${product.delivery}원</span>
+	                       	</c:when>
+	                       </c:choose>
+                    <c:set var="arrival" value="<%=new Date(new Date().getTime() + 60*60*24*1000*3)%>"/>
+                    <fmt:formatDate value="${arrival}" pattern="yyyy-MM-dd" var="arrival" />
+                    <span class="arrival">${arrival} 도착예정</span>
+                    <span class="desc">${product.descript}</span>
                 </nav>
                 <nav>
                     <span class="card cardfree"><i>아이콘</i>무이자할부</span>&nbsp;&nbsp;
@@ -48,9 +71,9 @@
                 <img src="/Java1_Kmarket1/img/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립!" class="banner" />
                 
                 <div class="count">
-                    <button class="decrease">-</button>
-                    <input type="text" name="num" value="1" readonly/>
-                    <button class="increase">+</button>
+                    <button class="decrease" onclick="decrease()">-</button>
+                    <input type="text" id="num" name="num" value="1" readonly/>
+                    <button class="increase" onclick="increase()">+</button>
                 </div>
                 
                 <div class="total">
@@ -71,9 +94,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+            <img src="${product.detail}" alt="상세페이지1">
         </article>
 
         <!-- 상품 정보 제공 고시 내용 -->
@@ -85,31 +106,31 @@
             <table border="0">
                 <tr>
                     <td>상품번호</td>
-                    <td>10110125435</td>
+                    <td>${product.prodNo}</td>
                 </tr>
                 <tr>
                     <td>상품상태</td>
-                    <td>새상품</td>
+                    <td>${product.status}</td>
                 </tr>
                 <tr>
                     <td>부가세 면세여부</td>
-                    <td>과세상품</td>
+                    <td>${product.duty}</td>
                 </tr>
                 <tr>
                     <td>영수증발행</td>
-                    <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                    <td>${product.receipt}</td>
                 </tr>
                 <tr>
                     <td>사업자구분</td>
-                    <td>사업자 판매자</td>
+                    <td>${product.bizType}</td>
                 </tr>
                 <tr>
                     <td>브랜드</td>
-                    <td>블루포스</td>
+                    <td>${product.company}</td>
                 </tr>
                 <tr>
                     <td>원산지</td>
-                    <td>국내생산</td>
+                    <td>${product.origin}</td>
                 </tr>
             </table>
             <table border="0">

@@ -14,12 +14,12 @@
        </nav>
        <!-- 정렬 메뉴 -->
        <ul class="sort">
-           <li><a href="#" class="on">판매많은순</a></li>
-           <li><a href="#">낮은가격순</a></li>
-           <li><a href="#">높은가격순</a></li>
-           <li><a href="#">평점높은순</a></li>
-           <li><a href="#">후기많은순</a></li>
-           <li><a href="#">최근등록순</a></li>
+           <li><a href="#" class="on" id="sold">판매많은순</a></li>
+           <li><a href="#" id="lowPrice">낮은가격순</a></li>
+           <li><a href="#" id="highPrice">높은가격순</a></li>
+           <li><a href="#" id="score">평점높은순</a></li>
+           <li><a href="#" id="review">후기많은순</a></li>
+           <li><a href="#" id="new">최근등록순</a></li>
        </ul>
 
        <!-- 상품목록 -->
@@ -27,13 +27,13 @@
        <c:forEach var="product" items="${products}">
            <tr>
                <td>
-                   <a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}" class="thumb">
+                   <a href="/Java1_Kmarket1/product/view.do?prodNo=${product.prodNo}" class="thumb">
                        <img src="${product.thumb1}" alt="상품이미지">
                    </a>
                </td>
                <td>
                    <h3 class="name">${product.prodName}</h3>
-                   <a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}" class="desc">${product.descript}</a>
+                   <a href="/Java1_Kmarket1/product/view.do?prodNo=${product.prodNo}" class="desc">${product.descript}</a>
                </td>
               
                <td>
@@ -69,7 +69,7 @@
                <td>
                    <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i>&nbsp;${product.seller}</h4>
                    <h5 class="badge power">판매자등급</h5>
-                   <h6 class="rating star1">상품평</h6>
+                   <h6 class="rating star${product.score}">상품평 </h6>
                </td>
            </tr>
            </c:forEach>
