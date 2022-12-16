@@ -35,8 +35,8 @@ public class SQL {
 	
 	
 	
-	// admin
-	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product`";
+	// admin list 상품 불러오기
+	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product` ";
 	
 	// admin 상품 갯수 출력
 	public static final String SELECT_LIST_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product`";
