@@ -47,6 +47,7 @@ public class ArticleDao extends DBHelper{
 		}
 		return article;
 	}
+	// 그룹별 리스트 불러오기
 	public List<ArticleVO> selectArticlesByGroup(String group,int start) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
@@ -73,6 +74,7 @@ public class ArticleDao extends DBHelper{
 		}
 		return articles;
 	}
+	// CS인덱스용 리스트 불러오기
 	public List<ArticleVO> selectArticlesByGroupIdx(String group, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
@@ -99,6 +101,7 @@ public class ArticleDao extends DBHelper{
 		}
 		return articles;
 	}
+	// 공지사항 리스트 불러오기 
 	public List<ArticleVO> selectArticlesByCate(String group, String cate, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
@@ -126,15 +129,17 @@ public class ArticleDao extends DBHelper{
 		}
 		return articles;
 	}
+	// 자주묻는질문 및 문의하기 리스트 불러오기
 	public List<ArticleVO> selectArticlesByCate2(String group,String cate, String cate2, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
-			logger.info("selectArticlesByGroup start...");
+			logger.info("selectArticlesByCate2 start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement("select * from `km_article` where `group`=? AND `cate`=? AND `cate2`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10;");
 			psmt.setString(1, group);
-			psmt.setString(2, cate2);
-			psmt.setInt(3, top);
+			psmt.setString(2, cate);
+			psmt.setString(3, cate2);
+			psmt.setInt(4, top);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ArticleVO article = new ArticleVO();
@@ -190,6 +195,7 @@ public class ArticleDao extends DBHelper{
 		}
 		return total;
 	}
+	
 	public void insertArticle() {}
 	public void updateArticle() {}
 	public void deleteArticle() {}

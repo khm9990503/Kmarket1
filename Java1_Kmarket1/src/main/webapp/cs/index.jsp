@@ -23,7 +23,7 @@
             <section class="faq">
                 <h1>
                     자주 묻는 질문
-                    <a href="/Java1_Kmarket1/cs/faq/list.do?group=faq">전체보기</a>
+                    <a href="/Java1_Kmarket1/cs/faq/list.do?group=faq&cate=member">전체보기</a>
                 </h1>
                 <ol>
                     <li>

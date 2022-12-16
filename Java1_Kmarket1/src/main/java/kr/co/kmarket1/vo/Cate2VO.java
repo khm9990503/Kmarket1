@@ -8,6 +8,9 @@ public class Cate2VO {
 	private int cate1;
 	private int cate2;
 	private String c2Name;
+	
+	private String artiCate2;
+	
 	public int getCate1() {
 		return cate1;
 	}
@@ -25,5 +28,13 @@ public class Cate2VO {
 	}
 	public void setC2Name(String c2Name) {
 		this.c2Name = c2Name;
+	}
+	
+	public String getArtiCate2() {
+		return artiCate2;
+	}
+	
+	public void setArtiCate2(String artiCate2) {
+		this.artiCate2 = artiCate2;
 	}
 }
