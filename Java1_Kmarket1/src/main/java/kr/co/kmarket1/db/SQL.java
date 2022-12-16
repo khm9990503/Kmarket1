@@ -68,6 +68,30 @@ public class SQL {
 													+ "`locationTerms`=?, "
 													+ "`rdate`= NOW()";
 
+	// 회원가입 - 판매자 (insertSellerMember)
+	public static final String INSERT_MEMBER_SELLER = "INSERT INTO `km_member` SET " 
+													+ "`uid`=?, "
+													+ "`pass`=SHA2(?, 256), "
+													+ "`name`='판매자', "
+													+ "`gender`='3', "
+													+ "`hp`=?, "
+													+ "`company`=?, "
+													+ "`ceo`=?, "
+													+ "`bizRegNum`=?, "
+													+ "`comRegNum`=?, "
+													+ "`tel`=?, "
+													+ "`fax`=?, "
+													+ "`email`=?, "
+													+ "`zip`=?, "
+													+ "`addr1`=?, "
+													+ "`addr2`=?, "
+													+ "`type`=?, "
+													+ "`level`=?, "
+													+ "`regip`=?, "
+													+"`rdate`=NOW()";
+													
+													
+	
 	
 	// 회원가입 - uid 중복체크 
 	public static final String SELECT_COUNT_UID = "select count('uid') from `km_member` where `uid`=?";
@@ -82,5 +106,6 @@ public class SQL {
 													+ "order by `sold` desc limit ?, 10";
 	public static final String SELECT_PRODUCTS_BY_LOW_PRICE = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
 			+ "order by `price` asc limit ?, 10";
+	
 	
 }

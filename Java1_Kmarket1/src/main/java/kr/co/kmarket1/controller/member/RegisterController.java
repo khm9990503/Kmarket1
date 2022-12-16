@@ -1,6 +1,7 @@
 package kr.co.kmarket1.controller.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,7 +68,14 @@ public class RegisterController extends HttpServlet {
 		
 		MemberDao.getInstance().insertMember(vo);
 		
-		resp.sendRedirect("/Java1_Kmarket1/member/login.do");
+		// 회원가입 완료
+		if(vo != null) {
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.println("<script>alert('회원가입이 완료되었습니다.'); location.href='/Java1_Kmarket1/member/login.do';</script>");
+			out.flush();
+		
+		}
 		
 	}
 	
