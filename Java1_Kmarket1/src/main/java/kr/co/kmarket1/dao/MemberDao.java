@@ -83,6 +83,7 @@ public class MemberDao extends DBHelper{
 	}
 	
 	// 회원가입 
+	//개인 회원가입
 	public void insertMember(MemberVO vo) {
 		try {
 			logger.info("insertMember start..");
@@ -110,6 +111,40 @@ public class MemberDao extends DBHelper{
 		}
 	
 	}
+	
+	
+	public void insertSellerMember(MemberVO vo){
+		try {
+			logger.info("insertSellerMember start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_MEMBER_SELLER);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getPass());
+			psmt.setString(3, vo.getHp());
+			psmt.setString(4, vo.getCompany());
+			psmt.setString(5, vo.getCeo());
+			psmt.setString(6, vo.getBizRegNum());
+			psmt.setString(7, vo.getComRegNum());
+			psmt.setString(8, vo.getTel());
+			psmt.setString(9, vo.getFax());
+			psmt.setString(10, vo.getEmail());
+			psmt.setString(11, vo.getZip());
+			psmt.setString(12, vo.getAddr1());
+			psmt.setString(13, vo.getAddr2());
+			psmt.setInt(14, vo.getType());
+			psmt.setInt(15, vo.getLevel());
+			psmt.setString(16, vo.getRegip());
+			
+			
+			psmt.executeUpdate();
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	
 	public void updateMember() {}
 	public void deleteMember() {}
 	

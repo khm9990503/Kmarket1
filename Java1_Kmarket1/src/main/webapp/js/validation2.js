@@ -83,7 +83,7 @@
 				$('.resultPass').css('color', 'green').text('비밀번호가 일치합니다.');	
 			}else{
 				isPassOk = false;
-				$('.resultPass').css('color', 'red').text('영문, 숫자, 특수문자 조합 8자~12자 설정해 주세요.');
+				$('.resultPass').css('color', 'red').text('영문, 숫자, 특수문자 조합 최소 5자 이상 이어야 합니다.');
 			}				
 			
 		}else{
@@ -94,19 +94,7 @@
 	});
 		
 	
-	// 이름 유효성 검증
-	$('input[name=name]').focusout(function(){
-		let name = $(this).val();
-		
-		if(!name.match(regName)){
-			isNameOk = false;
-			$('.resultName').css('color', 'red').text('이름은 한글 2자 이상 이어야 합니다.');
-		}else{
-			isNameOk = true;
-			$('.resultName').text('');
-		}
-	});
-		
+	
 	// 이메일 유효성 검사
 	$('input[name=email]').focusout(function(){
 		let email = $(this).val();
@@ -120,18 +108,7 @@
 		}			
 	});
 	
-	// 휴대폰 유효성 검사
-	$('input[name=hp]').focusout(function(){
-		let hp = $(this).val();
-		
-		if(!hp.match(regHp)){
-			isHpOk = false;
-			$('.resultHp').css('color', 'red').text('휴대폰이 유효하지 않습니다.');
-		}else{
-			isHpOk = true;
-			$('.resultHp').text('');
-		}
-	});
+
 	
 	// 폼 전송이 시작될 때 실행되는 폼 이벤트(폼 전송 버튼을 클릭했을 때) 
 	$('.register > form').submit(function(){
@@ -150,12 +127,7 @@
 			alert('비밀번호를 확인 하십시요.');
 			return false;
 		}
-		// 이름 검증
-		if(!isNameOk){
-			alert('이름을 확인 하십시요.');
-			return false;
-		}
-		
+	
 		// 이메일 검증
 		if(!isEmailOk){
 			alert('이메일을 확인 하십시요.');

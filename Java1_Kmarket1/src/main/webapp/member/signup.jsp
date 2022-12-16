@@ -24,7 +24,7 @@
 						location.href='/Java1_Kmarket1/member/register.do?locationTerms=1';	
 					}else{
 						console.log('here4');
-						location.href='/Java1_Kmarket1/member/registerSeller.do?locationTerms=1';
+						location.href='/Java1_Kmarket1/member/registerSeller.do';
 					}
 				}else{
 					if(type == 'normal'){
@@ -32,7 +32,7 @@
 						location.href='/Java1_Kmarket1/member/register.do?locationTerms=0';	
 					}else{
 						console.log('here6');
-						location.href='/Java1_Kmarket1/member/registerSeller.do?locationTerms=0';
+						location.href='/Java1_Kmarket1/member/registerSeller.do';
 					}
 				}
 				
@@ -80,15 +80,28 @@
                 <input type="checkbox" name="agree3">동의합니다.
             </label>
         </section>
-        <section>
-            <h3>
-                <span class="optional">(선택)</span>위치정보 이용약관
-            </h3>
-            <textarea class="location" readonly>${vo.location}</textarea>
-            <label>
-                <input type="checkbox" name="agree4">동의합니다.
-            </label>
-        </section>
+        
+        <c:choose>
+            <c:when test="${type == 'normal'}">
+            	<section>
+		            <h3>
+		                <span class="optional">(선택)</span>위치정보 이용약관
+		            </h3>
+		            <textarea class="location" readonly>${vo.location}</textarea>
+		            <label>
+		                <input type="checkbox" name="agree4">동의합니다.
+		            </label>
+        		</section>
+            </c:when>
+        <c:otherwise>
+        
+        
+        </c:otherwise>    
+            
+        </c:choose>
+        
+        
+        
         <div>
             <input type="button" class="agree" value="동의하기">
         </div>

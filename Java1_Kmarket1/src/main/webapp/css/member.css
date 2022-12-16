@@ -596,6 +596,14 @@ footer p:nth-of-type(2) {
 	padding: 5px
 }
 
+#member > .registerSeller table #btnZip {
+    position: relative;
+    top: 5px;
+    padding: 5px;
+}
+
+
+
 /*findId*/
 #member > .findId {
     width: 900px;
