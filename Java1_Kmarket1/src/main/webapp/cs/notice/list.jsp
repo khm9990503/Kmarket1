@@ -57,33 +57,33 @@
                         </c:forEach>
                     </table>
                     <div class="page">
-                    <c:choose>
-		            <c:when test="${pageGroupStart gt 1 && cate != null}">
-		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}&cate=${cate}" class="prev">이전</a>
-		            </c:when>
-		            <c:when test="${pageGroupStart gt 1 && cate == null}">
-		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
-		            </c:when>
-		            </c:choose>
-		            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd }">
-		            <c:choose>
-		            <c:when test="${cate != null}">
-		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${i}&cate=${cate}" class="num ${i==currentPage?'current':'off'} ${i==currentPage?'on':'off'}">${i}</a>
-		            </c:when>
-		            <c:when test="${cate == null}">
-		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${i}" class="num ${i==currentPage?'current':'off'} ${i==currentPage?'on':'off'}">${i}</a>
-		            </c:when>
-		            </c:choose>
-		            </c:forEach>
-		            <c:choose>
-		            <c:when test="${pageGroupEnd lt lastPageNum && cate != null}">
-		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}&cate=${cate}" class="next">다음</a>
-		            </c:when>
-		            <c:when test="${pageGroupEnd lt lastPageNum && cate == null}">
-		            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
-		            </c:when>
-		            </c:choose>
-	        	</div>
+	                    <c:choose>
+			            <c:when test="${pageGroupStart gt 1 && cate != null}">
+			            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}&cate=${cate}" class="prev">이전</a>
+			            </c:when>
+			            <c:when test="${pageGroupStart gt 1 && cate == null}">
+			            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
+			            </c:when>
+			            </c:choose>
+			            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd }">
+			            <c:choose>
+			            <c:when test="${cate != null}">
+			            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${i}&cate=${cate}" class="num ${i==currentPage?'current':'off'} ${i==currentPage?'on':'off'}">${i}</a>
+			            </c:when>
+			            <c:when test="${cate == null}">
+			            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${i}" class="num ${i==currentPage?'current':'off'} ${i==currentPage?'on':'off'}">${i}</a>
+			            </c:when>
+			            </c:choose>
+			            </c:forEach>
+			            <c:choose>
+			            <c:when test="${pageGroupEnd lt lastPageNum && cate != null}">
+			            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}&cate=${cate}" class="next">다음</a>
+			            </c:when>
+			            <c:when test="${pageGroupEnd lt lastPageNum && cate == null}">
+			            <a href="/Java1_Kmarket1/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+			            </c:when>
+			            </c:choose>
+	        		</div>
                 </article>
             </section>
         </div>

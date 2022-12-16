@@ -50,7 +50,7 @@ $(function() {
                         <ul class="articles">
                         	<c:forEach var="arti" items="${articles}">
                             <li>
-                                <a href="/Java1_Kmarket1/cs/faq/view.do?no=${arti.no}">
+                                <a href="/Java1_Kmarket1/cs/faq/view.do?no=${arti.no}&cate=${arti.cate}">
                                     <span>Q.</span>${arti.title}
                                 </a>
                             </li>
