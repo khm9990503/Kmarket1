@@ -90,5 +90,26 @@ public class CateDao extends DBHelper{
 	public void insertCate() {}
 	public void updateCate() {}
 	public void deleteCate() {}
-	
+	// 게시물 카테 리스트 불러오기
+	public List<Cate2VO> selectArtiCates_2(String cate) {
+		List<Cate2VO> cate2s = new ArrayList<>();
+		try {
+			logger.info("selectArtiCates_2 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_article_cate` where `cate`=?");
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				Cate2VO cate2 = new Cate2VO();
+				cate2.setArtiCate2(rs.getString(2));
+				cate2.setC2Name(rs.getString(3));
+				
+				cate2s.add(cate2);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cate2s;
+	}
 }
