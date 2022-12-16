@@ -36,7 +36,7 @@ public class AdminProductListDao extends DBHelper{
 	
 	
 	// List 상품출력
-	public List<ProductVO> selectAdminProductList(String uid) {
+	public List<ProductVO> selectAdminProductList() {
 		logger.info("selectAdminProductList...");
 		List<ProductVO> products = new ArrayList<>();
 		
@@ -82,8 +82,6 @@ public class AdminProductListDao extends DBHelper{
 		logger.debug("result :" + products);
 		return products;
 	}
-	
-	
 	
 	// 상품 갯수 출력
 		public int selectListCountTotal() {

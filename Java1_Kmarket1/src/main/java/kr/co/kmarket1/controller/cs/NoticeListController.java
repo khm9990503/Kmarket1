@@ -28,9 +28,10 @@ public class NoticeListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate = req.getParameter("cate");
-		String pg = req.getParameter("pg");
+		
 		String group = "notice";
 		
+		String pg = req.getParameter("pg");
 		int start = 0;
 		int currentPage = 1;
 		int currentPageGroup = 1;

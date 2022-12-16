@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket1.dao.AdminProductListDao;
+import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.service.AdminProductService;
 import kr.co.kmarket1.vo.ProductVO;
 
@@ -56,7 +58,7 @@ public class AdminProductListController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		//req.setAttribute("search", search);
 		
-		List<ProductVO> products = service.selectAdminProductList("uid");
+		List<ProductVO> products = AdminProductListDao.getInstance().selectAdminProductList();
 		req.setAttribute("products", products);
 		
 		// view forward

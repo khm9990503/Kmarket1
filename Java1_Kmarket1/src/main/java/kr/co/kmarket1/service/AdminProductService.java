@@ -12,10 +12,7 @@ public enum AdminProductService {
 	
 	AdminProductListDao dao = AdminProductListDao.getInstance();
 	
-	// admin list 출력
-	public List<ProductVO> selectAdminProductList(String uid){
-		return dao.selectAdminProductList(uid);
-	}
+	
 
 	// list 페이지 번호
 	public int selectListCountTotal() {
