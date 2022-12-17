@@ -13,43 +13,31 @@
                 <aside>
                     <h2>문의하기</h2>
                     <ul>
-                        <li class="on"><a href="#">회원</a></li>
-                        <li><a href="#">쿠폰/이벤트</a></li>
-                        <li><a href="#">주문/결제</a></li>
-                        <li><a href="#">배송</a></li>
-                        <li><a href="#">취소/반품/교환</a></li>
-                        <li><a href="#">여행/숙박/항공</a></li>
-                        <li><a href="#">안전거래</a></li>
+                        <li class="${cate.equals('member') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=member">회원</a></li>
+                        <li class="${cate.equals('event') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=event">쿠폰/이벤트</a></li>
+                        <li class="${cate.equals('order') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=order">주문/결제</a></li>
+                        <li class="${cate.equals('deli') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=deli">배송</a></li>
+                        <li class="${cate.equals('cancle') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=cancle">취소/반품/교환</a></li>
+                        <li class="${cate.equals('trip') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=trip">여행/숙박/항공</a></li>
+                        <li class="${cate.equals('safe') ?'on':'off'}"><a href="/Java1_Kmarket1/cs/qna/list.do?cate=safe">안전거래</a></li>
                     </ul>
                 </aside>
                 <article>
                     <nav>
                         <h2 class="title">
-                            [가입] 가입 문의내용
+                            ${article.title }
                         </h2>
                         <p>
-                            <span>chh***</span>
-                            <span>2022-11-21</span>
+                            <span>${article.uid}***</span>
+                            <span>${article.rdate}</span>
                         </p>
                     </nav>
                     <div class="content">
                         <p>
-                            개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
-                        </p>
-                        <p>
-                            ※ 피싱 관련 피해신고
-                            <br>
-                            <br>
-                            ▶ 경찰청 사이버수사국 (국번없이)182 :
-                            http://cyberbureau.police.go.kr
-                            <br>
-                            ▶ KISA 인터넷침해대응센터 (국번없이)118 :
-                            http://www.krcert.or.kr
-                            <br>
-                            감사합니다.
+                            ${article.content}
                         </p>
                     </div>
-                    <a href="#" class="btnList">목록보기</a>
+                    <a href="/Java1_Kmarket1/cs/qna/list.do?cate=${article.cate}" class="btnList">목록보기</a>
                 </article>
             </section>
         </div>

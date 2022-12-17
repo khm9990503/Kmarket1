@@ -78,7 +78,7 @@
 			            <a href="/Java1_Kmarket1/cs/qna/list.do?pg=${pageGroupStart+1}&cate=${cate}" class="next">다음</a>
 			            </c:if>
 	        		</div>
-                    <a href="/Java1_Kmarket1/cs/qna/write.do" class="btnWrite">문의하기</a>
+                    <a href="/Java1_Kmarket1/cs/qna/write.do?cate=${cate}" class="btnWrite">문의하기</a>
                 </article>
             </section>
         </div>

@@ -107,5 +107,14 @@ public class SQL {
 	public static final String SELECT_PRODUCTS_BY_LOW_PRICE = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
 			+ "order by `price` asc limit ?, 10";
 	
-	
+	// ARTICLE
+	public static final String INSERT_ARTICLE 	= "insert into `km_article` set "
+												+ "`group`=?, "
+												+ "`cate`=?, "
+												+ "`cate2`=?, "
+												+ "`title`=?, "
+												+ "`content`=?, "
+												+ "`uid`=?, "
+												+ "`regip`=?, "
+												+ "`rdate`=NOW()";
 }
