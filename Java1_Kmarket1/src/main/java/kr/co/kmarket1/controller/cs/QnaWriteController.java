@@ -1,6 +1,7 @@
 package kr.co.kmarket1.controller.cs;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import kr.co.kmarket1.dao.ArticleDao;
 import kr.co.kmarket1.dao.CateDao;
@@ -29,10 +32,8 @@ public class QnaWriteController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 게시물 카테고리2 옵션 리스트 불러오기
 		String cate = req.getParameter("cate");
-		List<Cate2VO> artiCate2s = CateDao.getInstance().selectArtiCates_2(cate);
-		req.setAttribute("artiCate2s", artiCate2s);
+		
 		req.setAttribute("cate", cate);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");

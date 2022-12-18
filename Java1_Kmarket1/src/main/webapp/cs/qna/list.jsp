@@ -28,7 +28,7 @@
                         <c:choose>
                     	<c:when test="${cate==null || cate.equals('member')}">
                         <h1>회원</h1>
-                        <h2>회원 전체 내용입니다.</h2>
+                        <h2>회원 내용입니다.</h2>
                         </c:when>
                     	<c:when test="${cate.equals('event')}">
                         <h1>쿠폰/이벤트</h1>
