@@ -24,7 +24,7 @@ public class ProductDao extends DBHelper{
 	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
   
-	public ProductVO selectProduct (String prodNo) {
+	public ProductVO selectProduct (String prodCate1, String prodCate2, String prodNo) {
 		
 		ProductVO product = null;
 		
@@ -32,7 +32,9 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProduct start...");
 			conn = getConnection(); 
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCT);
-			psmt.setString(1, prodNo);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setString(3, prodNo);
 			
 			rs = psmt.executeQuery();
 			
