@@ -66,7 +66,7 @@
             <section class="qna">
                 <h1>
                     문의하기
-                    <a href="/Java1_Kmarket1/cs/faq/list.do?group=qna&cate=member">전체보기</a>
+                    <a href="/Java1_Kmarket1/cs/qna/list.do?group=qna&cate=member">전체보기</a>
                 </h1>
                 <ul>
                 	<c:forEach var="qna" items="${qnas}">

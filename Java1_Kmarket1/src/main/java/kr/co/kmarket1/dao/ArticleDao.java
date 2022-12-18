@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket1.db.DBHelper;
+import kr.co.kmarket1.db.SQL;
 import kr.co.kmarket1.vo.ArticleVO;
 
 public class ArticleDao extends DBHelper{
@@ -78,7 +79,7 @@ public class ArticleDao extends DBHelper{
 	public List<ArticleVO> selectArticlesByGroupIdx(String group, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
-			logger.info("selectArticlesByGroup start...");
+			logger.info("selectArticlesByGroupIdx start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement("select * from `km_article` where `group`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?;");
 			psmt.setString(1, group);
@@ -105,7 +106,7 @@ public class ArticleDao extends DBHelper{
 	public List<ArticleVO> selectArticlesByCate(String group, String cate, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
-			logger.info("selectArticlesByGroup start...");
+			logger.info("selectArticlesByCate start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement("select * from `km_article` where `group`=? AND `cate`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10;");
 			psmt.setString(1, group);
@@ -195,8 +196,25 @@ public class ArticleDao extends DBHelper{
 		}
 		return total;
 	}
-	
-	public void insertArticle() {}
+	// 게시물 작성
+	public void insertArticle(ArticleVO vo) {
+		try {
+			logger.info("insertArticle start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
+			psmt.setString(1, vo.getGroup());
+			psmt.setString(2, vo.getCate());
+			psmt.setString(3, vo.getCate2());
+			psmt.setString(4, vo.getTitle());
+			psmt.setString(5, vo.getContent());
+			psmt.setString(6, vo.getUid());
+			psmt.setString(7, vo.getRegip());
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public void updateArticle() {}
 	public void deleteArticle() {}
 }

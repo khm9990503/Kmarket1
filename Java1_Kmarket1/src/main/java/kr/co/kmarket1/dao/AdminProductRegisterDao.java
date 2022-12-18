@@ -27,10 +27,6 @@ public class AdminProductRegisterDao extends DBHelper{
 	public void selectProduct () {}
 	
 	// 메인 상품 리스트 작업 ////////////// 시작 12/13 - 홍모
-	
-	
-	
-	
 	// 베스트 상품 리스트 TOP5
 	public List<ProductVO> selectProductsSold () {
 		List<ProductVO> products = new ArrayList<>();
