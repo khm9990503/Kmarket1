@@ -40,7 +40,12 @@
     padding: 0 10px;
     border-right: 1px solid #ddd;
 }
-#product > .list > .sort > li > a.on {font-weight: bold;}
+#product > .list > .sort > li:nth-child(1).on > a  {font-weight: bold;}
+#product > .list > .sort > li:nth-child(2).on > a  {font-weight: bold;}
+#product > .list > .sort > li:nth-child(3).on > a  {font-weight: bold;}
+#product > .list > .sort > li:nth-child(4).on > a  {font-weight: bold;}
+#product > .list > .sort > li:nth-child(5).on > a  {font-weight: bold;}
+
 #product > .list > table {
     width: 100%;
     height: auto;
