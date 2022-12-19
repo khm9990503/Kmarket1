@@ -96,7 +96,7 @@
 	    </c:choose>
     </div>
     <a class="btn btnDel">선택삭제</a>
-    <a class="btn btnWrite">작성하기</a>
+    <a href="/Java1_Kmarket1/admin/cs/write.do?group=${group}" class="btn btnWrite">작성하기</a>
 </section>
 </main>
 <jsp:include page="../_footer.jsp"/>
