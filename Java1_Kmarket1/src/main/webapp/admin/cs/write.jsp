@@ -5,26 +5,26 @@
 	<c:choose>
 	<c:when test="${group.equals('notice')}">
 		<nav>
-	        <h3>공지사항 수정</h3>
+	        <h3>공지사항 작성</h3>
 	        <p>HOME > 고객센터 ><strong>공지사항</strong></p>
 	    </nav>
     </c:when>
 	<c:when test="${group.equals('faq')}">
 		<nav>
-	        <h3>자주묻는질문 수정</h3>
+	        <h3>자주묻는질문 작성</h3>
 	        <p>HOME > 고객센터 ><strong>자주묻는질문</strong></p>
 	    </nav>
     </c:when>
 	<c:when test="${group.equals('qna')}">
 		<nav>
-	        <h3>문의하기 수정</h3>
+	        <h3>문의하기 작성</h3>
 	        <p>HOME > 고객센터 ><strong>문의하기</strong></p>
 	    </nav>
     </c:when>
     </c:choose>
     <article>
-        <form action="/Java1_Kmarket1/cs/qna/write.do" method="post">
-       	<input type="hidden" name="group" value="qna">
+        <form action="/Java1_Kmarket1/admin/cs/write.do" method="post">
+       	<input type="hidden" name="group" value="${group}">
        	<input type="hidden" name="uid" value="uid">
            <table>
                <tr>
@@ -53,7 +53,7 @@
                </tr>
            </table>
            <div>
-               <a href="/Java1_Kmarket1/cs/qna/list.do?cate=member" class="btn btnList">취소하기</a>
+               <a href="/Java1_Kmarket1/admin/cs/list.do?group=${group}" class="btn btnList">취소하기</a>
                <input type="submit" class="btn btnSubmit" value="등록하기">
            </div>
        </form>

@@ -494,27 +494,78 @@ p.alert {
 	height: auto;
 	margin-top: 50px;
 }
-
-#csView {}
-#csView table {
+/* cs-write */
+#csWrite {}
+#csWrite table {
 	border-top: 2px solid #8798a3;
 }
-#csView table td{
+#csWrite table td{
 	font-size: 18px;
 	padding: 20px;
 }
-#csView table td:nth-child(1) {
+#csWrite table td:nth-child(1) {
 	font-weight: bold;
 }
-#csView table tr:nth-child(3) td:nth-child(1) {
+#csWrite table tr:nth-child(3) td:nth-child(1) {
 	height: 280px;
 }
-#csView div {
+#csWrite div {
+	position:relative;
 	width: 100%;
 	height: auto;
 	margin-top: 50px;
 }
-
+#csWrite table input {
+	width: 100%;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+#csWrite table textarea {
+	width: 100%;
+    height: 360px;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+/* cs-modify */
+#csModify {}
+#csModify table {
+	border-top: 2px solid #8798a3;
+}
+#csModify table td{
+	font-size: 18px;
+	padding: 20px;
+}
+#csModify table td:nth-child(1) {
+	font-weight: bold;
+}
+#csModify table tr:nth-child(3) td:nth-child(1) {
+	height: 280px;
+}
+#csModify div {
+	position:relative;
+	width: 100%;
+	height: auto;
+	margin-top: 50px;
+}
+#csModify table input {
+	width: 100%;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+#csModify table textarea {
+	width: 100%;
+    height: 360px;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+}
 /* footer */
 footer {
     width: 100%;
@@ -539,7 +590,7 @@ footer > div > p {
 	display:inline-block;
 	padding: 10px 20px;
     text-align: center;
-    margin-top: -48px;
+    margin-top: -40px;
     background-color: #c0c0c0;
     border: 1px solid #111;
     border-radius: 2px;
@@ -574,6 +625,8 @@ footer > div > p {
     background-color: #0063ce;
 }
 .btnSubmit {
+	position:absolute;
+	right:133px;
     display: inline-block;
     text-align: center;
     background-color: #067dfd;
