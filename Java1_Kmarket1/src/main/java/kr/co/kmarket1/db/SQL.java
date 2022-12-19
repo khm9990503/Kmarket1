@@ -128,11 +128,25 @@ public class SQL {
 													+ "order by `review` desc limit ?, 10";
 	public static final String SELECT_PRODUCTS_BY_NEW = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
 													+ "order by `rdate` desc limit ?, 10";
-	// 리뷰 보기
+	// product - 리뷰 보기
 	public static final String SELECT_REVIEW = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
 													+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
+													+"where a.`prodNo`=? "
 													+"ORDER BY `rdate` desc "
 													+"LIMIT ?, 5";
+	
+	// product - 카트(장바구니)
+	public static final String INSERT_CART = "insert into `km_product_cart` set "
+												+"`uid`=?, "
+												+"`prodNo`=?, "
+												+"`count`=?, "
+												+"`price`=?, "
+												+"`discount`=?, "
+												+"`point`=?, "
+												+"`delivery`=?, "
+												+"`total`=?, "
+												+"`rdate`=NOW()";
+	
 	
 	// ARTICLE
 	public static final String INSERT_ARTICLE 	= "insert into `km_article` set "

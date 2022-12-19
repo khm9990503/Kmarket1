@@ -380,7 +380,7 @@ public class ProductDao extends DBHelper{
 	}
 	
 	// 리뷰
-	public List<ReviewVO> selectReview(int start) {
+	public List<ReviewVO> selectReview(String prodNo,int start) {
 		
 		List<ReviewVO> reviews = new ArrayList<>();
 		
@@ -388,7 +388,8 @@ public class ProductDao extends DBHelper{
 			logger.info("selectReview start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_REVIEW);
-			psmt.setInt(1, start);
+			psmt.setString(1, prodNo);
+			psmt.setInt(2, start);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
