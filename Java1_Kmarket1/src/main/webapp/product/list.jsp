@@ -7,19 +7,23 @@
            <h1>상품목록</h1>
            <p>
                HOME >
-               <span>dd</span>
+               <c:forEach var="ca1" items="${cate1s}">
+               		<c:if test="${prodCate1 eq ca1.cate1}"><span>${ca1.c1Name}</span></c:if>
+               </c:forEach>
                 > 
-                <strong>dd</strong>
+                <c:forEach var="ca2" items="${cate2s}">
+                	<c:if test="${prodCate1 == ca2.cate1 && prodCate2 == ca2.cate2}"><strong>${ca2.c2Name}</strong></c:if>
+                </c:forEach>
            </p>
        </nav>
        <!-- 정렬 메뉴 -->
        <ul class="sort">
-           <li><a href="#" class="on" id="sold">판매많은순</a></li>
-           <li><a href="#" id="lowPrice">낮은가격순</a></li>
-           <li><a href="#" id="highPrice">높은가격순</a></li>
-           <li><a href="#" id="score">평점높은순</a></li>
-           <li><a href="#" id="review">후기많은순</a></li>
-           <li><a href="#" id="new">최근등록순</a></li>
+           <li class="${type eq 'sold'?'on':'off'}"><a href="/Java1_Kmarket1/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${currentPage}&type=sold">판매많은순</a></li>
+           <li class="${type eq 'lowPrice'?'on':'off'}"><a href="/Java1_Kmarket1/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${currentPage}&type=lowPrice">낮은가격순</a></li>
+           <li class="${type eq 'highPrice'?'on':'off'}"><a href="/Java1_Kmarket1/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${currentPage}&type=highPrice">높은가격순</a></li>
+           <li class="${type eq 'score'?'on':'off'}"><a href="/Java1_Kmarket1/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${currentPage}&type=score">평점높은순</a></li>
+           <li class="${type eq 'review'?'on':'off'}"><a href="/Java1_Kmarket1/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${currentPage}&type=review">후기많은순</a></li>
+           <li class="${type eq 'new'?'on':'off'}"><a href="/Java1_Kmarket1/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&pg=${currentPage}&type=new">최근등록순</a></li>
        </ul>
 
        <!-- 상품목록 -->
@@ -27,13 +31,13 @@
        <c:forEach var="product" items="${products}">
            <tr>
                <td>
-                   <a href="/Java1_Kmarket1/product/view.do?prodNo=${product.prodNo}" class="thumb">
+                   <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${product.prodNo}" class="thumb">
                        <img src="${product.thumb1}" alt="상품이미지">
                    </a>
                </td>
                <td>
                    <h3 class="name">${product.prodName}</h3>
-                   <a href="/Java1_Kmarket1/product/view.do?prodNo=${product.prodNo}" class="desc">${product.descript}</a>
+                   <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${product.prodNo}" class="desc">${product.descript}</a>
                </td>
               
                <td>

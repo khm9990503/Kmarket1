@@ -7,6 +7,7 @@ import kr.co.kmarket1.db.SQL;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.ProductVO;
+import kr.co.kmarket1.vo.ReviewVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class ProductDao extends DBHelper{
 	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
   
-	public ProductVO selectProduct (String prodNo) {
+	public ProductVO selectProduct (String prodCate1, String prodCate2, String prodNo) {
 		
 		ProductVO product = null;
 		
@@ -32,7 +33,9 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProduct start...");
 			conn = getConnection(); 
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCT);
-			psmt.setString(1, prodNo);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setString(3, prodNo);
 			
 			rs = psmt.executeQuery();
 			
@@ -74,12 +77,13 @@ public class ProductDao extends DBHelper{
 	}
 	
 	// 메인 상품 리스트 작업 ////////////// 시작 12/13 - 홍모
+	// 상품 정렬
 	public List<ProductVO> selectProductsBySold(String prodCate1, String prodCate2, int start) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
-			logger.info("selectProducts start...");
+			logger.info("selectProductsBySold start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_SOLD);
 			psmt.setString(1, prodCate1);
@@ -129,7 +133,7 @@ public class ProductDao extends DBHelper{
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
-			logger.info("selectProducts start...");
+			logger.info("selectProductsByLowPrice start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_LOW_PRICE);
 			psmt.setString(1, prodCate1);
@@ -174,8 +178,240 @@ public class ProductDao extends DBHelper{
 		}
 		return products;
 	}
+	public List<ProductVO> selectProductsByHighPrice(String prodCate1, String prodCate2, int start) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductsByHighPrice start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_HIGH_PRICE);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getString(2));
+				product.setProdCate2(rs.getString(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				
+				products.add(product);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	public List<ProductVO> selectProductsByScore(String prodCate1, String prodCate2, int start) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductsByScore start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_SCORE);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getString(2));
+				product.setProdCate2(rs.getString(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				
+				products.add(product);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	public List<ProductVO> selectProductsByReview(String prodCate1, String prodCate2, int start) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductsByReview start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_REVIEW);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getString(2));
+				product.setProdCate2(rs.getString(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				
+				products.add(product);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
+	public List<ProductVO> selectProductsByNew(String prodCate1, String prodCate2, int start) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.info("selectProductsByNew start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_NEW);
+			psmt.setString(1, prodCate1);
+			psmt.setString(2, prodCate2);
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getString(2));
+				product.setProdCate2(rs.getString(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				
+				products.add(product);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return products;
+	}
 	
-	// 전체 게시물 카운트
+	// 리뷰
+	public List<ReviewVO> selectReview(int start) {
+		
+		List<ReviewVO> reviews = new ArrayList<>();
+		
+		try {
+			logger.info("selectReview start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_REVIEW);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ReviewVO review = new ReviewVO();
+				review.setRevNo(rs.getInt(1));
+				review.setProdNo(rs.getInt(2));
+				review.setContent(rs.getString(3));
+				review.setUid(rs.getString(4));
+				review.setRating(rs.getInt(5));
+				review.setRegip(rs.getString(6));
+				review.setRdate(rs.getString(7).substring(0, 10));
+				review.setProdName(rs.getString(8));
+				
+				reviews.add(review);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return reviews;
+	}
+	
+	// 전체 상품 카운트(리스트)
 	public int selectCountTotal(String prodCate1, String prodCate2) {
 		
 		int total = 0;
@@ -185,6 +421,26 @@ public class ProductDao extends DBHelper{
 			psmt.setString(1, prodCate1);
 			psmt.setString(2, prodCate2);
 			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;		
+	}
+	// 전체 리뷰 카운트(뷰)
+	public int selectCountTotalReview(String prodNo) {
+		
+		int total = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL_REVIEW);
+			psmt.setString(1, prodNo);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {

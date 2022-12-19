@@ -56,7 +56,14 @@ public class ProductVO {
 	private String origin;
 	private String ip;
 	private String rdate;
+	private int disPrice;
 	
+	public int getDisPrice() {
+		return disPrice;
+	}
+	public void setDisPrice(int disPrice) {
+		this.disPrice = disPrice;
+	}
 	public void setPrice(String price) {
 		this.price = Integer.parseInt(price);
 	}

@@ -11,6 +11,7 @@
         </nav>
         <form action="#">
             <table>
+            <c:forEach var="product" items="${products}">
                 <tr>
                     <th><input type="checkbox" name="all"></th>
                     <th>상품명</th>
@@ -26,7 +27,7 @@
                     <td><input type="checkbox" name></td>
                     <td>
                         <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
+                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${product.prodNo}"><img src="${product.thumb1}" alt></a>
                             <div>
                                 <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
                                 <p>상품설명</p>
@@ -40,42 +41,7 @@
                     <td>무료배송</td>
                     <td>27,000</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" name></td>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>5%</td>
-                    <td>270</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name></td>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>5%</td>
-                    <td>270</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
+            </c:forEach>    
             </table>
             <input type="button" name="del" value="선택삭제">
             <div class="total">

@@ -40,7 +40,8 @@
     padding: 0 10px;
     border-right: 1px solid #ddd;
 }
-#product > .list > .sort > li > a.on {font-weight: bold;}
+#product > .list > .sort > li.on > a  {font-weight: bold;}
+
 #product > .list > table {
     width: 100%;
     height: auto;
@@ -509,7 +510,7 @@
     text-align: center;
     text-decoration: none;
 }
-#product > .view > .review > .paging > .num > a.on {
+#product > .view > .review > .paging > .num .current {
     color: #fe434c;
     font-weight: bold;
 }

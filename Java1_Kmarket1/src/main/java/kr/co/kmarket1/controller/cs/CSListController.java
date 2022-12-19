@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.kmarket1.dao.ArticleDao;
 import kr.co.kmarket1.vo.ArticleVO;
 
-@WebServlet("/cs/qna/list.do")
-public class QnaListController extends HttpServlet{
+@WebServlet("/admin/cs/list.do")
+public class CSListController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -27,12 +27,8 @@ public class QnaListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
-		if(cate == null) {
-			cate = "member";
-		}
-		String group = "qna";
-		
 		String pg = req.getParameter("pg");
 		int start = 0;
 		int currentPage = 1;
@@ -47,9 +43,11 @@ public class QnaListController extends HttpServlet{
 		start = (currentPage - 1) * 10;
 		
 		// 전체 게시물 갯수
-		
-		total = ArticleDao.getInstance().selectCountTotal(cate, group);
-		
+		if(cate==null) {
+			total = ArticleDao.getInstance().selectCountTotal(group);
+		}else {
+			total = ArticleDao.getInstance().selectCountTotal(cate, group);
+		}
 		
 		
 		// 시작 페이지 번호
@@ -71,8 +69,27 @@ public class QnaListController extends HttpServlet{
 		}
 		int[] result = {pageGroupStart, pageGroupEnd};
 		
+		List<ArticleVO> articles = null;
 		
-		List<ArticleVO> articles = ArticleDao.getInstance().selectArticlesByCate(group, cate, start);
+		if(group == null) {
+			group = "notice";
+		}
+		if(group.equals("notice")) {
+			if(cate==null) {
+				total = ArticleDao.getInstance().selectCountTotal(group);
+			}else {
+				total = ArticleDao.getInstance().selectCountTotal(cate, group);
+			}
+			if(cate==null) {
+				articles = ArticleDao.getInstance().selectArticlesByGroup(group, start);
+			}else {
+				articles = ArticleDao.getInstance().selectArticlesByCate(group, cate, start);
+			}
+		}else if(group.equals("faq")) {
+			
+		}else if(group.equals("qna")) {
+			
+		}
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("pg", pg);
@@ -83,13 +100,14 @@ public class QnaListController extends HttpServlet{
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
 		req.setAttribute("articles", articles);
+		req.setAttribute("group", group);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 	}
 }

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.kmarket1.dao.ArticleDao;
 import kr.co.kmarket1.vo.ArticleVO;
 
-@WebServlet("/cs/qna/view.do")
-public class QnaViewController extends HttpServlet{
+@WebServlet("/admin/cs/view.do")
+public class CSViewController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -26,17 +26,20 @@ public class QnaViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 수신
+		String group = req.getParameter("group");
 		String no = req.getParameter("no");
-		String cate = req.getParameter("cate");
-		
-		ArticleVO article = ArticleDao.getInstance().selectArticle(no);
-		
-		req.setAttribute("cate", cate);
+		ArticleVO article = null;
+		if(group.equals("notice")) {
+			article = ArticleDao.getInstance().selectArticle(no);
+		}else if(group.equals("faq")) {
+			
+		}else if(group.equals("qna")) {
+			
+		}
 		req.setAttribute("article", article);
-		
-		RequestDispatcher Dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
-		Dispatcher.forward(req, resp);
+		req.setAttribute("group", group);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/view.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
 	@Override

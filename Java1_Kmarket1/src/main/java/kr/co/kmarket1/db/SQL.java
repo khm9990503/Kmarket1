@@ -33,16 +33,15 @@ public class SQL {
 												+ "`ip` = ?, "
 												+ "`rdate`=NOW()";
 	
-	
-	
 	// admin list 상품 불러오기
-	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product` ";
+	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT 10";
 	
 	// admin 상품 갯수 출력
 	public static final String SELECT_LIST_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product`";
-												
-	
-	
+	// admin list 삭제
+	public static final String DELETE_ADMIN_LIST = "DELETE FROM `km_product` WHERE `prodNo`=?";
+	// admin list 수정
+	public static final String MODIFY_ADMIN_PRODUCT = "SELECT * FROM `km_product` WHERE `prodNo` = ?";
 
 	//member
 	// terms 불러오기
@@ -110,14 +109,39 @@ public class SQL {
 	
 
 
-	//product
+	// product
 	public static final String SELECT_COUNT_TOTAL = "select count(`prodNo`) from `km_product` where `prodCate1`=? and `prodCate2`=?";
+	public static final String SELECT_COUNT_TOTAL_REVIEW = "SELECT COUNT(`revNo`) FROM `km_product_review` where `prodNo`=? ";
 
-	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodNo`=?";
+	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodCate1`=? AND `prodCate2`=? AND `prodNo`=?";
+	
+	// product - 상품정렬
 	public static final String SELECT_PRODUCTS_BY_SOLD = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
 													+ "order by `sold` desc limit ?, 10";
 	public static final String SELECT_PRODUCTS_BY_LOW_PRICE = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
-			+ "order by `price` asc limit ?, 10";
+													+ "order by `price` asc limit ?, 10";
+	public static final String SELECT_PRODUCTS_BY_HIGH_PRICE = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
+													+ "order by `price` desc limit ?, 10";
+	public static final String SELECT_PRODUCTS_BY_SCORE = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
+													+ "order by `score` desc limit ?, 10";
+	public static final String SELECT_PRODUCTS_BY_REVIEW = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
+													+ "order by `review` desc limit ?, 10";
+	public static final String SELECT_PRODUCTS_BY_NEW = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
+													+ "order by `rdate` desc limit ?, 10";
+	// 리뷰 보기
+	public static final String SELECT_REVIEW = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
+													+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
+													+"ORDER BY `rdate` desc "
+													+"LIMIT ?, 5";
 	
-	
+	// ARTICLE
+	public static final String INSERT_ARTICLE 	= "insert into `km_article` set "
+												+ "`group`=?, "
+												+ "`cate`=?, "
+												+ "`cate2`=?, "
+												+ "`title`=?, "
+												+ "`content`=?, "
+												+ "`uid`=?, "
+												+ "`regip`=?, "
+												+ "`rdate`=NOW()";
 }
