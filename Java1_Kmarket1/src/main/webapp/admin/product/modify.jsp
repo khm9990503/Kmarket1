@@ -37,11 +37,10 @@
 		
 		function autoPoint(){
 			let price = $('input[name=price]').val();
-			$('input[name=point]').val('');
 			console.log(price);
-			let point = Math.round(price/100);
+			let point = (price/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			console.log(point);
-			$('input[name=point]').val(point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			$('input[name=point]').val(point);
 		}
 		
 		$('#discount').keydown(function(){
