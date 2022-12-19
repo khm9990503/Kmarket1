@@ -33,16 +33,15 @@ public class SQL {
 												+ "`ip` = ?, "
 												+ "`rdate`=NOW()";
 	
-	
-	
 	// admin list 상품 불러오기
-	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product` ";
+	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT 10";
 	
 	// admin 상품 갯수 출력
 	public static final String SELECT_LIST_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product`";
-												
-	
-	
+	// admin list 삭제
+	public static final String DELETE_ADMIN_LIST = "DELETE FROM `km_product` WHERE `prodNo`=?";
+	// admin list 수정
+	public static final String MODIFY_ADMIN_PRODUCT = "SELECT * FROM `km_product` WHERE `prodNo` = ?";
 
 	//member
 	// terms 불러오기

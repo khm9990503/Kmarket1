@@ -8,11 +8,16 @@ import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.ProductVO;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mysql.cj.protocol.Resultset;
+import com.mysql.cj.xdevapi.PreparableStatement;
 public class AdminProductListDao extends DBHelper{
 	private static AdminProductListDao instance = new AdminProductListDao();
 	public static AdminProductListDao getInstance () {
@@ -84,24 +89,87 @@ public class AdminProductListDao extends DBHelper{
 	}
 	
 	// 상품 갯수 출력
-		public int selectListCountTotal() {
-			int result = 0;
-			try {
-				logger.info("selectListCountTotal...");
-				conn = getConnection();
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(SQL.SELECT_LIST_COUNT_TOTAL);
-				if(rs.next()) result = rs.getInt(1);
-				close();
-			} catch (Exception e) {
-				logger.error(e.getMessage());
-			}
-			logger.debug("result : " + result);
-			return result;
-		} 
+	public int selectListCountTotal() {
+		int result = 0;
+		try {
+			logger.info("selectListCountTotal...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_LIST_COUNT_TOTAL);
+			if(rs.next()) result = rs.getInt(1);
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	} 
 
 	
+	// 상품 삭제
+	public void deleteAdminList(String prodNo) {
+		logger.info("상품삭제 : " + prodNo);
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ADMIN_LIST);
+			psmt.setString(1, prodNo);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	
+	// 상품수정	if = 참이면 실행 / while = 참이면 계속 실행(거짓이 될때까지)
+	public ProductVO ModifyAdminProduct(String prodNo) {
+			logger.info("상품수정");
+			
+			ProductVO vo = new ProductVO(); 
+			
+		try {
+			
+			conn = getConnection();
+			PreparedStatement psmt = conn.prepareStatement(SQL.MODIFY_ADMIN_PRODUCT);
+			psmt.setString(1, prodNo);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()){
+				vo.setProdNo(rs.getInt(1));
+				vo.setProdCate1(rs.getInt(2));
+				vo.setProdCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18)); 
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				vo.setDuty(rs.getString(22));
+				vo.setReceipt(rs.getString(23));
+				vo.setBizType(rs.getString(24));
+				vo.setOrigin(rs.getString(25));
+				vo.setIp(rs.getString(26));
+				vo.setRdate(rs.getString(27));
+				vo.setDisPrice(vo.getPrice() / 100 * vo.getDiscount());
+			}
+			
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
 	
 	
 }
