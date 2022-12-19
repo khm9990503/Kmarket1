@@ -51,7 +51,7 @@
     </table>
     <div>
     	<a href="/Java1_Kmarket1/admin/cs/list.do?group=${group}" class="btn btnList">목록</a>
-    	<a href="/Java1_Kmarket1/admin/cs/modify.do?group=${group}"class="btn btnMod">수정</a>
+    	<a href="/Java1_Kmarket1/admin/cs/modify.do?group=${group}&no=${article.no}"class="btn btnMod">수정</a>
     	<a class="btn btnDel2">삭제</a>
     </div>
 </section>
