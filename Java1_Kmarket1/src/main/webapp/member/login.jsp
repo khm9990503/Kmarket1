@@ -16,6 +16,7 @@
 	        }
 		});
 		
+	
 	});
 
 </script>
@@ -40,7 +41,7 @@
                             <tr>
                                 <td>비밀번호</td>
                                 <td>
-                                    <input type="password" name="pass" placeholder="비밀번호 입력">
+                                    <input type="password" name="pass" id="password" placeholder="비밀번호 입력">
                                     <i class="fa fa-eye fa-lg" id="eye"></i>
                                 </td>
                             </tr>

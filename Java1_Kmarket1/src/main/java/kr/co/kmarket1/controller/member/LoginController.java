@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket1.dao.MemberDao;
+import kr.co.kmarket1.service.MemberService;
 import kr.co.kmarket1.vo.MemberVO;
 
 @WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private MemberService service = MemberService.instance;
+	
 	
 	@Override
 	public void init() throws ServletException {
@@ -38,8 +41,7 @@ public class LoginController extends HttpServlet {
 		String pass = req.getParameter("pass");
 		
 		// 데이터베이스 처리
-		MemberDao dao = MemberDao.getInstance();
-		MemberVO vo = dao.selectMember(uid, pass);
+		MemberVO vo = service.selectMember(uid, pass);
 		
 		// 로그인 처리
 		if(vo != null) {

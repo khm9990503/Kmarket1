@@ -50,10 +50,19 @@
 	                    <a href="/Java1_Kmarket1/member/login.do">로그인</a>
 	                    <a href="/Java1_Kmarket1/member/join.do">회원가입</a>
                     </c:when>
+                    <c:when test="${sessUser.level == '5' || sessUser.level == '7'}">
+                    	<a href="/Java1_Kmarket1/admin/index.do">관리자</a>
+                    	<a href="/Java1_Kmarket1/member/logout.do">로그아웃</a>
+	                    <a href="#">마이페이지</a>
+	                    <a href="/Java1_Kmarket1/product/cart.do">
+	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+	                        장바구니
+	                    </a>
+                    </c:when>
                     <c:otherwise>
                     	<a href="/Java1_Kmarket1/member/logout.do">로그아웃</a>
 	                    <a href="#">마이페이지</a>
-	                    <a href="#">
+	                    <a href="/Java1_Kmarket1/product/cart.do">
 	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 	                        장바구니
 	                    </a>
@@ -63,7 +72,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="#">
+                    <a href="/Java1_Kmarket1/index.do">
                         <img src="/Java1_Kmarket1/img/header_logo.png" alt="로고">
                     </a>
                     <div class="head-search">

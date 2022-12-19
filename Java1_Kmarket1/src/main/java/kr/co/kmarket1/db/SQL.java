@@ -92,7 +92,19 @@ public class SQL {
 													
 													
 	
-	
+	// 회원가입 - 관리자 
+	public static final String INSERT_MEMBER_admin = "INSERT INTO `km_member` SET " 
+													+ "`uid`=?, "
+													+ "`pass`=SHA2(?, 256), "
+													+ "`name`='?', "
+													+ "`gender`='4', "
+													+ "`hp`=?, "
+													+ "`email`=?, "
+													+ "`type`=3, "
+													+ "`level`=7, "
+													+ "`regip`=?, "
+													+"`rdate`=NOW()";
+
 	// 회원가입 - uid 중복체크 
 	public static final String SELECT_COUNT_UID = "select count('uid') from `km_member` where `uid`=?";
 	

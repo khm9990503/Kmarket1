@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.MemberDao;
+import kr.co.kmarket1.service.MemberService;
 import kr.co.kmarket1.vo.MemberVO;
 
 @WebServlet("/member/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private MemberService service = MemberService.instance;
 	
 	@Override
 	public void init() throws ServletException {
