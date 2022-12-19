@@ -100,6 +100,7 @@ public class SQL {
 
 	// product
 	public static final String SELECT_COUNT_TOTAL = "select count(`prodNo`) from `km_product` where `prodCate1`=? and `prodCate2`=?";
+	public static final String SELECT_COUNT_TOTAL_REVIEW = "SELECT COUNT(`revNo`) FROM `km_product_review` where `prodNo`=? ";
 
 	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodCate1`=? AND `prodCate2`=? AND `prodNo`=?";
 	
@@ -116,6 +117,11 @@ public class SQL {
 													+ "order by `review` desc limit ?, 10";
 	public static final String SELECT_PRODUCTS_BY_NEW = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
 													+ "order by `rdate` desc limit ?, 10";
+	// 리뷰 보기
+	public static final String SELECT_REVIEW = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
+													+"JOIN `km_product` as b ON a.prodNo = b.prodNo "
+													+"ORDER BY `rdate` desc "
+													+"LIMIT ?, 5";
 	
 	// ARTICLE
 	public static final String INSERT_ARTICLE 	= "insert into `km_article` set "

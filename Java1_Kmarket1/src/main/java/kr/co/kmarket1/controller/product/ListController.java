@@ -56,7 +56,21 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage); // 시작 인덱스
 		
 		// 카테고리별 리스트 불러오기
-		List<ProductVO> products = PD.selectProductsBySold(prodCate1, prodCate2, start);
+		// 상품 정렬
+		List<ProductVO> products = null;
+		if(type == null || type.equals("sold")) {
+			products = PD.selectProductsBySold(prodCate1, prodCate2, start);
+		}else if(type.equals("lowPrice")) {
+			products = PD.selectProductsByLowPrice(prodCate1, prodCate2, start);
+		}else if(type.equals("highPrice")) {
+			products = PD.selectProductsByHighPrice(prodCate1, prodCate2, start);
+		}else if(type.equals("score")) {
+			products = PD.selectProductsByScore(prodCate1, prodCate2, start);
+		}else if(type.equals("review")) {
+			products = PD.selectProductsByReview(prodCate1, prodCate2, start);
+		}else if(type.equals("new")) {
+			products = PD.selectProductsByNew(prodCate1, prodCate2, start);
+		}
 		
 		req.setAttribute("products", products);
 		req.setAttribute("lastPageNum", lastPageNum);		
@@ -67,6 +81,7 @@ public class ListController extends HttpServlet {
 		req.setAttribute("prodNo", prodNo);
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);
+		req.setAttribute("type", type);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp");
 		dispatcher.forward(req, resp);

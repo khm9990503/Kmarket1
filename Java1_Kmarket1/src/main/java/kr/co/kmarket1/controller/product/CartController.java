@@ -32,6 +32,15 @@ public class CartController extends HttpServlet {
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
 		
+		String prodCate1 = req.getParameter("prodCate1");
+		String prodCate2 = req.getParameter("prodCate2");
+		String prodNo = req.getParameter("prodNo");
+		
+		req.setAttribute("prodCate1", prodCate1);
+		req.setAttribute("prodCate2", prodCate2);
+		req.setAttribute("prodNo", prodNo);
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
 	}

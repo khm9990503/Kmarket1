@@ -15,14 +15,17 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket1.dao.CateDao;
 import kr.co.kmarket1.dao.ProductDao;
+import kr.co.kmarket1.service.ProductService;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.MemberVO;
 import kr.co.kmarket1.vo.ProductVO;
+import kr.co.kmarket1.vo.ReviewVO;
 
 @WebServlet("/product/view.do")
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ProductService service = ProductService.instance;
 	
 	@Override
 	public void init() throws ServletException {
@@ -31,19 +34,6 @@ public class ViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		/* 장바구니 이동
-		HttpSession session = req.getSession();
-		MemberVO sessUser = (MemberVO) session.getAttribute("sessUser");
-		
-		if(sessUser == null){
-			resp.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-		    out.println("<script>alert('장바구니로 이동합니다.'); location.href='/Java1_Kmarket1/product/cart.do' </script>");
-		    out.flush();
-			return;
-		}
-		*/
-		
 		// cate1,2 리스트 불러오기 - 구홍모 12/11
 		CateDao CD = CateDao.getInstance();
 		List<Cate1VO> cate1s = CD.selectCates_1();
@@ -54,12 +44,33 @@ public class ViewController extends HttpServlet {
 		String prodCate1 = req.getParameter("prodCate1");
 		String prodCate2 = req.getParameter("prodCate2");
 		String prodNo = req.getParameter("prodNo");
+		String pg = req.getParameter("pg");
+		
+		// 페이징 처리
+		int currentPage = service.getCurrentPage2(pg); // 현재 페이지 번호
+		int total = 0; // 전체 게시물 갯수
+		total = service.selectCountTotalReview(prodNo);
+		
+		int lastPageNum = service.getLastPageNum2(total);// 마지막 페이지 번호
+		int[] result = service.getPageGroupNum2(currentPage, lastPageNum); // 페이지 그룹번호
+		int pageStartNum = service.getPageStartNum2(total, currentPage); // 페이지 시작번호
+		int start = service.getStartNum2(currentPage); // 시작 인덱스
+		
 		
 		ProductDao PD = ProductDao.getInstance();
 		ProductVO product = PD.selectProduct(prodCate1, prodCate2, prodNo);
+		List<ReviewVO> reviews = PD.selectReview(start);
+		
 		req.setAttribute("product", product);
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);
+		req.setAttribute("prodNo", prodNo);
+		req.setAttribute("lastPageNum", lastPageNum);		
+		req.setAttribute("currentPage", currentPage);		
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
+		req.setAttribute("pageStartNum", pageStartNum+1);
+		req.setAttribute("reviews", reviews);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);

@@ -4,84 +4,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp" />
+<script>
+
+	// 수량 변경
+	$(function(){
+		
+		$('.increase').on('click', function(){
+			let quantity = $(this).parent("div").find("input").val();
+			$(this).parent("div").find("input").val(++quantity);
+		});
+		$(".decrease").on("click", function(){
+			let quantity = $(this).parent("div").find("input").val();
+			if(quantity > 1){
+				$(this).parent("div").find("input").val(--quantity);		
+			}
+		});
+	});
+	
+	
+</script>
     <section class="view">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
-           <h1>상품목록</h1>
-           <p>
+           <h1>상품보기</h1>
+          <p>
                HOME >
-               <c:if test="${prodCate1 eq '10'}"><span>브랜드패션</span></c:if>
-               <c:if test="${prodCate1 eq '11'}"><span>패션·의류·잡화·뷰티</span></c:if>
-               <c:if test="${prodCate1 eq '12'}"><span>유아동</span></c:if>
-               <c:if test="${prodCate1 eq '13'}"><span>식품·생필품</span></c:if>
-               <c:if test="${prodCate1 eq '14'}"><span>홈데코·문구·취미·반려</span></c:if>
-               <c:if test="${prodCate1 eq '15'}"><span>컴퓨터·디지털·가전</span></c:if>
-               <c:if test="${prodCate1 eq '16'}"><span>스포츠·건강·렌탈</span></c:if>
-               <c:if test="${prodCate1 eq '17'}"><span>자동차·공구</span></c:if>
-               <c:if test="${prodCate1 eq '18'}"><span>여행·도서·티켓·e쿠폰</span></c:if>
+               <c:forEach var="ca1" items="${cate1s}">
+               		<c:if test="${prodCate1 eq ca1.cate1}"><span>${ca1.c1Name}</span></c:if>
+               </c:forEach>
                 > 
-               <c:if test="${prodCate1 eq '10' and prodCate2 eq '10'}"><strong>브랜드 여성의류</strong></c:if>
-               <c:if test="${prodCate1 eq '10' and prodCate2 eq '11'}"><strong>브랜드 남성의류</strong></c:if>
-               <c:if test="${prodCate1 eq '10' and prodCate2 eq '12'}"><strong>브랜드 진/캐쥬얼</strong></c:if>
-               <c:if test="${prodCate1 eq '10' and prodCate2 eq '13'}"><strong>브랜드 신발/가방</strong></c:if>
-               <c:if test="${prodCate1 eq '10' and prodCate2 eq '14'}"><strong>브랜드 쥬얼리/시계</strong></c:if>
-               <c:if test="${prodCate1 eq '10' and prodCate2 eq '15'}"><strong>브랜드 아웃도어</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '10'}"><strong>여성의류</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '11'}"><strong>남성의류</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '12'}"><strong>언더웨어</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '13'}"><strong>신발</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '14'}"><strong>가방/잡화</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '15'}"><strong>쥬얼리/시계</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '16'}"><strong>화장품/향수</strong></c:if>
-               <c:if test="${prodCate1 eq '11' and prodCate2 eq '17'}"><strong>바디/헤어</strong></c:if>
-               <c:if test="${prodCate1 eq '12' and prodCate2 eq '10'}"><strong>출산/육아</strong></c:if>
-               <c:if test="${prodCate1 eq '12' and prodCate2 eq '11'}"><strong>장난감/완구</strong></c:if>
-               <c:if test="${prodCate1 eq '12' and prodCate2 eq '12'}"><strong>유아동 의류</strong></c:if>
-               <c:if test="${prodCate1 eq '12' and prodCate2 eq '13'}"><strong>유아동 신발/잡화</strong></c:if>
-               <c:if test="${prodCate1 eq '13' and prodCate2 eq '10'}"><strong>신선식품</strong></c:if>
-               <c:if test="${prodCate1 eq '13' and prodCate2 eq '11'}"><strong>가공식품</strong></c:if>
-               <c:if test="${prodCate1 eq '13' and prodCate2 eq '12'}"><strong>건강식품</strong></c:if>
-               <c:if test="${prodCate1 eq '13' and prodCate2 eq '13'}"><strong>커피/음료</strong></c:if>
-               <c:if test="${prodCate1 eq '13' and prodCate2 eq '14'}"><strong>생필품</strong></c:if>
-               <c:if test="${prodCate1 eq '13' and prodCate2 eq '15'}"><strong>바디/헤어</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '10'}"><strong>가구/DIY</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '11'}"><strong>침구/커튼</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '12'}"><strong>조명/인테리어</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '13'}"><strong>생활용품</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '14'}"><strong>주방용품</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '15'}"><strong>문구/사무용품</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '16'}"><strong>사무기기</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '17'}"><strong>악기/취미</strong></c:if>
-               <c:if test="${prodCate1 eq '14' and prodCate2 eq '18'}"><strong>반려동물용품</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '10'}"><strong>노트북/PC</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '11'}"><strong>모니터/프린터</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '12'}"><strong>PC주변기기</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '13'}"><strong>모바일/태블릿</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '14'}"><strong>카메라</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '15'}"><strong>게임</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '16'}"><strong>영상가전</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '17'}"><strong>주방가전</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '18'}"><strong>계절가전</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '19'}"><strong>생활/미용가전</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '20'}"><strong>음향가전</strong></c:if>
-               <c:if test="${prodCate1 eq '15' and prodCate2 eq '21'}"><strong>건강가전</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '10'}"><strong>스포츠의류/운동화</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '11'}"><strong>휘트니스/수영</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '12'}"><strong>구기/라켓</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '13'}"><strong>골프</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '14'}"><strong>자전거/보드/기타레저</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '15'}"><strong>캠핑/낚시</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '16'}"><strong>등산/아웃도어</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '17'}"><strong>건강/의료용품</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '18'}"><strong>건강식품</strong></c:if>
-               <c:if test="${prodCate1 eq '16' and prodCate2 eq '19'}"><strong>렌탈서비스</strong></c:if>
-               <c:if test="${prodCate1 eq '17' and prodCate2 eq '10'}"><strong>자동차용품</strong></c:if>
-               <c:if test="${prodCate1 eq '17' and prodCate2 eq '11'}"><strong>공구/안전/산업용품</strong></c:if>
-               <c:if test="${prodCate1 eq '18' and prodCate2 eq '10'}"><strong>여행/항공권</strong></c:if>
-               <c:if test="${prodCate1 eq '18' and prodCate2 eq '11'}"><strong>도서/음반/e교육</strong></c:if>
-               <c:if test="${prodCate1 eq '18' and prodCate2 eq '12'}"><strong>공연티켓</strong></c:if>
-               <c:if test="${prodCate1 eq '18' and prodCate2 eq '13'}"><strong>e쿠폰</strong></c:if>
-               <c:if test="${prodCate1 eq '18' and prodCate2 eq '14'}"><strong>상품권</strong></c:if>
+                <c:forEach var="ca2" items="${cate2s}">
+                	<c:if test="${prodCate1 == ca2.cate1 && prodCate2 == ca2.cate2}"><strong>${ca2.c2Name}</strong></c:if>
+                </c:forEach>
            </p>
        </nav>
 
@@ -143,19 +97,19 @@
                 <img src="/Java1_Kmarket1/img/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립!" class="banner" />
                 
                 <div class="count">
-                    <button class="decrease" onclick="decrease()">-</button>
+                    <button class="decrease">-</button>
                     <input type="text" id="num" name="num" value="1" readonly/>
-                    <button class="increase" onclick="increase()">+</button>
+                    <button class="increase">+</button>
                 </div>
                 
                 <div class="total">
-                    <span>35,000</span>
+                    <span>25,000</span>
                     <em>총 상품금액</em>
                 </div>
 
                 <div class="button">
-                    <input type="button" class="cart"  value="장바구니"/>
-                    <input type="button" class="order" value="구매하기"/>
+                    <input type="button" class="cart"  value="장바구니"  onclick="alert('장바구니로 이동합니다.'); location.href='/Java1_Kmarket1/product/cart.do'"/>
+                    <input type="button" class="order" value="구매하기"  onclick="location.href='/Java1_Kmarket1/product/order.do'"/>
                 </div>
             </div>
         </article>
@@ -266,85 +220,35 @@
                 <h1>상품리뷰</h1>
             </nav>
             <ul>
+            <c:forEach var="review" items="${reviews}">
                 <li>
                     <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo******	2018-07-10</span>
+                        <h5 class="rating star${review.rating}">상품평</h5>
+                        <span>${review.uid}	${review.rdate}</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                        아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                        제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                    </p>
+                    <h3>${review.prodName}</h3>
+                    <p>${review.content}</p>
                 </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo******	2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                        아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                        제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                    </p>
-                </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo******	2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                        아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                        제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                    </p>
-                </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo******	2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                        아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                        제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                    </p>
-                </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo******	2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                        아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                        제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                    </p>
-                </li>
+            </c:forEach>
             </ul>
-            <!-- 상품목록 페이지 번호 -->
+            <!-- 리뷰 페이지 번호 -->
             <div class="paging">
-                <span class="prev">
-                    <a href="#"><&nbsp;이전</a>
-                </span>
-                <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                </span>
-                <span class="next">
-                    <a href="#">다음&nbsp;></a>
-                </span>
-            </div>
+	            <span class="prev">
+		            <c:if test="${pageGroupStart > 1}">
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
+		            </c:if>
+		        </span>
+		        <span class="num">
+		            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+		            </c:forEach>
+		        </span>
+		        <span class="next">
+		            <c:if test="${pageGroupEnd < lastPageNum}">
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
+		            </c:if>
+	            </span>
+        </div>
         </article>
     </section>
 </main>
