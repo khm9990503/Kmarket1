@@ -38,6 +38,7 @@
 	                <tr>
 	                    <td><input type="checkbox" name="상품코드"/></td>
 	                    <td><img src="../../img/sample_thumb.jpg" class="thumb"></td>
+<%-- 	                    <td>${vo.thumb1}</td> --%>
 	                    <td>${vo.prodNo}</td>
 	                    <td>${vo.prodName}</td>
 	                    <td>${vo.price}</td>
@@ -47,8 +48,8 @@
 	                    <td>${vo.seller}</td>
 	                    <td>${vo.hit}</td>
 	                    <td>
-	                        <a href="#">[삭제]</a>
-	                        <a href="#">[수정]</a>
+	                        <a href="/Java1_Kmarket1/admin/product/delete.do?prodNo=${vo.prodNo}">[삭제]</a>
+	                        <a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">[수정]</a>
 	                    </td>
 	                </tr>
                 </c:forEach>
