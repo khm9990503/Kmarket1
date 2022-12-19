@@ -4,12 +4,11 @@
  * 내용 : 회원가입 입력데이터 유효성 검증
  */
 	// 데이터 검증에 사용할 정규표현식
-	let regUid   = /^[a-z]+[a-z0-9]{4,19}$/g;
+	let regUid   = /^[a-z]+[a-z0-9]{3,12}$/g;
 	let regName  = /^[가-힣]{2,4}$/;
-	let regNick  = /^[가-힣a-zA-Z0-9]+$/;
 	let regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	let regHp	 = /^\d{3}-\d{3,4}-\d{4}$/;
-	let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	let regPass  = /^.*(?=^.{7,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 	
 	// 폼 데이터 검증 결과 상태변수
 	let isUidOk   = false;
@@ -94,19 +93,7 @@
 	});
 		
 	
-	// 이름 유효성 검증
-	$('input[name=name]').focusout(function(){
-		let name = $(this).val();
-		
-		if(!name.match(regName)){
-			isNameOk = false;
-			$('.resultName').css('color', 'red').text('이름은 한글 2자 이상 이어야 합니다.');
-		}else{
-			isNameOk = true;
-			$('.resultName').text('');
-		}
-	});
-		
+	
 	// 이메일 유효성 검사
 	$('input[name=email]').focusout(function(){
 		let email = $(this).val();
@@ -120,18 +107,7 @@
 		}			
 	});
 	
-	// 휴대폰 유효성 검사
-	$('input[name=hp]').focusout(function(){
-		let hp = $(this).val();
-		
-		if(!hp.match(regHp)){
-			isHpOk = false;
-			$('.resultHp').css('color', 'red').text('휴대폰이 유효하지 않습니다.');
-		}else{
-			isHpOk = true;
-			$('.resultHp').text('');
-		}
-	});
+
 	
 	// 폼 전송이 시작될 때 실행되는 폼 이벤트(폼 전송 버튼을 클릭했을 때) 
 	$('.register > form').submit(function(){
@@ -150,12 +126,7 @@
 			alert('비밀번호를 확인 하십시요.');
 			return false;
 		}
-		// 이름 검증
-		if(!isNameOk){
-			alert('이름을 확인 하십시요.');
-			return false;
-		}
-		
+	
 		// 이메일 검증
 		if(!isEmailOk){
 			alert('이메일을 확인 하십시요.');

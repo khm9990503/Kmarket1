@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket1.dao.MemberDao;
 import kr.co.kmarket1.vo.MemberVO;
@@ -85,5 +84,3 @@ public class RegisterSellerController extends HttpServlet {
 		
 	}
 	
-	
-

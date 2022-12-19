@@ -2,7 +2,8 @@
 <jsp:include page="/member/_header.jsp"/>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Java1_Kmarket1/js/postcode.js"></script>
-<script src="/Java1_Kmarket1/js/validation.js"></script>
+<script src="/Java1_Kmarket1/js/MemberValidation.js"></script>
+
 
 <main id="member">
 <div class="register">
