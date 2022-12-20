@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/member/_header.jsp"/>
+
 <script>
 
 	$(function(){
@@ -16,8 +17,18 @@
 	        }
 		});
 		
+		
 	
 	});
+	
+	function checkCapsLock(event)  {
+		  if (event.getModifierState("CapsLock")) {
+			  $('#capsLock').text("CapsLock 이 켜져있습니다.");
+			  $('#capsLock').show();
+		  }else {
+			  $('#capsLock').hide();
+		  }
+		}
 
 </script>
         <main id="member">
@@ -41,8 +52,9 @@
                             <tr>
                                 <td>비밀번호</td>
                                 <td>
-                                    <input type="password" name="pass" id="password" placeholder="비밀번호 입력">
+                                    <input type="password" name="pass" id="password" placeholder="비밀번호 입력" onkeyup="checkCapsLock(event)">
                                     <i class="fa fa-eye fa-lg" id="eye"></i>
+                                    <p id="capsLock"></p>
                                 </td>
                             </tr>
                         </tbody>
