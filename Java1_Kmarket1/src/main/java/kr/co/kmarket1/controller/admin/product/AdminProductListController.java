@@ -20,6 +20,7 @@ import kr.co.kmarket1.vo.ProductVO;
 public class AdminProductListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	AdminProductService service = AdminProductService.INSTANCE;
+	AdminProductListDao dao = AdminProductListDao.getInstance();
 	
 	@Override
 	public void init() throws ServletException {
@@ -29,9 +30,11 @@ public class AdminProductListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String search = req.getParameter("search");
+		String pg	  = req.getParameter("pg");
 		
-		String pg = req.getParameter("pg");
 		int currentPage = service.getCurrentPage(pg);// 현재 페이지 번호
+		
 		
 		//페이지 번호
 		int total = 0; // 전체 게시물 갯수 
@@ -42,13 +45,13 @@ public class AdminProductListController extends HttpServlet{
 		int pageStartNum = service.getPageStartNum(total, currentPage);// 페이지 시작번호
 		int start = service.getStartNum(currentPage);// 시작 인덱스
 		
-		 // 글 가져오기
-		//List<ArticleVO> articles = null;
-		//if(search == null) {
-		//	articles = service.selectArticles(start);
-		//}else {
-		//	articles = service.selectArticleByKeyword(search, start);
-		//}
+		// 글 가져오기
+//		List<ProductVO> products = null;
+//		if(search == null) {
+//			products = dao.selectProducts(start);
+//		}else {
+//			products = dao.selectProductByKeyword(search, start);
+//		}
 		
 		//req.setAttribute("articles", articles);
 		req.setAttribute("lastPageNum", lastPageNum);		

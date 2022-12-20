@@ -171,6 +171,33 @@ public class AdminProductListDao extends DBHelper{
 		return vo;
 	}
 	
+	// 검색
+	public void selectProducts() {
+		
+		try {
+			logger.info("");
+			
+		}catch(Exception e) {
+			
+		}
+	}
+	
+	
+	
+	
+	
+	// 검색
+	public void selectProductByKeyword() {
+		
+		try {
+			logger.info("");
+			
+		}catch(Exception e) {
+			
+		}
+		
+	}
+	
 	
 }
 
