@@ -21,9 +21,74 @@
 		});
 	});
 	
-	
+	$(function(){
+		
+		// 총 상품금액
+		let count = parseInt($('input[name=num]').val());
+		let price =  parseInt($('input[name=price]').val());
+		let discount =  parseInt($('input[name=discount]').val());
+		let delivery =  parseInt($('input[name=delivery]').val());
+		let totalPrice =  count * Math.round(price*(100-discount)/100) + delivery;
+
+		$('.total > span').text(totalPrice);
+		
+		$('.cart').click(function(){
+			
+			let uid = $('input[name=uid]').val();
+			let prodNo = $('input[name=prodNo]').val();
+			let count = $('input[name=num]').val();
+			let price = $('input[name=price]').val();
+			let discount = $('input[name=discount]').val();
+			let point = $('input[name=point]').val();
+			let delivery = $('input[name=delivery]').val();
+			let total = $('input[name=total]').val();
+			
+			let jsonData = {
+					"uid": uid,
+					"prodNo": prodNo,
+					"count": count,
+					"price": price,
+					"discount": discount,
+					"point": point,
+					"delivery": delivery,
+					"total": total
+			};
+			
+			$.ajax({
+				url: '/Java1_Kmarket1/product/view.do',
+				type: 'post',
+				data: jsonData,
+				dataType: 'json',
+				success: function(){
+					if(sessUser != null){
+						if(confirm('장바구니로 이동하시겠습니까?')){
+							// 일치 정보가 있음
+							location.href = "/Java1_Kmarket1/product/cart.do";
+						}else{
+							return;
+						}
+					}else{
+						
+					}
+				}
+			});
+		});
+		
+		$('.order').click(function(){
+			location.href = '/Java1_Kmarket1/product/order.do';
+			
+		});
+	});
 </script>
     <section class="view">
+    <input type="hidden" name="uid" value="${sessUser.uid}">
+    <input type="hidden" name="prodNo" value="${product.prodNo}">
+    <input type="hidden" name="count" value="${count}">
+    <input type="hidden" name="price" value="${product.price}">
+    <input type="hidden" name="discount" value="${product.discount}">
+    <input type="hidden" name="point" value="${product.point}">
+    <input type="hidden" name="delivery" value="${product.delivery}">
+    <input type="hidden" name="total" value="${total}">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
            <h1>상품보기</h1>
@@ -103,13 +168,13 @@
                 </div>
                 
                 <div class="total">
-                    <span>25,000</span>
+                    <span></span>
                     <em>총 상품금액</em>
                 </div>
 
                 <div class="button">
-                    <input type="button" class="cart"  value="장바구니"  onclick="alert('장바구니로 이동합니다.'); location.href='/Java1_Kmarket1/product/cart.do'"/>
-                    <input type="button" class="order" value="구매하기"  onclick="location.href='/Java1_Kmarket1/product/order.do'"/>
+                    <input type="button" class="cart"  value="장바구니" />
+                    <input type="button" class="order" value="구매하기" />
                 </div>
             </div>
         </article>

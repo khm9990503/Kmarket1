@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
+import kr.co.kmarket1.dao.CartDao;
 import kr.co.kmarket1.dao.CateDao;
 import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.service.ProductService;
+import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.MemberVO;
@@ -46,7 +50,11 @@ public class ViewController extends HttpServlet {
 		String prodNo = req.getParameter("prodNo");
 		String pg = req.getParameter("pg");
 		
-		// 페이징 처리
+		// 상품 출력
+		ProductDao PD = ProductDao.getInstance();
+		ProductVO product = PD.selectProduct(prodCate1, prodCate2, prodNo);
+		
+		// 리뷰 페이징 처리
 		int currentPage = service.getCurrentPage2(pg); // 현재 페이지 번호
 		int total = 0; // 전체 게시물 갯수
 		total = service.selectCountTotalReview(prodNo);
@@ -56,10 +64,7 @@ public class ViewController extends HttpServlet {
 		int pageStartNum = service.getPageStartNum2(total, currentPage); // 페이지 시작번호
 		int start = service.getStartNum2(currentPage); // 시작 인덱스
 		
-		
-		ProductDao PD = ProductDao.getInstance();
-		ProductVO product = PD.selectProduct(prodCate1, prodCate2, prodNo);
-		List<ReviewVO> reviews = PD.selectReview(start);
+		List<ReviewVO> reviews = PD.selectReview(prodNo, start);
 		
 		req.setAttribute("product", product);
 		req.setAttribute("prodCate1", prodCate1);
@@ -80,5 +85,37 @@ public class ViewController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Calendar cCal = Calendar.getInstance();
 		cCal.add(Calendar.DATE, 3);
+		
+		// 카트 삽입
+		String uid = req.getParameter("uid");
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
+		String price = req.getParameter("price");
+		String discount = req.getParameter("discount");
+		String point = req.getParameter("point");
+		String delivery = req.getParameter("delivery");
+		String total = req.getParameter("total");
+		
+		CartVO cart = new CartVO();
+		cart.setUid(uid);
+		cart.setProdNo(prodNo);
+		cart.setCount(count);
+		cart.setPrice(price);
+		cart.setDiscount(discount);
+		cart.setPoint(point);
+		cart.setDelivery(delivery);
+		cart.setTotal(total);
+
+		CartDao.getInstance().insertCart(cart);
+		
+		HttpSession session = req.getSession();
+		MemberVO sessUser = (MemberVO) session.getAttribute("sessUser");
+		
+		JsonObject json = new JsonObject();
+		
+		req.setAttribute("cart", cart);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	}
 }
