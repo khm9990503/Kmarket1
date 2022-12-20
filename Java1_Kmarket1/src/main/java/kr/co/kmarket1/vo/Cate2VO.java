@@ -9,6 +9,7 @@ public class Cate2VO {
 	private int cate2;
 	private String c2Name;
 	
+	private String artiCate;
 	private String artiCate2;
 	
 	public int getCate1() {
@@ -36,5 +37,13 @@ public class Cate2VO {
 	
 	public void setArtiCate2(String artiCate2) {
 		this.artiCate2 = artiCate2;
+	}
+	
+	public String getArtiCate() {
+		return artiCate;
+	}
+	
+	public void setArtiCate(String artiCate) {
+		this.artiCate = artiCate;
 	}
 }

@@ -46,16 +46,19 @@ public class CSModiController extends HttpServlet{
 		String cate2 = req.getParameter("cate2");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		String no = req.getParameter("no");
 		
 		ArticleVO vo = new ArticleVO();
 		vo.setCate(cate);
 		vo.setCate2(cate2);
 		vo.setTitle(title);
 		vo.setContent(content);
+		vo.setNo(no);
 		
-		// 게시물 작성하기
-		ArticleDao.getInstance().insertArticle(vo);
-		// 
-		resp.sendRedirect("/Java1_Kmarket1/admin/cs/list.do?&group="+group);
+		// 공지사항 수정하기
+		ArticleDao.getInstance().updateArticle(vo);
+		
+		// 글보기로 돌아가기 
+		resp.sendRedirect("/Java1_Kmarket1/admin/cs/view.do?&group="+group+"&no="+no);
 	}
 }

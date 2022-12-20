@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.ArticleDao;
+import kr.co.kmarket1.dao.CateDao;
 import kr.co.kmarket1.vo.ArticleVO;
+import kr.co.kmarket1.vo.Cate2VO;
 
 @WebServlet("/admin/cs/list.do")
 public class CSListController extends HttpServlet{
@@ -28,8 +30,15 @@ public class CSListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
+		if(group == null) {
+			group = "notice";
+		}
 		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
+		
+		List<Cate2VO> artiCate2s = null;
+		
 		int start = 0;
 		int currentPage = 1;
 		int currentPageGroup = 1;
@@ -41,14 +50,33 @@ public class CSListController extends HttpServlet{
 		}
 		
 		start = (currentPage - 1) * 10;
-		
+		ArticleDao AD = ArticleDao.getInstance();
 		// 전체 게시물 갯수
-		if(cate==null) {
-			total = ArticleDao.getInstance().selectCountTotal(group);
-		}else {
-			total = ArticleDao.getInstance().selectCountTotal(cate, group);
+		if(group.equals("notice")) {
+			if(cate==null) {
+				total = AD.selectCountTotal(group);
+			}else {
+				total = AD.selectCountTotal(cate, group);
+			}
+		}else if(group.equals("faq")) {
+			artiCate2s = CateDao.getInstance().selectArtiCates_2();
+			if(cate == null) {
+				cate = "member";
+			}
+			if(cate2 == null) {
+				cate2 = "reg";
+			}
+			total = AD.selectCountTotal(cate, group);
+		}else if(group.equals("qna")) {
+			artiCate2s = CateDao.getInstance().selectArtiCates_2();
+			if(cate == null) {
+				cate = "member";
+			}
+			if(cate2 == null) {
+				cate2 = "reg";
+			}
+			total = AD.selectCountTotal(cate, cate2, group);
 		}
-		
 		
 		// 시작 페이지 번호
 		pageStartNum = total - start;
@@ -71,24 +99,31 @@ public class CSListController extends HttpServlet{
 		
 		List<ArticleVO> articles = null;
 		
-		if(group == null) {
-			group = "notice";
-		}
+		
 		if(group.equals("notice")) {
 			if(cate==null) {
-				total = ArticleDao.getInstance().selectCountTotal(group);
+				articles = AD.selectArticlesByGroup(group, start);
 			}else {
-				total = ArticleDao.getInstance().selectCountTotal(cate, group);
-			}
-			if(cate==null) {
-				articles = ArticleDao.getInstance().selectArticlesByGroup(group, start);
-			}else {
-				articles = ArticleDao.getInstance().selectArticlesByCate(group, cate, start);
+				articles = AD.selectArticlesByCate(group, cate, start);
 			}
 		}else if(group.equals("faq")) {
-			
+			artiCate2s = CateDao.getInstance().selectArtiCates_2();
+			if(cate == null) {
+				cate = "member";
+			}
+			if(cate2 == null) {
+				cate2 = "reg";
+			}
+			articles = AD.selectArticlesByCate2(group, cate, cate2, start);
 		}else if(group.equals("qna")) {
-			
+			artiCate2s = CateDao.getInstance().selectArtiCates_2();
+			if(cate == null) {
+				cate = "member";
+			}
+			if(cate2 == null) {
+				cate2 = "reg";
+			}
+			articles = AD.selectArticlesByCate2(group, cate, cate2, start);
 		}
 		
 		req.setAttribute("cate", cate);
@@ -99,6 +134,7 @@ public class CSListController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
+		req.setAttribute("artiCate2s", artiCate2s);
 		req.setAttribute("articles", articles);
 		req.setAttribute("group", group);
 		
