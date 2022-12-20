@@ -145,8 +145,10 @@ public class ArticleDao extends DBHelper{
 			while(rs.next()) {
 				ArticleVO article = new ArticleVO();
 				article.setNo(rs.getInt(1));
+				article.setComment(rs.getInt(3));
 				article.setGroup(rs.getString(4));
 				article.setCate(rs.getString(5));
+				article.setCate2(rs.getString(6));
 				article.setTitle(rs.getString(7));
 				article.setUid(rs.getString(11).substring(0,3));
 				article.setRdate(rs.getString(13).substring(2,10));
@@ -158,6 +160,26 @@ public class ArticleDao extends DBHelper{
 			logger.error(e.getMessage());
 		}
 		return articles;
+	}
+	// 전체 게시물 카운트(2차 카테고리 O)
+	public int selectCountTotal(String cate, String cate2, String group) {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT COUNT(`no`) FROM `km_article` where `parent`=0 and `cate`=? and `cate2`=? and `group`=?");
+			psmt.setString(1, cate);
+			psmt.setString(2, cate2);
+			psmt.setString(3, group);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
 	}
 	// 전체 게시물 카운트(카테고리 O)
 	public int selectCountTotal(String cate, String group) {
@@ -215,6 +237,32 @@ public class ArticleDao extends DBHelper{
 			logger.error(e.getMessage());
 		}
 	}
-	public void updateArticle() {}
-	public void deleteArticle() {}
+	public void updateArticle(ArticleVO vo) {
+		try {
+			logger.info("updateArticle start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("update `km_article` set `title`=?,`content`=?,`cate`=?,`rdate`=now() where `no`=?");
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getContent());
+			psmt.setString(3, vo.getCate());
+			psmt.setInt(4, vo.getNo());
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	public void deleteArticle(String no) {
+		try {
+			logger.info("deleteArticle start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("DELETE FROM `km_article` WHERE `no`=? or `parent`=?");
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 }

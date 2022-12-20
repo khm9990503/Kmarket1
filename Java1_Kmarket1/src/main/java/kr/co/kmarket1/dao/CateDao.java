@@ -112,4 +112,26 @@ public class CateDao extends DBHelper{
 		}
 		return cate2s;
 	}
+	// 게시물 카테 모든 리스트 불러오기
+	public List<Cate2VO> selectArtiCates_2() {
+		List<Cate2VO> cate2s = new ArrayList<>();
+		try {
+			logger.info("selectArtiCates_2 start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select * from `km_article_cate`");
+			while(rs.next()) {
+				Cate2VO cate2 = new Cate2VO();
+				cate2.setArtiCate(rs.getString(1));
+				cate2.setArtiCate2(rs.getString(2));
+				cate2.setC2Name(rs.getString(3));
+				
+				cate2s.add(cate2);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cate2s;
+	}
 }

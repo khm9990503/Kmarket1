@@ -1,9 +1,7 @@
 package kr.co.kmarket1.controller.cs;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,12 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.ArticleDao;
-import kr.co.kmarket1.dao.CateDao;
-import kr.co.kmarket1.vo.ArticleVO;
-import kr.co.kmarket1.vo.Cate2VO;
 
-@WebServlet("/admin/cs/view.do")
-public class CSViewController extends HttpServlet{
+@WebServlet("/admin/cs/delete.do")
+public class CSDeleteController extends HttpServlet {
 	/**
 	 * 
 	 */
@@ -29,19 +24,12 @@ public class CSViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String group = req.getParameter("group");
 		String no = req.getParameter("no");
-		ArticleVO article = null;
+		String group = req.getParameter("group");
 		
-		List<Cate2VO> artiCate2s = CateDao.getInstance().selectArtiCates_2();
+		ArticleDao.getInstance().deleteArticle(no);
 		
-		article = ArticleDao.getInstance().selectArticle(no);
-		
-		req.setAttribute("artiCate2s", artiCate2s);
-		req.setAttribute("article", article);
-		req.setAttribute("group", group);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/view.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("/Java1_Kmarket1/admin/cs/list.do?group="+group);
 	}
 	
 	@Override

@@ -422,28 +422,31 @@ p.alert {
 	background: #fff;
 	text-align: center;
 	box-sizing: border-box;
+	padding: 20px;
 }
 #csList table td:nth-child(1){
 	width: 60px;
 }
 #csList table td:nth-child(2){
-	width: 90px;
+	width: auto;
 }
 #csList table td:nth-child(3){
-	width: 120px;
+	width: auto;
 }
 #csList table td:nth-child(4){
 	width: auto;
-	text-align: left;
 }
 #csList table td:nth-child(5){
-	width: 120px
+	width: auto;
 }
 #csList table td:nth-child(6){
-	width: 120px
+	width: auto;
 }
 #csList table td:nth-child(7){
-	width: 60px
+	width: auto;
+}
+#csList table td:nth-child(8){
+	width: auto;
 }
 #csList .page {
     width: 100%;
@@ -486,8 +489,16 @@ p.alert {
 #csView table td:nth-child(1) {
 	font-weight: bold;
 }
-#csView table tr:nth-child(3) td:nth-child(1) {
+#csView table .content {
 	height: 280px;
+}
+#csView table textarea {
+	width: 100%;
+    height: 360px;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 #csView div {
 	width: 100%;
