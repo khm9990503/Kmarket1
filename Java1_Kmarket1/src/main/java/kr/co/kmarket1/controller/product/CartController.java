@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket1.dao.CartDao;
 import kr.co.kmarket1.dao.CateDao;
+import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 
@@ -36,10 +38,14 @@ public class CartController extends HttpServlet {
 		String prodCate2 = req.getParameter("prodCate2");
 		String prodNo = req.getParameter("prodNo");
 		
+		// 장바구니 출력
+		CartDao Cartdao = CartDao.getInstance();
+		List<CartVO> carts = Cartdao.selectCarts();
+		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);
 		req.setAttribute("prodNo", prodNo);
-		
+		req.setAttribute("carts", carts);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);

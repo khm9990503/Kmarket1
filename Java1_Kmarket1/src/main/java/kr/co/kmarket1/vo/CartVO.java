@@ -12,6 +12,45 @@ public class CartVO {
 	int total;
 	String rdate;
 	
+	// 추가 필드
+	String prodName;
+	String thumb1;
+	String descript;
+	int prodCate1;
+	int prodCate2;
+	
+	public int getProdCate1() {
+		return prodCate1;
+	}
+	public void setProdCate1(int prodCate1) {
+		this.prodCate1 = prodCate1;
+	}
+	public int getProdCate2() {
+		return prodCate2;
+	}
+	public void setProdCate2(int prodCate2) {
+		this.prodCate2 = prodCate2;
+	}
+	
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	
 	public int getCartNo() {
 		return cartNo;
 	}

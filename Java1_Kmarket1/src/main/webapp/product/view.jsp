@@ -1,4 +1,3 @@
-<%@page import="org.apache.naming.java.javaURLContextFactory"%>
 <%@page import="java.util.Date"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,32 +5,34 @@
 <jsp:include page="./_header.jsp" />
 <script>
 
-	// 수량 변경
+	// 수량 변경 + 자동 총 합계 계산
 	$(function(){
+		
+		let price = parseInt($('input[name=price]').val());
+		let discount = parseInt($('input[name=discount]').val());
+		let delivery = parseInt($('input[name=delivery]').val());
+		let totalPrice = 1 * Math.round(price*(100-discount)/100) + delivery;
+		$('.total > span').text(totalPrice);
 		
 		$('.increase').on('click', function(){
 			let quantity = $(this).parent("div").find("input").val();
 			$(this).parent("div").find("input").val(++quantity);
+			let count = parseInt($('input[name=num]').val());
+			let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
+			$('.total > span').text(totalPrice);
 		});
+		
 		$(".decrease").on("click", function(){
 			let quantity = $(this).parent("div").find("input").val();
 			if(quantity > 1){
 				$(this).parent("div").find("input").val(--quantity);		
 			}
+			let count = parseInt($('input[name=num]').val());
+			let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
+			$('.total > span').text(totalPrice);
 		});
-	});
-	
-	$(function(){
 		
-		// 총 상품금액
-		let count = parseInt($('input[name=num]').val());
-		let price =  parseInt($('input[name=price]').val());
-		let discount =  parseInt($('input[name=discount]').val());
-		let delivery =  parseInt($('input[name=delivery]').val());
-		let totalPrice =  count * Math.round(price*(100-discount)/100) + delivery;
-
-		$('.total > span').text(totalPrice);
-		
+		// 장바구니 클릭
 		$('.cart').click(function(){
 			
 			let uid = $('input[name=uid]').val();
@@ -41,7 +42,7 @@
 			let discount = $('input[name=discount]').val();
 			let point = $('input[name=point]').val();
 			let delivery = $('input[name=delivery]').val();
-			let total = $('input[name=total]').val();
+			let total = $('.total > span').text();
 			
 			let jsonData = {
 					"uid": uid,
@@ -51,7 +52,7 @@
 					"discount": discount,
 					"point": point,
 					"delivery": delivery,
-					"total": total
+					"total": total,
 			};
 			
 			$.ajax({
@@ -59,23 +60,28 @@
 				type: 'post',
 				data: jsonData,
 				dataType: 'json',
-				success: function(){
-					if(sessUser != null){
-						if(confirm('장바구니로 이동하시겠습니까?')){
-							// 일치 정보가 있음
+				success: function(data){
+					if(${sessUser != null}){
+						if(confirm("장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?")){
 							location.href = "/Java1_Kmarket1/product/cart.do";
 						}else{
 							return;
 						}
 					}else{
-						
+						alert('로그인 후 이용 가능합니다.');
 					}
 				}
 			});
 		});
 		
+		// 주문하기 클릭
 		$('.order').click(function(){
-			location.href = '/Java1_Kmarket1/product/order.do';
+			if(${sessUser != null}){
+				location.href = "/Java1_Kmarket1/product/order.do?prodNo=${prodNo}";
+			}else{
+				alert('로그인 후 이용 가능합니다.');				
+				return;
+			}
 			
 		});
 	});
@@ -83,12 +89,10 @@
     <section class="view">
     <input type="hidden" name="uid" value="${sessUser.uid}">
     <input type="hidden" name="prodNo" value="${product.prodNo}">
-    <input type="hidden" name="count" value="${count}">
     <input type="hidden" name="price" value="${product.price}">
     <input type="hidden" name="discount" value="${product.discount}">
     <input type="hidden" name="point" value="${product.point}">
     <input type="hidden" name="delivery" value="${product.delivery}">
-    <input type="hidden" name="total" value="${total}">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
            <h1>상품보기</h1>

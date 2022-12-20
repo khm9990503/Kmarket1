@@ -23,6 +23,8 @@
     float: right;
     margin-top: 10px;
 }
+#product > section > nav > p > strong {font-weight: bold;}
+
 #product > .list > .sort {
     margin: 0 0 20px 0;
     border-top: 2px solid #111;
@@ -69,6 +71,9 @@
     font-weight: bold;
     color: #111;
     margin-bottom: 6px;
+}
+#product > .list > table .name:hover {
+	text-decoration: underline;
 }
 #product > .list > table .desc {
     font-size: 12px;

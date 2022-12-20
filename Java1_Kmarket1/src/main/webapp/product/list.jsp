@@ -36,8 +36,10 @@
                    </a>
                </td>
                <td>
-                   <h3 class="name">${product.prodName}</h3>
-                   <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${product.prodNo}" class="desc">${product.descript}</a>
+	          		<a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${product.prodNo}">
+	          			<h3 class="name">${product.prodName}</h3>
+	          		</a>
+                    <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${product.prodNo}" class="desc">${product.descript}</a>
                </td>
               
                <td>
