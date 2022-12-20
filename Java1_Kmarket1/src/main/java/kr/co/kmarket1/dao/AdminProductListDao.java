@@ -120,7 +120,7 @@ public class AdminProductListDao extends DBHelper{
 		}
 	}
 	
-	// 상품수정	if = 참이면 실행 / while = 참이면 계속 실행(거짓이 될때까지)
+	// admin list 상품수정버튼	if = 참이면 실행 / while = 참이면 계속 실행(거짓이 될때까지)
 	public ProductVO ModifyAdminProduct(String prodNo) {
 			logger.info("상품수정");
 			

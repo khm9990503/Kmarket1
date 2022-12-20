@@ -8,6 +8,7 @@ import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.ProductVO;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -192,7 +193,37 @@ public class AdminProductRegisterDao extends DBHelper{
 		}
 		return result;
 	}
-	public void updateProduct () {}
+	
+	
+	
+	public void updateProduct (String prodName, String descript, String company, String seller, String price, String discount, String point, String stock, String delivery, String thumb1, String thumb2, String thumb3, String detail, String prodNo) {
+		try {
+			logger.info("상품내용 수정 : " + prodNo);
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_ADMIN_PRODUCT);
+			psmt.setString(1, prodName);
+			psmt.setString(2, descript);
+			psmt.setString(3, company);
+			psmt.setString(4, seller);
+			psmt.setString(5, price);
+			psmt.setString(6, discount);
+			psmt.setString(7, point);
+			psmt.setString(8, stock);
+			psmt.setString(9, delivery);
+			psmt.setString(10, thumb1);
+			psmt.setString(11, thumb2);
+			psmt.setString(12, thumb3);
+			psmt.setString(13, detail);
+			psmt.setString(14, prodNo);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	
 	public void deleteProduct () {}
 	
 	
