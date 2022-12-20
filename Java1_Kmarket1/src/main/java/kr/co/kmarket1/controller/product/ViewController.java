@@ -1,6 +1,8 @@
 package kr.co.kmarket1.controller.product;
 
 import java.io.IOException;
+
+
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
@@ -11,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
@@ -22,7 +23,6 @@ import kr.co.kmarket1.service.ProductService;
 import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
-import kr.co.kmarket1.vo.MemberVO;
 import kr.co.kmarket1.vo.ProductVO;
 import kr.co.kmarket1.vo.ReviewVO;
 
@@ -108,12 +108,8 @@ public class ViewController extends HttpServlet {
 
 		CartDao.getInstance().insertCart(cart);
 		
-		HttpSession session = req.getSession();
-		MemberVO sessUser = (MemberVO) session.getAttribute("sessUser");
-		
+		// JSON 출력
 		JsonObject json = new JsonObject();
-		
-		req.setAttribute("cart", cart);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
