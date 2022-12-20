@@ -29,8 +29,9 @@
 <script>
 	// 판매가격의 1%를 포인트로 자동 계상
 	$(function(){
-		$('input[name=price]').focusout(function(){
+		$('input[name=price]').keydown(function(){
 			autoPoint();
+			discount();
 		});
 		
 		function autoPoint(){
@@ -39,6 +40,16 @@
 			let point = (price/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			console.log(point);
 			$('input[name=point]').val(point);
+		}
+		
+		$('#discount').keydown(function(){
+			discount();
+		});
+		
+		function discount(){
+			let price = $('input[name=price]').val();
+			let dis = $('#discount').val();
+			$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(price/100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
 		}
 	});
 </script>
@@ -54,6 +65,7 @@
 		}
 	});
 </script>
+
 
     <section id="admin-product-register">
         <nav>
@@ -133,15 +145,6 @@
                             <input id="discount" maxlength="2" value="0">		<!-- maxlength 입력값 2개까지 까지 제한 -->
 							<input name="discount" type="hidden" value="0">%
 							<span class="step_val">할인 가격 : </span>
-							<script>
-								$(function(){
-									$('#discount').focusout(function(){
-										let price = $('input[name=price]').val();
-										let dis = $(this).val();
-										$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(price/100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
-									});
-								});
-							</script>
 							<span class="discount_num">0~99 숫자를 입력해주세요.</span>
                         </td>
                     </tr>

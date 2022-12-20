@@ -37,11 +37,10 @@
 		
 		function autoPoint(){
 			let price = $('input[name=price]').val();
-			$('input[name=point]').val('');
 			console.log(price);
-			let point = Math.round(price/100);
+			let point = (price/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			console.log(point);
-			$('input[name=point]').val(point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			$('input[name=point]').val(point);
 		}
 		
 		$('#discount').keydown(function(){
@@ -77,7 +76,7 @@
         </nav>
         <!--상품수정 컨텐츠 시작-->
         <article><!-- [insert type="file"]이 있는 경우 enctype="multipart/form-data" 필요하다.-->
-            <form action="/Java1_Kmarket1/admin/product/register.do" method="post" enctype="multipart/form-data">
+            <form action="/Java1_Kmarket1/admin/product/modify.do" method="post">
                 <section>
                     <h4>상품분류</h4>
                     <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
@@ -116,6 +115,7 @@
                     <tr>
                         <td>상품명</td>
                         <td><input type="text" name="prodName" value="${product.prodName}"/></td>
+            				<input type="hidden" name="prodNo" value="${product.prodNo}">
                         <span class="resultprodName"></span>
                     </tr>
                     

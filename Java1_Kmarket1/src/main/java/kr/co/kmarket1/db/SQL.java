@@ -42,6 +42,10 @@ public class SQL {
 	public static final String DELETE_ADMIN_LIST = "DELETE FROM `km_product` WHERE `prodNo`=?";
 	// admin list 수정
 	public static final String MODIFY_ADMIN_PRODUCT = "SELECT * FROM `km_product` WHERE `prodNo` = ?";
+	// admin 상품정보 수정
+	public static final String UPDATE_ADMIN_PRODUCT = "UPDATE `km_product` "
+														+ "SET `prodName`=?, `descript`=?, `company`=?, `seller`=?, `price`=?, `point`=?, `discount`=?, `stock`=?, `delivery`=?, `thumb1`=?, `thumb2`=?, `thumb3`=?, `detail`=?, `rdate`=now() "
+														+ "WHERE `prodNo` = ?";
 
 	//member
 	// terms 불러오기
