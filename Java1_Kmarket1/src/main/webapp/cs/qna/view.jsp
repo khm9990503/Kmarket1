@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
     <section id="cs">
         <div class="qna">
@@ -37,6 +38,18 @@
                             ${article.content}
                         </p>
                     </div>
+                    <c:if test="${article.comment != 0}">
+                    <nav style="border-top: 2px solid #e9e9e9">
+                        <h2 class="title">
+                            ☞[답변]${article.title }
+                        </h2>
+                    </nav>
+                    <div class="content">
+                        <p>
+                            ${reply.content}
+                        </p>
+                    </div>
+                    </c:if>
                     <a href="/Java1_Kmarket1/cs/qna/list.do?cate=${article.cate}" class="btnList">목록보기</a>
                 </article>
             </section>
