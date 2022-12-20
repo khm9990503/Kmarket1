@@ -62,6 +62,14 @@
                             <td>
                                 <a href="/Java1_Kmarket1/cs/qna/view.do?no=${article.no}&cate=${article.cate}">${article.title }</a>
                             </td>
+                            <c:choose>
+                            	<c:when test="${article.comment == 0}">
+                            		<td><span style="color:#777;">검토중</span></td>
+                            	</c:when>
+                            	<c:when test="${article.comment != 0}">
+                            		<td><span style="color:#0078ff;font-weight: bold;">답변완료</span></td>
+                            	</c:when>
+                            </c:choose>
                             <td>${article.uid}***</td>
                             <td>${article.rdate}</td>
                         </tr>

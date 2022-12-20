@@ -1,6 +1,35 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
+<script>
+$(function() {
+	$('.replySub').click(function(e) {
+		let reply = $('.reply').val();
+		let no = $('input[name=no]').val();
+		let uid = $('input[name=uid]').val();
+		let group = $('input[name=group]').val();
+		let cate = $('input[name=cate]').val();
+		let cate2 = $('input[name=cate2]').val();
+		let jsonData = {
+				"reply":reply,
+				"no":no,
+				"uid":uid
+				};
+		$.ajax({
+			url:"/Java1_Kmarket1/admin/cs/view.do",
+			method:"post",
+			data:jsonData,
+			dateType:"json",
+			success:function(data){
+				if(data.result != 0){
+					location.href = "/Java1_Kmarket1/admin/cs/list.do?group="+group+"&cate="+cate+"&cate2"+cate2;
+				}
+			}
+		});
+		return false;
+	});
+});
+</script>
 <section id="csView">
 	<c:choose>
 	<c:when test="${group.equals('notice')}">
@@ -79,23 +108,38 @@
     		<td>내용</td>
     		<td class="content">${article.content}</td>
     	</tr>
-    	<tr>
-    		<td>답변</td>
-    		<td><textarea class="reply"></textarea></td>
-    	</tr>
+    	<c:choose>
+    		<c:when test="${group.equals('qna') && article.comment == 0}">
+    			<tr>
+    				<td>답변</td>
+    				<td><textarea class="reply"></textarea></td>
+    			</tr>
+    		</c:when>
+    		<c:when test="${group.equals('qna') && article.comment != 0}">
+    			<tr>
+    				<td>답변</td>
+    				<td>${reply.content}</td>
+    			</tr>
+    		</c:when>
+    	</c:choose>
     </table>
     <div>
     	<a href="/Java1_Kmarket1/admin/cs/list.do?group=${group}" class="btn btnList">목록</a>
     	<c:choose>
-	    	<c:when test="${group.equals('group') || group.equals('faq')}">
+	    	<c:when test="${group.equals('notice') || group.equals('faq')}">
 	    		<a href="/Java1_Kmarket1/admin/cs/modify.do?group=${group}&no=${article.no}" class="btn btnMod">수정</a>
 	    	</c:when>
-	    	<c:when test="${group.equals('qna')}">
-	    		<a href="#" class="btn btnList">답변등록</a>
+	    	<c:when test="${group.equals('qna') && article.comment == 0}">
+	    		<a href="#" class="btn btnList replySub">답변등록</a>
 	    	</c:when>
     	</c:choose>
     	<a href="/Java1_Kmarket1/admin/cs/delete.do?group=${group}&no=${article.no}" class="btn btnDel2">삭제</a>
     </div>
+    <input type="hidden" name="no" value="${article.no}">
+    <input type="hidden" name="uid" value="uid">
+    <input type="hidden" name="group" value="${group}">
+    <input type="hidden" name="cate" value="${article.cate}">
+    <input type="hidden" name="cate2" value="${article.cate2}">
 </section>
 </main>
 <jsp:include page="../_footer.jsp"/>

@@ -3,7 +3,8 @@
 <jsp:include page="../_header.jsp"/>
 <script>
 $(function(){
-	$("select[name=cate]").click(function(){
+	// 1차 유형 선택 시 2차 유형 카테고리 불러오기
+	$("select[name=cate]").on("click",function(){
 		let cate = $(this).val(); // 선택된 option의 value = select의 value
 		let jsonData = {
 				"cate":cate
@@ -15,7 +16,7 @@ $(function(){
 			data:jsonData,
 			dataType:'json',
 			success:function(data){
-				console.log(data)
+				//console.log(data)
 				for(let vo of data){
                     let tag = "<option class='opt' value="+vo.artiCate2+">"+vo.c2Name+"</option>";
                     $('select[name=cate2]').append(tag); // select에 option을 뒤에 붙임
@@ -23,11 +24,72 @@ $(function(){
 			}
 		});
 	});
+	// 2차 유형별 게시물 불러오기
 	$('select[name=cate2]').on("change",function() {
 		let group = $('input[name=group]').val();
 		let cate = $('select[name=cate]').val();
 		let cate2 = $(this).val();
 		location.href = "/Java1_Kmarket1/admin/cs/list.do?pg=1&group="+group+"&cate="+cate+"&cate2="+cate2;
+	})
+	// 전체 체크박스 클릭 이벤트
+	$('input[name=selectAll]').on("click",function(){
+		let isCheck = $(this).is(":checked");
+		
+		let val_arr = [];
+		$("input[name=select]").each(function(){
+			let chk = $(this).val();
+			val_arr.push(chk);
+		})
+		$('input[name=select]').remove();
+		for(let i=0;i<10;i++){
+			let tag = "<input type='checkbox' name='select' value="+val_arr[i]+">"
+			let sel = ".chk"+i;
+			$(sel).append(tag);
+		}
+		
+		if(isCheck){
+			$('input[name=select]').attr("checked",true); 
+		}else {
+			$('input[name=select]').attr("checked",false);
+		}
+		
+	});
+	// 각 체크박스 클릭 이벤트
+	$('input[name=select]').each(function(){
+		$(this).click(function(){
+			let isCheck = $(this).is(":checked");
+			if(isCheck){
+				$(this).attr("checked",true); 
+			}else {
+				$(this).attr("checked",false);
+			}
+		});
+	});
+	$('.btnDel').click(function(){
+		let group = $('input[name=group]').val();
+		let cate = $('input[name=cate]').val();
+		let cate2 = $('input[name=cate2]').val();
+		let chk_arr = [];
+		$("input[name=select]:checked").each(function(){
+			let chk = $(this).val();
+			chk_arr.push(chk);
+		})
+		//console.log(chk_arr);
+		let chks = chk_arr.toString();
+		let jsonData = {
+				"chks":chks
+		}
+		$.ajax({
+			url:"/Java1_Kmarket1/admin/cs/list.do",
+			method:"post",
+			data:jsonData,
+			dataType:"json",
+			success:function(data){
+				if(data.result > 0){
+					location.href = "/Java1_Kmarket1/admin/cs/list.do?group="+group+"&cate="+cate+"&cate2="+cate2;	
+				}
+			}
+		});
 	});
 });
 </script>
@@ -91,7 +153,7 @@ $(function(){
     </c:if>
     <table>
     	<tr>
-    		<th><input type="checkbox" name="selectAll"></th>
+    		<th><input type="checkbox" name="selectAll" c></th>
     		<th>번호</th>
     		<c:choose>
     			<c:when test="${group.equals('notice')}">
@@ -118,7 +180,7 @@ $(function(){
     	</tr>
     	<c:forEach var="arti" items="${articles}" varStatus="i">
     	<tr>
-    		<td><input type="checkbox" name="select" value="${arti.no}"></td>
+    		<td class="chk${i.index}"><input type="checkbox" name="select" value="${arti.no}"></td>
     		<c:choose>
     		<c:when test="${group.equals('notice')||group.equals('qna')}">
     		<td>${pageStartNum-i.index}</td>
@@ -223,9 +285,11 @@ $(function(){
 	</c:if>
     </div>
     
-    <a class="btn btnDel">선택삭제</a>
+    <a href="#" class="btn btnDel">선택삭제</a>
     <a href="/Java1_Kmarket1/admin/cs/write.do?group=${group}" class="btn btnWrite">작성하기</a>
     <input type="hidden" name="group" value="${group}">
+    <input type="hidden" name="cate" value="${cate}">
+    <input type="hidden" name="cate2" value="${cate2}">
 </section>
 </main>
 <jsp:include page="../_footer.jsp"/>

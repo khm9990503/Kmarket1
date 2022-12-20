@@ -1,5 +1,6 @@
 package kr.co.kmarket1.dao;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ArticleDao extends DBHelper{
 	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 기본 CRUD
+	// 게시물 글보기
 	public ArticleVO selectArticle(String no) {
 		logger.info("selectArticle start...");
 		ArticleVO article = new ArticleVO();
@@ -44,7 +46,25 @@ public class ArticleDao extends DBHelper{
 			}
 			close();
 		} catch (Exception e) {
-			logger.error("selectArticle end...");
+			logger.error(e.getMessage());
+		}
+		return article;
+	}
+	// 답변 불러오기
+	public ArticleVO selectReply(String no) {
+		logger.info("selectReply start...");
+		ArticleVO article = new ArticleVO();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_article` where `parent`=?");
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				article.setContent(rs.getString(8));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
 		return article;
 	}
@@ -116,6 +136,7 @@ public class ArticleDao extends DBHelper{
 			while(rs.next()) {
 				ArticleVO article = new ArticleVO();
 				article.setNo(rs.getInt(1));
+				article.setComment(rs.getInt(3));
 				article.setGroup(rs.getString(4));
 				article.setCate(rs.getString(5));
 				article.setTitle(rs.getString(7));
@@ -237,6 +258,29 @@ public class ArticleDao extends DBHelper{
 			logger.error(e.getMessage());
 		}
 	}
+	// 답변 작성
+	public int insertReply(ArticleVO vo) {
+		int result = 0;
+		try {
+			logger.info("insertReply start...");
+			conn = getConnection();
+			conn.setAutoCommit(false); // 트렌젝션 시작
+			psmt = conn.prepareStatement("insert into `km_article` set `parent`=?,`uid`=?,`content`=?,`regip`=?,`rdate`=now()");
+			psmt.setInt(1, vo.getNo());
+			psmt.setString(2, vo.getUid());
+			psmt.setString(3, vo.getContent());
+			psmt.setString(4, vo.getRegip());
+			result = psmt.executeUpdate();
+			PreparedStatement psmt2 = conn.prepareStatement("UPDATE `km_article` SET `comment`=`comment`+1 WHERE `no`=?");
+			psmt2.setInt(1, vo.getNo());
+			psmt2.executeUpdate();
+			conn.commit();			// 트렌젝션 끝 All or Nothing
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	public void updateArticle(ArticleVO vo) {
 		try {
 			logger.info("updateArticle start...");
@@ -264,5 +308,20 @@ public class ArticleDao extends DBHelper{
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+	}
+	public int deleteArticleByChk(String chks) {
+		int result = 0;
+		try {
+			logger.info("deleteArticle start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("DELETE FROM `km_article` WHERE `no` in (?) or `parent` in (?)");
+			psmt.setString(1, chks);
+			psmt.setString(2, chks);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
 	}
 }

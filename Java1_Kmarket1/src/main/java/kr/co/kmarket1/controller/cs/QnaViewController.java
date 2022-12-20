@@ -31,9 +31,11 @@ public class QnaViewController extends HttpServlet{
 		String cate = req.getParameter("cate");
 		
 		ArticleVO article = ArticleDao.getInstance().selectArticle(no);
+		ArticleVO reply = ArticleDao.getInstance().selectReply(no);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("article", article);
+		req.setAttribute("reply", reply);
 		
 		RequestDispatcher Dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 		Dispatcher.forward(req, resp);
