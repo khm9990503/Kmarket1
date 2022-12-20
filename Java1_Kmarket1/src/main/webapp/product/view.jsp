@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="./_header.jsp" />
 <script>
 
@@ -82,7 +83,6 @@
 				alert('로그인 후 이용 가능합니다.');				
 				return;
 			}
-			
 		});
 	});
 </script>
@@ -293,7 +293,7 @@
                 <li>
                     <div>
                         <h5 class="rating star${review.rating}">상품평</h5>
-                        <span>${review.uid}	${review.rdate}</span>
+                        <span>${fn:substring(review.uid,0,3)}<c:forEach begin="4" end="${fn:length(review.uid)}">*</c:forEach>   ${review.rdate}</span>
                     </div>
                     <h3>${review.prodName}</h3>
                     <p>${review.content}</p>
