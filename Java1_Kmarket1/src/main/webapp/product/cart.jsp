@@ -136,7 +136,6 @@
                     </c:if>
                     <td>${cart.total}</td>
                 </tr>
-            </c:if>
             </c:forEach>    
             </table>
             <input type="button" name="del" class="btnDelete" value="선택삭제">
