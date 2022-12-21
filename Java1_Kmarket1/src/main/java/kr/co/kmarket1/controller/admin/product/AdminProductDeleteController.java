@@ -11,14 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.AdminProductListDao;
-import kr.co.kmarket1.service.AdminProductService;
 
 
 
 @WebServlet("/admin/product/delete.do")
 public class AdminProductDeleteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	AdminProductService service = AdminProductService.INSTANCE;
 	
 	@Override
 	public void init() throws ServletException {
