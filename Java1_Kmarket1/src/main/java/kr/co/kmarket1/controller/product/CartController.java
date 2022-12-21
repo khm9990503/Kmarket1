@@ -33,7 +33,8 @@ public class CartController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+
+	  /*
 		// 본인 아이디 장바구니만
 		HttpSession session = req.getSession();
 		MemberVO sessUser = (MemberVO) session.getAttribute("sessUser");
@@ -45,6 +46,12 @@ public class CartController extends HttpServlet {
 		    out.flush();
 			return;
 		}
+    */
+		// 세션에서 아이디 불러오기
+		HttpSession session = req.getSession();
+		MemberVO vo = (MemberVO) session.getAttribute("sessUser");
+		String uid = vo.getUid();
+
 		
 		// cate1,2 리스트 불러오기 - 구홍모 12/11
 		CateDao CD = CateDao.getInstance();
@@ -60,7 +67,7 @@ public class CartController extends HttpServlet {
 		
 		// 장바구니 출력
 		CartDao Cartdao = CartDao.getInstance();
-		List<CartVO> carts = Cartdao.selectCarts();
+		List<CartVO> carts = Cartdao.selectCartsByUid(uid); // 해당 uid를 가진 회원의 장바구니 가져오기
 		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);

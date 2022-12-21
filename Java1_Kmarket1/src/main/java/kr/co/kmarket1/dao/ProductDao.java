@@ -71,6 +71,7 @@ public class ProductDao extends DBHelper{
 		}catch (Exception e) {
 			logger.error(e.getMessage()); 
 		}
+		logger.info("price :"+product.getPrice());
 		return product;
 	}
 	// 주문상품 불러오기
