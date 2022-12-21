@@ -9,10 +9,16 @@ $(function() {
 	let dc_arr = [];
 	let deli_arr = [];
 	let tot_arr = [];
+	let p = null;
 	$('.prc').each(function() {
 		let prc = parseInt($(this).text());
 		prc_arr.push(prc);
 	});
+	for(let prc of prc_arr){
+		p+=prc;	
+	}
+	console.log(p);
+	
 	
 });
 </script>
@@ -78,9 +84,7 @@ $(function() {
                     <tr>
                         <td>상품금액</td>
                         <td>
-                        	<c:forEach var="prd" items="${products}">
-								${prc=0+prd.price}                        	
-                        	</c:forEach>
+                        	
                         </td>
                     </tr>
                     <tr>
