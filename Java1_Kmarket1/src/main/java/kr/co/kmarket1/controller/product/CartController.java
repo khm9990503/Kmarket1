@@ -33,10 +33,25 @@ public class CartController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	  /*
+		// 본인 아이디 장바구니만
+		HttpSession session = req.getSession();
+		MemberVO sessUser = (MemberVO) session.getAttribute("sessUser");
+		
+		if(sessUser == null){
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+		    out.println("<script>alert('먼저 로그인을 하세요.'); location.href='/Java1_Kmarket1/member/login.do' </script>");
+		    out.flush();
+			return;
+		}
+    */
 		// 세션에서 아이디 불러오기
 		HttpSession session = req.getSession();
 		MemberVO vo = (MemberVO) session.getAttribute("sessUser");
 		String uid = vo.getUid();
+
 		
 		// cate1,2 리스트 불러오기 - 구홍모 12/11
 		CateDao CD = CateDao.getInstance();
