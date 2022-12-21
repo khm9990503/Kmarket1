@@ -65,10 +65,20 @@ $(function(){
 			}
 		});
 	});
+	// 선택삭제 버튼 이벤트
 	$('.btnDel').click(function(){
+		// 체크가 없으면 실행 안함
+		let isCheck = $('input[name=select]').is(":checked");
+		if(!isCheck){
+			alert("삭제할 게시물을 선택해주세요.");
+			return false;
+		}
+		
 		let group = $('input[name=group]').val();
 		let cate = $('input[name=cate]').val();
 		let cate2 = $('input[name=cate2]').val();
+		
+		
 		let chk_arr = [];
 		$("input[name=select]:checked").each(function(){
 			let chk = $(this).val();
@@ -86,7 +96,7 @@ $(function(){
 			dataType:"json",
 			success:function(data){
 				if(data.result > 0){
-					location.href = "/Java1_Kmarket1/admin/cs/list.do?group="+group+"&cate="+cate+"&cate2="+cate2;	
+					location.href = "/Java1_Kmarket1/admin/cs/list.do?group="+group;	
 				}
 			}
 		});
@@ -230,7 +240,14 @@ $(function(){
     			</c:if>
     		</c:forEach>
     		<td><a href="/Java1_Kmarket1/admin/cs/view.do?no=${arti.no}&group=${group}">${arti.title}</a></td>
+    		<c:choose>
+    		<c:when test="${group.equals('notice') || group.equals('faq')}">
     		<td>${arti.hit}</td>
+    		</c:when>
+    		<c:when test="${group.equals('qna')}">
+    		<td>${arti.uid}***</td>
+    		</c:when>
+    		</c:choose>
     		<td>${arti.rdate}</td>
     		<c:choose>
     		<c:when test="${group.equals('notice') || group.equals('faq')}">
@@ -286,7 +303,15 @@ $(function(){
     </div>
     
     <a href="#" class="btn btnDel">선택삭제</a>
-    <a href="/Java1_Kmarket1/admin/cs/write.do?group=${group}" class="btn btnWrite">작성하기</a>
+    <c:choose>
+    	<c:when test="${group.equals('notice') || group.equals('faq')}">
+    		<a href="/Java1_Kmarket1/admin/cs/write.do?group=${group}" class="btn btnWrite">작성하기</a>
+    	</c:when>
+    	<c:when test="${group.equals('qna')}">
+    		<a href="/Java1_Kmarket1/cs/qna/list.do" class="btn btnWrite">문의하기</a>
+    	</c:when>
+    </c:choose>
+    
     <input type="hidden" name="group" value="${group}">
     <input type="hidden" name="cate" value="${cate}">
     <input type="hidden" name="cate2" value="${cate2}">

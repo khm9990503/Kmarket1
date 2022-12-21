@@ -77,8 +77,9 @@
 		
 		// 주문하기 클릭
 		$('.order').click(function(){
+			let count = $('input[name=num]').val();
 			if(${sessUser != null}){
-				location.href = "/Java1_Kmarket1/product/order.do?prodNo=${prodNo}";
+				location.href = "/Java1_Kmarket1/product/order.do?prodNo=${prodNo}&count="+count;
 			}else{
 				alert('로그인 후 이용 가능합니다.');				
 				return;

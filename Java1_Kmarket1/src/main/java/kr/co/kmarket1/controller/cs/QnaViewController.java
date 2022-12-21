@@ -30,8 +30,11 @@ public class QnaViewController extends HttpServlet{
 		String no = req.getParameter("no");
 		String cate = req.getParameter("cate");
 		
-		ArticleVO article = ArticleDao.getInstance().selectArticle(no);
-		ArticleVO reply = ArticleDao.getInstance().selectReply(no);
+		ArticleDao ad = ArticleDao.getInstance();
+		// 조회수 업데이트
+		ad.updateArticleHit(no);
+		ArticleVO article = ad.selectArticle(no);
+		ArticleVO reply = ad.selectReply(no);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("article", article);

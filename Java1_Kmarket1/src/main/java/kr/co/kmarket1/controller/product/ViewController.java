@@ -52,7 +52,7 @@ public class ViewController extends HttpServlet {
 		
 		// 상품 출력
 		ProductDao PD = ProductDao.getInstance();
-		ProductVO product = PD.selectProduct(prodCate1, prodCate2, prodNo);
+		ProductVO product = PD.selectProduct(prodNo);
 		
 		// 리뷰 페이징 처리
 		int currentPage = service.getCurrentPage2(pg); // 현재 페이지 번호

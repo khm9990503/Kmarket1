@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.CateDao;
+import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
+import kr.co.kmarket1.vo.ProductVO;
 
 @WebServlet("/product/order.do")
 public class OrderController extends HttpServlet {
@@ -31,6 +33,16 @@ public class OrderController extends HttpServlet {
 		List<Cate2VO> cate2s = CD.selectCates_2();
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
+		
+		// 상품번호 수신 - 구홍모 
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
+		if(prodNo == null) {
+			prodNo = "1000288, 1000290";
+		}
+		List<ProductVO> products = ProductDao.getInstance().selectProducts(prodNo);
+		req.setAttribute("products", products);
+		req.setAttribute("count", count);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 		dispatcher.forward(req, resp);
