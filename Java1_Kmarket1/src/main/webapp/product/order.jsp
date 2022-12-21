@@ -5,19 +5,21 @@
 <jsp:include page="./_header.jsp" />
 <script>
 $(function() {
-	let prc_arr = [];
-	let dc_arr = [];
-	let deli_arr = [];
-	let tot_arr = [];
-	let p = null;
-	$('.prc').each(function() {
-		let prc = parseInt($(this).text());
-		prc_arr.push(prc);
+	$('.btnPoint').click(function() {
+		let point = $(this).prev().val();
+		let userPoint = ${sessUser.point};
+		
+		if(point < 5000){
+			alert('5,000점 이상부터 사용 가능합니다.');
+			return false;
+		}else if(point >= 5000){
+			if(point > userPoint){
+				alert('현재 포인트보다 많이 사용할 수 없습니다.');
+				return false;
+			}
+			$('.pointDC').text(point);
+		}
 	});
-	for(let prc of prc_arr){
-		p+=prc;	
-	}
-	console.log(p);
 	
 	
 });
@@ -36,7 +38,6 @@ $(function() {
         <form action="#">
             <table>
                 <tr>
-                	<th><input type="checkbox" name="all"></th>
                     <th style="width: 70%">상품명</th>
                     <th>총수량</th>
                     <th>판매가</th>
@@ -46,18 +47,16 @@ $(function() {
                     <th>총합</th>
                 </tr>
                 <c:choose>
-                	<c:when test="${products.size() == 0}">
+                	<c:when test="${product == null && cartList == null}">
                 		<tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
                 	</c:when>
-                	<c:otherwise>
-                		<c:forEach var="product" items="${products}">
+                	<c:when test="${cartList == null}">
                 		<tr>
-		                	<td><input type="checkbox" name="check" value="${product.prodNo}"></td>
 		                    <td>
 		                        <article>
-		                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
+		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}"><img src="${product.thumb1}"></a>
 		                            <div>
-		                                <h2><a href="/Java1_Kmarket1/product/view.do">${product.prodName}</a></h2>
+		                                <h2><a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}">${product.prodName}</a></h2>
 		                                <p>${product.descript}</p>
 		                            </div>
 		                        </article>
@@ -69,8 +68,28 @@ $(function() {
 		                    <td class="deli">${product.delivery==0?'무료배송':product.delivery}</td>
 		                    <td class="tot">${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
 		                </tr>
+                	</c:when>
+                	<c:when test="${product == null}">
+                		<c:forEach var="cart" items="${cartList}">
+                		<tr>
+		                    <td>
+		                        <article>
+		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}"><img src="${cart.thumb1}"></a>
+		                            <div>
+		                                <h2><a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}">${cart.prodName}</a></h2>
+		                                <p>${cart.descript}</p>
+		                            </div>
+		                        </article>
+		                    </td>
+		                    <td>${cart.count}</td>
+		                    <td class="prc">${cart.price}</td>
+		                    <td class="dc">${cart.discount}%</td>
+		                    <td>${cart.point}</td>
+		                    <td class="deli">${cart.delivery==0?'무료배송':cart.delivery}</td>
+		                    <td class="tot">${cart.total}</td>
+		                </tr>
 		                </c:forEach>
-                	</c:otherwise>
+                	</c:when>
                 </c:choose>
 
             </table>
@@ -79,29 +98,91 @@ $(function() {
                 <table border="0">
                     <tr>
                         <td>총</td>
-                        <td>${products.size()} 건</td>
+                        <td>${product==null?cartList.size():'1'}</td>
                     </tr>
                     <tr>
                         <td>상품금액</td>
+                        <c:choose>
+                        <c:when test="${product==null}">
                         <td>
-                        	
+                        	<c:set var="sum" value="0"/>
+                        	<c:forEach var="cart" items="${cartList}">
+                        	<c:set var="sum" value="${sum+cart.price}"/>
+                        	</c:forEach>
+                        	<c:out  value="${sum}"/>
                         </td>
+                        </c:when>
+                        <c:otherwise>
+                        <td>
+                        	${product.price}
+                        </td>
+                        </c:otherwise>
+                        </c:choose>
                     </tr>
                     <tr>
                         <td>할인금액</td>
-                        <td>-1,000</td>
+                        <c:choose>
+                        <c:when test="${product==null}">
+                        <td>
+                        	<c:set var="sum" value="0"/>
+                        	<c:forEach var="cart" items="${cartList}">
+                        	<c:set var="sum" value="${sum+Math.round(cart.price*(cart.discount/100))}"/>
+                        	</c:forEach>
+                        	<c:out  value="${sum}"/>
+                        </td>
+                        </c:when>
+                        <c:otherwise>
+                        <td>
+                        	${product.price*(product.discount/100)}
+                        </td>
+                        </c:otherwise>
+                        </c:choose>
                     </tr>
                     <tr>
                         <td>배송비</td>
-                        <td>0</td>
+                        <c:choose>
+                        <c:when test="${product==null}">
+                        <td>
+                        	<c:set var="sum" value="0"/>
+                        	<c:forEach var="cart" items="${cartList}">
+                        	<c:set var="sum" value="${sum+cart.delivery}"/>
+                        	</c:forEach>
+                        	<c:out  value="${sum}"/>
+                        </td>
+                        </c:when>
+                        <c:otherwise>
+                        <td>
+                        	${product.price*(product.discount/100)}
+                        </td>
+                        </c:otherwise>
+                        </c:choose>
                     </tr>
                     <tr>
                         <td>포인트 할인</td>
-                        <td>-1000</td>
+                        <td class="pointDC"></td>
                     </tr>
                     <tr>
                         <td>전체주문금액</td>
                         <td>25,000</td>
+                    </tr>
+                    <tr>
+                        <td>적립 포인트</td>
+                        <c:choose>
+                        <c:when test="${product==null}">
+                        <td>
+                        	<c:set var="sum" value="0"/>
+                        	<c:forEach var="cart" items="${cartList}">
+                        	<c:set var="sum" value="${sum+cart.point}"/>
+                        	</c:forEach>
+                        	<c:out  value="${sum}"/>
+                        </td>
+                        </c:when>
+                        <c:otherwise>
+                        <td>
+                        	${product.point}
+                        </td>
+                        </c:otherwise>
+                        </c:choose>
                     </tr>
                 </table>
                 <input type="button" name="" value="결제하기">
@@ -112,29 +193,29 @@ $(function() {
                 <table>
                     <tr>
                         <td>주문자</td>
-                        <td><input type="text" name="orderer" /></td>
+                        <td><input type="text" name="orderer" value="${sessUser.name}"/></td>
                     </tr>
                     <tr>
                         <td>휴대폰</td>
                         <td>
-                            <input type="text" name="hp" />
+                            <input type="text" name="hp" value="${sessUser.hp}" />
                             <span>- 포함 입력</span>
                         </td>
                     </tr>
                     <tr>
                         <td>우편번호</td>
                         <td>
-                            <input type="text" name="zip"/>
+                            <input type="text" name="zip" value="${sessUser.zip}"/>
                             <input type="button" value="검색"/>
                         </td>
                     </tr>
                     <tr>
                         <td>기본주소</td>
-                        <td><input type="text" name="addr1"/></td>
+                        <td><input type="text" name="addr1" value="${sessUser.addr1}"/></td>
                     </tr>
                     <tr>
                         <td>상세주소</td>
-                        <td><input type="text" name="addr2"/></td>
+                        <td><input type="text" name="addr2" value="${sessUser.addr2}"/></td>
                     </tr>
                 </table>
             </article>
@@ -143,10 +224,10 @@ $(function() {
             <article class="discount">
                 <h1>할인정보</h1>
                 <div>
-                    <p>현재 포인트 : <span>7200</span>점</p>
+                    <p>현재 포인트 : <span class="userPoint">${sessUser.point}</span>점</p>
                     <label>
-                        <input type="text" name="point" />점
-                        <input type="button" value="적용"/>
+                        <input type="number" name="point" />점
+                        <input type="button" class="btnPoint" value="적용"/>
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
                 </div>
@@ -158,23 +239,23 @@ $(function() {
                 <div>
                     <span>신용카드</span>
                     <p>
-                        <label><input type="radio" name="payment" value="type1"/>신용카드 결제</label>
-                        <label><input type="radio" name="payment" value="type2"/>체크카드 결제</label>                                
+                        <label><input type="radio" name="payment" value="1"/>신용카드 결제</label>
+                        <label><input type="radio" name="payment" value="2"/>체크카드 결제</label>                                
                     </p>
                 </div>
                 <div>
                     <span>계좌이체</span>
                     <p>
-                        <label><input type="radio" name="payment" value="type3"/>실시간 계좌이체</label>
-                        <label><input type="radio" name="payment" value="type4"/>무통장 입금</label>                                
+                        <label><input type="radio" name="payment" value="3"/>실시간 계좌이체</label>
+                        <label><input type="radio" name="payment" value="4"/>무통장 입금</label>                                
                     </p>
                 </div>
                 <div>
                     <span>기타</span>
                     <p>
-                        <label><input type="radio" name="payment" value="type3"/>휴대폰결제</label>
+                        <label><input type="radio" name="payment" value="5"/>휴대폰결제</label>
                         <label>
-                            <input type="radio" name="payment" value="type4"/>카카오페이
+                            <input type="radio" name="payment" value="6"/>카카오페이
                             <img src="/Java1_Kmarket1/product/img/ico_kakaopay.gif" alt="카카오페이"/>
                         </label>                                
                     </p>
