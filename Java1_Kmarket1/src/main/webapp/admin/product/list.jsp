@@ -12,13 +12,16 @@
         <!-- 상품목록 컨텐츠 -->
         <section>
             <div>
-                <select name="search">
-                    <option value="prodName">상품명</option>
-                    <option value="prodCode">상품코드</option>
-                    <option value="make">제조사</option>
-                    <option value="seller">판매자</option>                                    
-                </select>
-                <input type="text" name="search">
+            	<form action="/Java1_Kmarket1/admin/product/list.do" method="get">
+	                <select name="type">
+	                    <option value="prodName">상품명</option>
+	                    <option value="prodCode">상품코드</option>
+	                    <option value="make">제조사</option>
+	                    <option value="seller">판매자</option>                               
+	                </select>
+	                <input type="text" name="search">
+	                <button type="submit">검색</button>
+                </form>
             </div>
             <table>
                 <tr>
@@ -48,8 +51,8 @@
 	                    <td>${vo.seller}</td>
 	                    <td>${vo.hit}</td>
 	                    <td>
+	                    	<a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">[수정]</a>
 	                        <a href="/Java1_Kmarket1/admin/product/delete.do?prodNo=${vo.prodNo}">[삭제]</a>
-	                        <a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">[수정]</a>
 	                    </td>
 	                </tr>
                 </c:forEach>

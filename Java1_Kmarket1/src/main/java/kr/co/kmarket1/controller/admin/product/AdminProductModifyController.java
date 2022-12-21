@@ -13,14 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.kmarket1.dao.AdminProductListDao;
 import kr.co.kmarket1.dao.AdminProductRegisterDao;
 import kr.co.kmarket1.dao.ProductDao;
-import kr.co.kmarket1.service.AdminProductService;
 import kr.co.kmarket1.vo.ProductVO;
 
 
 @WebServlet("/admin/product/modify.do")
 public class AdminProductModifyController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	AdminProductService service = AdminProductService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
