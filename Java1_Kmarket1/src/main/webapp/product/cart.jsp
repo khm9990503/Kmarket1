@@ -2,22 +2,66 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp" />
 <script>
-	
 	$(function(){
-		
-		// 개별 체크박스
-		$('input[name=check]').change(function(){
-			if($(this).is(':checked')){
-				alert('check');
+		// 전체선택
+		$('.allCheck').on('click', function(){
+			var chk = $('.allCheck').prop('checked');
+			if(chk){
+				$('.check').prop('checked', true);
+			}else{
+				$('.check').prop('checked', false);
 			}
+		});
+		
+		// 전체 선택 후 개별 체크박스 해제시 전체선택 해제
+		$('.check').click(function(){
+			$('.allCheck').prop('checked', false);
+		});
+		
+		// 선택 삭제
+		$('.btnDelete').click(function(){
 			
+			let chk_arr = [];
+			$("input[name=check]:checked").each(function(){
+				let chk = $(this).val();
+				chk_arr.push(chk);
+			})
+			//console.log(chk_arr);
+			let chks = chk_arr.toString();
+			let jsonData = {
+					"chks":chks
+			}
+			if(chk_arr.length == 0){
+				alert('삭제할 상품을 선택해주세요.');
+			}
+			else{
+				var check = confirm('정말 삭제하시겠습니까?');
 			
-			
+				$.ajax({
+					url: '/Java1_Kmarket1/product/cart.do',
+					method: 'post',
+					data: jsonData,
+					dataType:"json",
+					success: function(data){
+						if(data.result > 0){
+							location.reload();
+						}else{
+							return;
+						}
+					}
+				});
+			}
 		});
 		
 		
-		
-		
+		// 주문하기
+		$('.cart > form').submit(function(){
+			if(confirm('주문하기로 이동하시겠습니까?')){
+				return true;
+			}else{
+				return false;
+			}
+		});
 		
 	});
 </script>
@@ -32,7 +76,7 @@
         <form action="#">
             <table>
                 <tr>
-                    <th><input type="checkbox" name="all"></th>
+                    <th><input type="checkbox" name="allCheck" class="allCheck"></th>
                     <th>상품명</th>
                     <th>총수량</th>
                     <th>판매가</th>
@@ -44,7 +88,7 @@
                 <c:forEach var="cart" items="${carts}">
                 <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
                 <tr>
-                    <td><input type="checkbox" name="check"></td>
+                    <td><input type="checkbox" name="check" class="check" value="${cart.cartNo}"></td>
                     <td>
                         <article>
                             <a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}"><img src="${cart.thumb1}"></a>
@@ -68,7 +112,7 @@
                 </tr>
             </c:forEach>    
             </table>
-            <input type="button" name="del" value="선택삭제">
+            <input type="button" name="del" class="btnDelete" value="선택삭제">
             <div class="total">
                 <h2>전체합계</h2>
                 <table border="0">
@@ -97,7 +141,7 @@
                         <td>26,000</td>
                     </tr>
                 </table>
-                <input type="submit" name="btnOrder" value="주문하기">
+                <input type="submit" name="btnOrder" class="btnOrder" value="주문하기">
             </div>
         </form>
     </section>

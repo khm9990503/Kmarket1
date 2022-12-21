@@ -57,6 +57,9 @@ public class CartVO {
 	public void setCartNo(int cartNo) {
 		this.cartNo = cartNo;
 	}
+	public void setCartNo(String cartNo) {
+		this.cartNo = Integer.parseInt(cartNo);
+	}
 	public String getUid() {
 		return uid;
 	}

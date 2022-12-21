@@ -3,12 +3,12 @@
     <section class="order">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
-            <h1>주문결제</h1>
+            <h1>주문하기</h1>
             <p>
                 HOME >
                 <span>장바구니</span>
                  > 
-                 <strong>주문결제</strong>
+                 <strong>주문하기</strong>
             </p>
         </nav>
         <form action="#">
@@ -21,36 +21,6 @@
                     <th>소계</th>
                 </tr>
                 <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
-                <tr>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
                 <tr>
                     <td>
                         <article>

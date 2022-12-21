@@ -40,19 +40,38 @@ public class CartDao extends DBHelper{
 		}
 	}
 	
-	public void selectCart() {
+	public CartVO selectCart(String cartNo) {
+		
+		CartVO cart = null;
 		
 		try {
 			logger.info("selectCart start...");
 			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_CART);
+			psmt.setString(1, cartNo);
 			
+			rs = psmt.executeQuery();
 			
-			
+			if(rs.next()) {
+				cart = new CartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+			}
+			close();
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
+		return cart;
 	}
+	
 	public List<CartVO> selectCarts() {
 		
 		List<CartVO> carts = new ArrayList<>();
@@ -91,5 +110,18 @@ public class CartDao extends DBHelper{
 	}
 	
 	public void updateCart() {}
-	public void deleteCart() {}
+	public int deleteCartByChk(String chks) {
+		int result = 0;
+		try {
+			logger.info("deleteCartByChk start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("delete from `km_product_cart` where `cartNo`=?");
+			psmt.setString(1, chks);
+			result = psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 }
