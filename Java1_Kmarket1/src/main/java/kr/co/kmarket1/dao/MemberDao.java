@@ -48,9 +48,10 @@ public class MemberDao extends DBHelper{
 				vo.setManager(rs.getString(18));
 				vo.setManagerHp(rs.getString(19));
 				vo.setFax(rs.getString(20));
-				vo.setWdate(rs.getString(21));
-				vo.setRdate(rs.getString(22));
-				vo.setLocationTerms(rs.getInt(23));
+				vo.setRegip(rs.getString(21));
+				vo.setWdate(rs.getString(22));
+				vo.setRdate(rs.getString(23));
+				vo.setLocationTerms(rs.getInt(24));
 			}
 			close();
 		} catch (Exception e) {

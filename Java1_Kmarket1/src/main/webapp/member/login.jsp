@@ -54,8 +54,11 @@
                                 <td>
                                     <input type="password" name="pass" id="password" placeholder="비밀번호 입력" onkeyup="checkCapsLock(event)">
                                     <i class="fa fa-eye fa-lg" id="eye"></i>
-                                    <p id="capsLock"></p>
                                 </td>
+                            </tr>
+                            <tr>
+                            	<td></td>
+                            	<td><p id="capsLock"></p></td>
                             </tr>
                         </tbody>
                     </table>
