@@ -21,38 +21,45 @@
 		// 선택 삭제
 		$('.btnDelete').click(function(){
 			
-			let chk_arr = [];
-			$("input[name=check]:checked").each(function(){
+			var chk_arr = new Array();
+			
+			$(".check:checked").each(function(){
 				let chk = $(this).val();
 				chk_arr.push(chk);
 			})
-			//console.log(chk_arr);
+			console.log(chk_arr);
+			
 			let chks = chk_arr.toString();
+			console.log(chks);
+			
 			let jsonData = {
 					"chks":chks
 			}
-			if(chk_arr.length == 0){
+			if(chks.length < 1){
 				alert('삭제할 상품을 선택해주세요.');
 			}
 			else{
 				var check = confirm('정말 삭제하시겠습니까?');
 			
-				$.ajax({
-					url: '/Java1_Kmarket1/product/cart.do',
-					method: 'post',
-					data: jsonData,
-					dataType:"json",
-					success: function(data){
-						if(data.result > 0){
-							location.reload();
-						}else{
-							return;
+				if(check){
+					$.ajax({
+						url: '/Java1_Kmarket1/product/cart.do',
+						method: 'post',
+						data: jsonData,
+						dataType:"json",
+						success: function(data){
+							if(data.result > 0){
+								location.reload();
+							}else{
+								return;
+							}
 						}
-					}
-				});
+					});
+				}else{
+					return;
+				}
 			}
 		});
-		
 		
 		// 주문하기
 		$('.cart > form').submit(function(){
@@ -86,6 +93,7 @@
                     <th>소계</th>
                 </tr>
                 <c:forEach var="cart" items="${carts}">
+                <c:if test="${sessUser.getUid().equals(cart.uid)}">
                 <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
                 <tr>
                     <td><input type="checkbox" name="check" class="check" value="${cart.cartNo}"></td>
@@ -110,6 +118,7 @@
                     </c:if>
                     <td>${cart.total}</td>
                 </tr>
+            </c:if>
             </c:forEach>    
             </table>
             <input type="button" name="del" class="btnDelete" value="선택삭제">
