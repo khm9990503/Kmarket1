@@ -133,7 +133,7 @@ $(function() {
                         </c:when>
                         <c:otherwise>
                         <td>
-                        	${product.price*(product.discount/100)}
+                        	${Math.round(product.price*(product.discount/100))}
                         </td>
                         </c:otherwise>
                         </c:choose>
@@ -152,7 +152,7 @@ $(function() {
                         </c:when>
                         <c:otherwise>
                         <td>
-                        	${product.price*(product.discount/100)}
+                        	${Math.round(product.price*(product.discount/100))}
                         </td>
                         </c:otherwise>
                         </c:choose>
