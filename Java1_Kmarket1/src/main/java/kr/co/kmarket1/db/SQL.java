@@ -118,6 +118,9 @@ public class SQL {
 	public static final String SELECT_COUNT_TOTAL_REVIEW = "SELECT COUNT(`revNo`) FROM `km_product_review` where `prodNo`=? ";
 
 	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodNo`=?";
+
+	public static final String SELECT_PRODUCTS = "select * from `km_product` where `prodNo` in (?)";
+
 	
 	// product - 상품정렬
 	public static final String SELECT_PRODUCTS_BY_SOLD = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
