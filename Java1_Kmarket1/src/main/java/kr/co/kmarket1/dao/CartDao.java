@@ -71,15 +71,55 @@ public class CartDao extends DBHelper{
 		}
 		return cart;
 	}
-	
-	public List<CartVO> selectCarts() {
+	// uid로 장바구니 목록 불러오기
+	public List<CartVO> selectCartsByUid(String uid) {
 		
 		List<CartVO> carts = new ArrayList<>();
 		
 		try {
-			logger.info("selectCarts start...");
+			logger.info("selectCartsByUid start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_CARTS);
+			psmt = conn.prepareStatement(SQL.SELECT_CARTS_BY_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CartVO cart = new CartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(11));
+				cart.setThumb1(rs.getString(12));
+				cart.setDescript(rs.getString(13));
+				cart.setProdCate1(rs.getInt(14));
+				cart.setProdCate2(rs.getInt(15));
+				
+				carts.add(cart);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return carts;
+	}
+	// 장바구니 번호로 불러오기
+	public List<CartVO> selectCartsByCartNo(String cartNo) {
+		
+		List<CartVO> carts = new ArrayList<>();
+		
+		try {
+			logger.info("selectCartsByCartNo start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` FROM `km_product_cart` AS a "
+					+"JOIN `km_product` as b ON a.prodNo = b.prodNo where `cartNo` in ("+cartNo+")");
+			//psmt.setString(1, cartNo);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
