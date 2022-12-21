@@ -6,7 +6,9 @@
         <nav>
             <h3>상품목록</h3>
             <p>
-                HOME > 상품관리 > <strong>상품목록</strong>
+            	<a href="/Java1_Kmarket1/admin/index.do">HOME</a>>
+            	<a href="/Java1_Kmarket1/admin/product/list.do">상품관리</a>>
+            	<a href=""><strong>상품목록</strong></a>
             </p>
         </nav>
         <!-- 상품목록 컨텐츠 -->
@@ -40,10 +42,9 @@
                 <c:forEach items="${products}" var="vo">
 	                <tr>
 	                    <td><input type="checkbox" name="상품코드"/></td>
-	                    <td><img src="../../img/sample_thumb.jpg" class="thumb"></td>
-<%-- 	                    <td>${vo.thumb1}</td> --%>
-	                    <td>${vo.prodNo}</td>
-	                    <td>${vo.prodName}</td>
+	                    <td><img src="${vo.thumb1}" class="thumb"></td>
+	                    <td><a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">${vo.prodNo}</a></td>
+	                    <td><a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">${vo.prodName}</a> </td>
 	                    <td>${vo.price}</td>
 	                    <td>${vo.discount}</td>
 	                    <td>${vo.point}</td>
