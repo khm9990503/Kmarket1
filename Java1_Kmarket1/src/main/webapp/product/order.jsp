@@ -19,12 +19,12 @@ $(function() {
     <section class="order">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
-            <h1>주문결제</h1>
+            <h1>주문하기</h1>
             <p>
                 HOME >
                 <span>장바구니</span>
                  > 
-                 <strong>주문결제</strong>
+                 <strong>주문하기</strong>
             </p>
         </nav>
         <form action="#">
@@ -66,6 +66,7 @@ $(function() {
 		                </c:forEach>
                 	</c:otherwise>
                 </c:choose>
+
             </table>
             <div class="final">
                 <h2>최종결제 정보</h2>

@@ -118,7 +118,9 @@ public class SQL {
 	public static final String SELECT_COUNT_TOTAL_REVIEW = "SELECT COUNT(`revNo`) FROM `km_product_review` where `prodNo`=? ";
 
 	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodNo`=?";
+
 	public static final String SELECT_PRODUCTS = "select * from `km_product` where `prodNo` in (?)";
+
 	
 	// product - 상품정렬
 	public static final String SELECT_PRODUCTS_BY_SOLD = "SELECT * FROM `km_product` WHERE `prodCate1`=? AND `prodCate2`=? "
@@ -161,6 +163,19 @@ public class SQL {
 	public static final String SELECT_CARTS_DELIVERY = "SELECT SUM(`delivery`) FROM `km_product_cart`";
 	public static final String SELECT_CARTS_TOTAL = "SELECT SUM(`total`) FROM `km_product_cart`";
 	public static final String SELECT_CARTS_POINT = "SELECT SUM(`point`) FROM `km_product_cart`";
+	
+	public static final String SELECT_CART = "select * from `km_product_cart` where `cartNo`=?";
+	
+	// product - order(item)
+	public static final String INSERT_ORDERITEM = "insert into `km_product_order_item` set "
+												+ "`ordNo`=?, "
+												+ "`prodNo`=?, "
+												+ "`count`=?, "
+												+ "`price`=?, "
+												+ "`discount`=?, "
+												+ "`point`=?, "
+												+ "`delivery`=?, "
+												+ "`total`=?";
 	
 	// ARTICLE
 	public static final String INSERT_ARTICLE 	= "insert into `km_article` set "
