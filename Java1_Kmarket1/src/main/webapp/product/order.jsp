@@ -1,5 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="./_header.jsp" />
+<script>
+$(function() {
+	let prc_arr = [];
+	let dc_arr = [];
+	let deli_arr = [];
+	let tot_arr = [];
+	$('.prc').each(function() {
+		let prc = parseInt($(this).text());
+		prc_arr.push(prc);
+	});
+	
+});
+</script>
     <section class="order">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
@@ -14,69 +30,57 @@
         <form action="#">
             <table>
                 <tr>
-                    <th>상품명</th>
+                	<th><input type="checkbox" name="all"></th>
+                    <th style="width: 70%">상품명</th>
                     <th>총수량</th>
                     <th>판매가</th>
+                    <th>할인</th>
+                    <th>포인트</th>
                     <th>배송비</th>
-                    <th>소계</th>
+                    <th>총합</th>
                 </tr>
-                <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
-                <tr>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
+                <c:choose>
+                	<c:when test="${products.size() == 0}">
+                		<tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
+                	</c:when>
+                	<c:otherwise>
+                		<c:forEach var="product" items="${products}">
+                		<tr>
+		                	<td><input type="checkbox" name="check" value="${product.prodNo}"></td>
+		                    <td>
+		                        <article>
+		                            <a href="/Java1_Kmarket1/product/view.do"><img src="https://via.placeholder.com/80x80" alt></a>
+		                            <div>
+		                                <h2><a href="/Java1_Kmarket1/product/view.do">${product.prodName}</a></h2>
+		                                <p>${product.descript}</p>
+		                            </div>
+		                        </article>
+		                    </td>
+		                    <td>${count}</td>
+		                    <td class="prc">${product.price}</td>
+		                    <td class="dc">${product.discount}%</td>
+		                    <td>${product.point}</td>
+		                    <td class="deli">${product.delivery==0?'무료배송':product.delivery}</td>
+		                    <td class="tot">${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
+		                </tr>
+		                </c:forEach>
+                	</c:otherwise>
+                </c:choose>
             </table>
             <div class="final">
                 <h2>최종결제 정보</h2>
                 <table border="0">
                     <tr>
                         <td>총</td>
-                        <td>2 건</td>
+                        <td>${products.size()} 건</td>
                     </tr>
                     <tr>
                         <td>상품금액</td>
-                        <td>27,000</td>
+                        <td>
+                        	<c:forEach var="prd" items="${products}">
+								${prc=0+prd.price}                        	
+                        	</c:forEach>
+                        </td>
                     </tr>
                     <tr>
                         <td>할인금액</td>

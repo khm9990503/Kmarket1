@@ -281,6 +281,7 @@ public class ArticleDao extends DBHelper{
 		}
 		return result;
 	}
+	// 게시물 수정
 	public void updateArticle(ArticleVO vo) {
 		try {
 			logger.info("updateArticle start...");
@@ -296,6 +297,20 @@ public class ArticleDao extends DBHelper{
 			logger.error(e.getMessage());
 		}
 	}
+	// 조회수 업데이트
+	public void updateArticleHit(String no) {
+		logger.info("updateArticleHit start...");
+		try{
+			conn = getConnection();
+			psmt = conn.prepareStatement("update `km_article` set `hit` = `hit` + 1 where `no`=?");
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+	}
+	// 게시물 삭제
 	public void deleteArticle(String no) {
 		try {
 			logger.info("deleteArticle start...");
@@ -309,6 +324,7 @@ public class ArticleDao extends DBHelper{
 			logger.error(e.getMessage());
 		}
 	}
+	// 게시물 선택 삭제
 	public int deleteArticleByChk(String chks) {
 		int result = 0;
 		try {

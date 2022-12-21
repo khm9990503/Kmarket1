@@ -37,8 +37,12 @@ public class CSViewController extends HttpServlet{
 		
 		List<Cate2VO> artiCate2s = CateDao.getInstance().selectArtiCates_2();
 		
-		ArticleVO article = ArticleDao.getInstance().selectArticle(no);
-		ArticleVO reply = ArticleDao.getInstance().selectReply(no);
+		ArticleDao ad = ArticleDao.getInstance();
+		
+		// 게시글 가져오기
+		ArticleVO article = ad.selectArticle(no);
+		// 답변 가져오기
+		ArticleVO reply = ad.selectReply(no);
 		
 		req.setAttribute("artiCate2s", artiCate2s);
 		req.setAttribute("article", article);

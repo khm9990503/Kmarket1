@@ -65,7 +65,9 @@ $(function(){
 			}
 		});
 	});
+	// 선택삭제 버튼 이벤트
 	$('.btnDel').click(function(){
+		// 체크가 없으면 실행 안함
 		let isCheck = $('input[name=select]').is(":checked");
 		if(!isCheck){
 			alert("삭제할 게시물을 선택해주세요.");
@@ -238,7 +240,14 @@ $(function(){
     			</c:if>
     		</c:forEach>
     		<td><a href="/Java1_Kmarket1/admin/cs/view.do?no=${arti.no}&group=${group}">${arti.title}</a></td>
+    		<c:choose>
+    		<c:when test="${group.equals('notice') || group.equals('faq')}">
     		<td>${arti.hit}</td>
+    		</c:when>
+    		<c:when test="${group.equals('qna')}">
+    		<td>${arti.uid}***</td>
+    		</c:when>
+    		</c:choose>
     		<td>${arti.rdate}</td>
     		<c:choose>
     		<c:when test="${group.equals('notice') || group.equals('faq')}">
