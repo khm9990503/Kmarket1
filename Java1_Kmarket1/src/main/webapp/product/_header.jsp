@@ -60,18 +60,17 @@
             <div class="menu">
                 <div>
                     <ul>
-                        <li><a href="#">히트상품</a></li>
-                        <li><a href="#">추천상품</a></li>
-                        <li><a href="#">최신상품</a></li>
-                        <li><a href="#">인기상품</a></li>
-                        <li><a href="#">할인상품</a></li>
+                        <li><a href="/Java1_Kmarket1/index.do#hit">히트상품</a></li>
+                        <li><a href="/Java1_Kmarket1/index.do#recommend">추천상품</a></li>
+                        <li><a href="/Java1_Kmarket1/index.do#new">최신상품</a></li>
+                        <li><a href="/Java1_Kmarket1/index.do#hit">인기상품</a></li>
+                        <li><a href="/Java1_Kmarket1/index.do#discount">할인상품</a></li>
                     </ul>
                     <ul>
-                        <li><a href="#">쿠폰존</a></li>
-                        <li><a href="#">사용후기</a></li>
-                        <li><a href="#">개인결제</a></li>
-                        <li><a href="#">고객센터</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="/Java1_Kmarket1/cs/notice/list.do">공지사항</a></li>
+                        <li><a href="/Java1_Kmarket1/cs/faq/list.do">자주묻는질문</a></li>
+                        <li><a href="/Java1_Kmarket1/cs/qna/list.do">문의하기</a></li>
+                        <li><a href="/Java1_Kmarket1/cs/index.do">고객센터</a></li>
                     </ul>
                 </div>
             </div>

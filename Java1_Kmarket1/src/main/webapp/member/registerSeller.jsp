@@ -101,12 +101,10 @@
                            <span class="msgTel">&nbsp;&nbsp;- 표시 포함, 지역번호 포함, 예) 02-234-1234</span>
                        </td>
                    </tr>
-                   <tr>
-                       <th>
-                           <span class="essential">*</span>팩스번호
-                       </th>
+                   <tr class="fax">
+                       <th>팩스번호</th>
                        <td>
-                           <input type="text" name="kms_fax" placeholder="팩스번호 입력" required>
+                           <input type="text" name="kms_fax" placeholder="팩스번호 입력">
                            <span class="msgFax">&nbsp;&nbsp;- 표시 포함, 지역번호 포함, 예) 02-234-1234</span>
                        </td>
                    </tr>
@@ -119,17 +117,19 @@
                        </td>
                    </tr>
                    <tr class="addr">
-                       <th>회사주소</th>
+                       <th>
+                       		<span class="essential">*</span>회사주소
+                       </th>
                        <td>
                        <div>
-                           <input type="text" name="zip" id="zip" placeholder="우편번호를 검색하세요." readonly/>
+                           <input type="text" name="zip" id="zip" placeholder="우편번호를 검색하세요." readonly required/>
            				<button type="button" id="btnZip" onclick="postcode()">우편번호 찾기</button>
                          </div>
                          <div>
-                            <input type="text" name="addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly/>
+                            <input type="text" name="addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly required/>
                          </div>
                          <div>
-                             <input type="text" name="addr2" id="addr2" size="50" placeholder="상세주소를 입력하세요.">
+                             <input type="text" name="addr2" id="addr2" size="50" placeholder="상세주소를 입력하세요." required>
                          </div>
                    	   </td>
                     </tr>

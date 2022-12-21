@@ -175,7 +175,7 @@
                     </div>
                 </section>
                 <!--히트상품-->
-                <section class="hit">
+                <section class="hit" id="hit">
                     <h3>
                         <span>히트상품</span>
                     </h3>
@@ -218,7 +218,7 @@
                     </c:forEach>
                 </section>
                 <!--추천상품-->
-                <section class="recommend">
+                <section class="recommend" id="recommend">
                     <h3>
                         <span>추천상품</span>
                     </h3>
@@ -261,7 +261,7 @@
                     </c:forEach>
                 </section>
                 <!--최신상품-->
-                <section class="new">
+                <section class="new" id="new">
                     <h3>
                         <span>최신상품</span>
                     </h3>
@@ -304,7 +304,7 @@
                     </c:forEach>
                 </section>
                 <!--할인상품-->
-                <section class="discount">
+                <section class="discount" id="discount">
                     <h3>
                         <span>할인상품</span>
                     </h3>
