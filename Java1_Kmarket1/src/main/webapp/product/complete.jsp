@@ -1,5 +1,57 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="./_header.jsp" />
+<script type="text/javascript">
+$(function() {
+	myStorage = window.sessionStorage;
+	let thm = myStorage.getItem("thm_arr");
+	let prdN = myStorage.getItem("prdN_arr");
+	let dsc = myStorage.getItem("dsc_arr");
+	let cnt = myStorage.getItem("cnt_arr");
+	let prc = myStorage.getItem("prc_arr");
+	let dc = myStorage.getItem("dc_arr");
+	let pt = myStorage.getItem("pt_arr");
+	let deli = myStorage.getItem("deli_arr");
+	let tot = myStorage.getItem("tot_arr");
+	let prodNo = myStorage.getItem("prodNo_arr");
+	let cate1 = myStorage.getItem("cate1_arr");
+	let cate2 = myStorage.getItem("cate2_arr");
+	
+	let thms = thm.split(',');
+	let prdNs = prdN.split(',');
+	let dscs = dsc.split(',');
+	let cnts = cnt.split(',');
+	let prcs = prc.split(',');
+	let dcs = dc.split(',');
+	let pts = pt.split(',');
+	let delis = deli.split(',');
+	let tots = tot.split(',');
+	let prodNos = prodNo.split(',');
+	let cate1s = cate1.split(',');
+	let cate2s = cate2.split(',');
+	
+	
+	for(let i = 0; i<tots.length; i++){
+		let tag = "<tr>";
+            tag += "<td>";
+           	tag += "<article>";
+       		tag += "<img src='"+thms[i]+"'>";
+       		tag += "<div>";
+      		tag += "<h2><a href='/Java1_Kmarket1/product/view.do?prodCate1="+cate1s[i]+"&prodCate2="+cate2s[i]+"&prodNo="+prodNo[i]+"'>"+prdNs[i]+"</a></h2>";
+      		tag += "<p>"+dscs[i]+"</p>";
+      		tag += "</div>";
+   			tag += "</article>";
+ 			tag += "</td>";
+			tag += "<td>"+prcs[i]+"원</td>";
+			tag += "<td>"+dcs[i]+"</td>";
+			tag += "<td>"+cnts[i]+"</td>";
+			tag += "<td>"+tots[i]+"</td>";
+			tag += "</tr>";
+		$('.total').before(tag);
+	}
+	
+});
+</script>
     <section class="complete">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
@@ -25,52 +77,7 @@
                     <th>수량</th>
                     <th>주문금액</th>
                 </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <img src="https://via.placeholder.com/80x80" alt="">
-                            <div>
-                                <h2><a href="#">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>17,000원</td>
-                    <td>1,000원</td>
-                    <td>1</td>
-                    <td>16,000원</td>
-                </tr>
 
-                <tr>
-                    <td>
-                        <article>
-                            <img src="https://via.placeholder.com/80x80" alt="">
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>17,000원</td>
-                    <td>1,000원</td>
-                    <td>1</td>
-                    <td>16,000원</td>
-                </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <img src="https://via.placeholder.com/80x80" alt="">
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>17,000원</td>
-                    <td>1,000원</td>
-                    <td>1</td>
-                    <td>16,000원</td>
-                </tr>
                 <tr class="total">
                     <td colspan="4"></td>
                     <td>

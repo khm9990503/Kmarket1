@@ -84,8 +84,8 @@
                         <img src="/Java1_Kmarket1/img/header_logo.png" alt="로고">
                     </a>
                     <div class="head-search">
-                        <form action="">
-                            <input type="text" name="" id="">
+                        <form action="#">
+                            <input type="text" name="keyword">
                             <button>
                                 <img src="/Java1_Kmarket1/img/image__header-search.png" alt="검색돋보기">
                             </button>

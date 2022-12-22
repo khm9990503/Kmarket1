@@ -51,10 +51,14 @@
                     <a href="/Java1_Kmarket1/index.do">
                         <img src="/Java1_Kmarket1/product/img/header_logo.png" alt="로고">
                     </a>
-                    <form action="#">
-                        <input type="text" name="keyword">
-                        <button><i class="fa fa-search"></i></button>
-                    </form>
+                    <div class="head-search">
+                        <form action="#">
+                            <input type="text" name="keyword">
+                            <button>
+                                <img src="/Java1_Kmarket1/img/image__header-search.png" alt="검색돋보기">
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="menu">
