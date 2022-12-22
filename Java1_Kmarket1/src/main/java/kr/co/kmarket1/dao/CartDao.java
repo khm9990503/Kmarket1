@@ -149,14 +149,47 @@ public class CartDao extends DBHelper{
 		return carts;
 	}
 	
+	// 장바구니에서 선택한 상품
+	public List<CartVO> selectCartByChk(String chks) {
+		
+		List<CartVO> carts = new ArrayList<>();
+		try {
+			logger.info("selectCartByChk start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_product_cart` where `cartNo` in ("+chks+")");
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CartVO cart = new CartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				
+				carts.add(cart);
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return carts;
+	}
+	
 	public void updateCart() {}
 	public int deleteCartByChk(String chks) {
 		int result = 0;
 		try {
 			logger.info("deleteCartByChk start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement("delete from `km_product_cart` where `cartNo`=?");
-			psmt.setString(1, chks);
+			psmt = conn.prepareStatement("delete from `km_product_cart` where `cartNo` in ("+chks+")");
+			//psmt.setString(1, chks);
 			result = psmt.executeUpdate();
 			close();
 		}catch (Exception e) {

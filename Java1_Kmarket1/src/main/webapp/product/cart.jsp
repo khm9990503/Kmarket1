@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp" />
 <script>
+	
 	$(function(){
+		
 		// 전체선택
 		$('.allCheck').on('click', function(){
 			var chk = $('.allCheck').prop('checked');
@@ -59,9 +61,53 @@
 				}else{
 					return;
 				}
-
 		});
-	
+		
+		// 총 합계
+		$('.allCheck, .check').click(function(){
+			
+			var totalCount = 0;
+			var totalPrice = 0;
+			var totalDiscount = 0;
+			var totalDelivery = 0;
+			var totalPoint = 0;
+			var itemSum = 0;
+			
+			$('.check').each(function(){
+				if($(this).is(':checked') == true){
+					var totalcount = parseInt($(this).parents('tr').find('input[name=count]').val());
+					totalCount = totalCount + totalcount;
+				}
+				if($(this).is(':checked') == true){
+					var totalprice = parseInt($(this).parents('tr').find('input[name=price]').val());
+					totalPrice = totalPrice + totalprice;
+				}
+				if($(this).is(':checked') == true){
+					var totaldiscount = parseInt($(this).parents('tr').find('input[name=discount]').val());
+					totalDiscount = totalDiscount + totaldiscount;
+				}
+				if($(this).is(':checked') == true){
+					var totaldelivery = parseInt($(this).parents('tr').find('input[name=delivery]').val());
+					totalDelivery = totalDelivery + totaldelivery;
+				}
+				if($(this).is(':checked') == true){
+					var totalpoint = parseInt($(this).parents('tr').find('input[name=point]').val());
+					totalPoint = totalPoint + totalpoint;
+				}
+				if($(this).is(':checked') == true){
+					var total = parseInt($(this).parents('tr').find('input[name=total]').val());
+					itemSum = itemSum + total;
+				}
+				
+			});
+		$('.totalCount').text(totalCount);
+		$('.totalPrice').text(totalPrice);			
+		$('.totalDiscount').text('-'+totalDiscount);			
+		$('.totalDelivery').text(totalDelivery);			
+		$('.totalPoint').text(totalPoint);			
+		$('.itemSum').text(itemSum+'원');			
+			
+		});
 		
 		// 주문하기
 		$('.btnOrder').click(function(e){
@@ -84,7 +130,6 @@
 				return false;
 			}
 		});
-		
 	});
 </script>
    <section class="cart">
@@ -107,13 +152,18 @@
                     <th>배송비</th>
                     <th>소계</th>
                 </tr>
-
-                <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
+                
                 <c:forEach var="cart" items="${carts}">
                 <tr>
                 	<td>
 	                	<input type="checkbox" name="check" class="check" value="${cart.cartNo}">
 	                	<input type="hidden" name="prodNo" value="${cart.prodNo}">
+	                	<input type="hidden" name="count" value="${cart.count}">
+	                	<input type="hidden" name="price" value="${cart.price}">
+	                	<input type="hidden" name="discount" value="${Math.round(cart.price*(cart.discount/100))}">
+	                	<input type="hidden" name="delivery" value="${cart.delivery}">
+	                	<input type="hidden" name="point" value="${cart.point}">
+	                	<input type="hidden" name="total" value="${cart.total}">
                 	</td>
                     <td>
                         <article>
@@ -136,6 +186,7 @@
                     </c:if>
                     <td>${cart.total}</td>
                 </tr>
+                <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
             </c:forEach>    
             </table>
             <input type="button" name="del" class="btnDelete" value="선택삭제">
@@ -144,27 +195,27 @@
                 <table border="0">
                     <tr>
                         <td>상품수</td>
-                        <td class="count">1</td>
+                        <td class="totalCount">0</td>
                     </tr>
                     <tr>
                         <td>상품금액</td>
-                        <td>27,000</td>
+                        <td class="totalPrice">0</td>
                     </tr>
                     <tr>
                         <td>할인금액</td>
-                        <td>-1,000</td>
+                        <td class="totalDiscount">0</td>
                     </tr>
                     <tr>
                         <td>배송비</td>
-                        <td>0</td>
+                        <td class="totalDelivery">0</td>
                     </tr>
                     <tr>
                         <td>포인트</td>
-                        <td>260</td>
+                        <td class="totalPoint">0</td>
                     </tr>
                     <tr>
                         <td>전체주문금액</td>
-                        <td>26,000</td>
+                        <td class="itemSum">0원</td>
                     </tr>
                 </table>
                 <input type="submit" name="btnOrder" class="btnOrder" value="주문하기">

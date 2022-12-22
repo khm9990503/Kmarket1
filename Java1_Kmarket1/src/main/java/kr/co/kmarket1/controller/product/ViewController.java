@@ -94,6 +94,7 @@ public class ViewController extends HttpServlet {
 		String discount = req.getParameter("discount");
 		String point = req.getParameter("point");
 		String delivery = req.getParameter("delivery");
+		String thumb1 = req.getParameter("thumb1");
 		String total = req.getParameter("total");
 		
 		CartVO cart = new CartVO();
@@ -104,6 +105,7 @@ public class ViewController extends HttpServlet {
 		cart.setDiscount(discount);
 		cart.setPoint(point);
 		cart.setDelivery(delivery);
+		cart.setThumb1(thumb1);
 		cart.setTotal(total);
 
 		CartDao.getInstance().insertCart(cart);

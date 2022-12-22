@@ -434,25 +434,25 @@ p.alert {
 	width: 60px;
 }
 #csList table td:nth-child(2){
-	width: auto;
+	width: 90px;
 }
 #csList table td:nth-child(3){
-	width: auto;
+	width: 180px;
 }
 #csList table td:nth-child(4){
-	width: auto;
+	width: 350px;
 }
 #csList table td:nth-child(5){
-	width: auto;
+	width: 300px;
 }
 #csList table td:nth-child(6){
-	width: auto;
+	width: 160px;
 }
 #csList table td:nth-child(7){
-	width: auto;
+	width: 160px;
 }
 #csList table td:nth-child(8){
-	width: auto;
+	width: 160px;
 }
 #csList .page {
     width: 100%;
