@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
@@ -19,6 +20,7 @@ import kr.co.kmarket1.dao.OrderItemDao;
 import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
+import kr.co.kmarket1.vo.MemberVO;
 import kr.co.kmarket1.vo.OrderItemVO;
 
 @WebServlet("/product/cart.do")
@@ -31,7 +33,26 @@ public class CartController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+
+	  /*
+		// 본인 아이디 장바구니만
+		HttpSession session = req.getSession();
+		MemberVO sessUser = (MemberVO) session.getAttribute("sessUser");
+		
+		if(sessUser == null){
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+		    out.println("<script>alert('먼저 로그인을 하세요.'); location.href='/Java1_Kmarket1/member/login.do' </script>");
+		    out.flush();
+			return;
+		}
+    */
+		// 세션에서 아이디 불러오기
+		HttpSession session = req.getSession();
+		MemberVO vo = (MemberVO) session.getAttribute("sessUser");
+		String uid = vo.getUid();
+
+		
 		// cate1,2 리스트 불러오기 - 구홍모 12/11
 		CateDao CD = CateDao.getInstance();
 		List<Cate1VO> cate1s = CD.selectCates_1();
@@ -46,7 +67,7 @@ public class CartController extends HttpServlet {
 		
 		// 장바구니 출력
 		CartDao Cartdao = CartDao.getInstance();
-		List<CartVO> carts = Cartdao.selectCarts();
+		List<CartVO> carts = Cartdao.selectCartsByUid(uid); // 해당 uid를 가진 회원의 장바구니 가져오기
 		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);

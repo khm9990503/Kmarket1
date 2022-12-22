@@ -21,43 +21,65 @@
 		// 선택 삭제
 		$('.btnDelete').click(function(){
 			
+			var chk_arr = new Array();
+			
+			$(".check:checked").each(function(){
+				let chk = $(this).val();
+				chk_arr.push(chk);
+			})
+			console.log(chk_arr);
+			
+			let chks = chk_arr.toString();
+			console.log(chks);
+			
+			let jsonData = {
+					"chks":chks
+			}
+			if(chks.length < 1){
+				alert('삭제할 상품을 선택해주세요.');
+				return false;
+			}
+
+			let isCheck = confirm('정말 삭제하시겠습니까?');
+			if(isCheck){
+				$.ajax({
+						url: '/Java1_Kmarket1/product/cart.do',
+						method: 'post',
+						data: jsonData,
+						dataType:"json",
+						success: function(data){
+							if(data.result > 0){
+								location.reload();
+							}else{
+								return;
+							}
+						}
+					});
+
+				}else{
+					return;
+				}
+
+		});
+	
+		
+		// 주문하기
+		$('.btnOrder').click(function(e){
+			e.preventDefault()
 			let chk_arr = [];
 			$("input[name=check]:checked").each(function(){
 				let chk = $(this).val();
 				chk_arr.push(chk);
 			})
-			//console.log(chk_arr);
-			let chks = chk_arr.toString();
-			let jsonData = {
-					"chks":chks
-			}
 			if(chk_arr.length == 0){
-				alert('삭제할 상품을 선택해주세요.');
+				alert('주문할 상품을 선택해주세요.');
+				return false;
 			}
-			else{
-				var check = confirm('정말 삭제하시겠습니까?');
+			let chks = chk_arr.toString();
 			
-				$.ajax({
-					url: '/Java1_Kmarket1/product/cart.do',
-					method: 'post',
-					data: jsonData,
-					dataType:"json",
-					success: function(data){
-						if(data.result > 0){
-							location.reload();
-						}else{
-							return;
-						}
-					}
-				});
-			}
-		});
-		
-		
-		// 주문하기
-		$('.cart > form').submit(function(){
-			if(confirm('주문하기로 이동하시겠습니까?')){
-				return true;
+			let isCheck = confirm('주문하기로 이동하시겠습니까?');
+			if(isCheck){
+				location.href = "/Java1_Kmarket1/product/order.do?cartNo="+chks;
 			}else{
 				return false;
 			}
@@ -76,7 +98,7 @@
         <form action="#">
             <table>
                 <tr>
-                    <th><input type="checkbox" name="allCheck" class="allCheck"></th>
+                	<th><input type="checkbox" name="allCheck" class="allCheck"></th>
                     <th>상품명</th>
                     <th>총수량</th>
                     <th>판매가</th>
@@ -85,10 +107,14 @@
                     <th>배송비</th>
                     <th>소계</th>
                 </tr>
-                <c:forEach var="cart" items="${carts}">
+
                 <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
+                <c:forEach var="cart" items="${carts}">
                 <tr>
-                    <td><input type="checkbox" name="check" class="check" value="${cart.cartNo}"></td>
+                	<td>
+	                	<input type="checkbox" name="check" class="check" value="${cart.cartNo}">
+	                	<input type="hidden" name="prodNo" value="${cart.prodNo}">
+                	</td>
                     <td>
                         <article>
                             <a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}"><img src="${cart.thumb1}"></a>

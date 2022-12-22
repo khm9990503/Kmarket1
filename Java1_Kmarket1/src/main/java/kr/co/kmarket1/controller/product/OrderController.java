@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket1.dao.CartDao;
 import kr.co.kmarket1.dao.CateDao;
 import kr.co.kmarket1.dao.ProductDao;
+import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
 import kr.co.kmarket1.vo.ProductVO;
@@ -35,13 +37,20 @@ public class OrderController extends HttpServlet {
 		req.setAttribute("cate2s", cate2s);
 		
 		// 상품번호 수신 - 구홍모 
+		String cartNo = req.getParameter("cartNo");
 		String prodNo = req.getParameter("prodNo");
 		String count = req.getParameter("count");
+		
+		List<CartVO> cartList = null;
+		ProductVO product = null;
 		if(prodNo == null) {
-			prodNo = "1000288, 1000290";
+			cartList = CartDao.getInstance().selectCartsByCartNo(cartNo);
+		}else {
+			product = ProductDao.getInstance().selectProduct(prodNo);
 		}
-		List<ProductVO> products = ProductDao.getInstance().selectProducts(prodNo);
-		req.setAttribute("products", products);
+		
+		req.setAttribute("cartList", cartList);
+		req.setAttribute("product", product);
 		req.setAttribute("count", count);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");

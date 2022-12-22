@@ -156,8 +156,10 @@ public class SQL {
 												+ "`total`=?, "
 												+ "`rdate`=NOW()";
 	// product - 장바구니 출력
-	public static final String SELECT_CARTS = "SELECT a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` FROM `km_product_cart` AS a "
-												+"JOIN `km_product` as b ON a.prodNo = b.prodNo";
+	public static final String SELECT_CARTS_BY_UID = "SELECT a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` FROM `km_product_cart` AS a "
+												+"JOIN `km_product` as b ON a.prodNo = b.prodNo where `uid`=?";
+	public static final String SELECT_CARTS_BY_CARTNO = "SELECT a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` FROM `km_product_cart` AS a "
+			+"JOIN `km_product` as b ON a.prodNo = b.prodNo where `cartNo` in (?)";
 	// product - 장바구니 전체합계(total)
 	public static final String SELECT_CARTS_COUNT = "SELECT SUM(`count`) FROM `km_product_cart`";
 	public static final String SELECT_CARTS_PRICE = "SELECT SUM(`price`) FROM `km_product_cart`";
@@ -166,7 +168,7 @@ public class SQL {
 	public static final String SELECT_CARTS_TOTAL = "SELECT SUM(`total`) FROM `km_product_cart`";
 	public static final String SELECT_CARTS_POINT = "SELECT SUM(`point`) FROM `km_product_cart`";
 	
-	public static final String SELECT_CART = "select * from `km_product_cart` where `cartNo`=?";
+	public static final String SELECT_CART = "select * from `km_product_cart` where `cartNo` in (?)";
 	
 	// product - order(item)
 	public static final String INSERT_ORDERITEM = "insert into `km_product_order_item` set "
