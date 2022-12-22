@@ -18,20 +18,21 @@ public class OrderItemDao extends DBHelper {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void selectOrderItem() {}
-	public void selectOrderItems() {}
+	public void selectOrderItems() {
+		
+	}
 	public void insertOrderItem(OrderItemVO item) {
 		try {
 			logger.info("insertOrderItem start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.INSERT_ORDERITEM);
-			psmt.setInt(1, item.getOrdNo());
-			psmt.setInt(2, item.getProdNo());
-			psmt.setInt(3, item.getCount());
-			psmt.setInt(4, item.getPrice());
-			psmt.setInt(5, item.getDiscount());
-			psmt.setInt(6, item.getPoint());
-			psmt.setInt(7, item.getDelivery());
-			psmt.setInt(8, item.getTotal());
+			psmt = conn.prepareStatement(SQL.INSERT_ORDER_ITEM);
+			psmt.setInt(1, item.getProdNo());
+			psmt.setInt(2, item.getCount());
+			psmt.setInt(3, item.getPrice());
+			psmt.setInt(4, item.getDiscount());
+			psmt.setInt(5, item.getPoint());
+			psmt.setInt(6, item.getDelivery());
+			psmt.setInt(7, item.getTotal());
 			psmt.executeUpdate();
 			close();
 		}catch (Exception e) {

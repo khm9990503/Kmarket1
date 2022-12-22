@@ -34,6 +34,7 @@ $(function() {
 			cartNo_arr.push(cart);
 		});
 		let cartNo = cartNo_arr.toString();
+		console.log(cartNo);
 		
 		// 상품번호 들고오기
 		let prodNo_arr = []; 
@@ -42,13 +43,14 @@ $(function() {
 			prodNo_arr.push(prodNo);
 		});
 		// 데이터 들고오기
+		let ordNo = $('input[name=ordNo]').val();
 		let recipName = $('input[name=orderer]').val();
 		let recipHp = $('input[name=hp]').val();
 		let recipZip = $('input[name=zip]').val();
 		let recipAddr1 = $('input[name=addr1]').val();
 		let recipAddr2 = $('input[name=addr2]').val();
 		let ordUid = $('input[name=uid]').val();
-		let ordCount = $('.ordCount').text();
+		let ordCount = parseInt($('.ordCount').text());
 		let ordPrice = parseInt($('.ordPrice').text());
 		let ordDiscount = parseInt($('.ordDiscount').text());
 		let ordDelivery = parseInt($('.ordDelivery').text());
@@ -158,17 +160,55 @@ $(function() {
 		$.ajax({
 			url:"/Java1_Kmarket1/product/order.do",
 			method:"post",
+			async: false,
 			data:jsonData,
 			dataType:"json",
 			success:function(data){
 				if(data.result > 0){
 					
 					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result;
+
 				}else{
 					alert("나중에 다시 시도해주세요.");
 				}
 			}
 		});
+		/*
+		let prodNo = $('input[name=prodNo]').val();
+		let thumb1 = $('input[name=thumb1]').val();
+		let prodName = $('input[name=prodName]').val();
+		let descript = $('input[name=descript]').val();
+		let price = $('input[name=price]').val();
+		let discount = $('input[name=discount]').val();
+		let count = $('input[name=count]').val();
+		let total = $('input[name=total]').val();
+		
+		let jsonData2 = {
+				"ordNo":ordNo,
+				"prodNo":prodNo,
+				"thumb1":thumb1,
+				"prodName":prodName,
+				"descript":descript,
+				"price":price,
+				"discount":discount,
+				"count":count,
+				"total":total
+		};
+		
+		$.ajax({
+			url:"/Java1_Kmarket1/product/order.do",
+			method:"post",
+			data: jsonData2,
+			dataType: 'json',
+			success:function(data){
+				if(data){
+					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+ordNo;
+				}else{
+					alert("나중에 다시 시도해주세요.");
+				}
+			}
+		});
+		*/
 		
 	});
 	
@@ -185,7 +225,7 @@ $(function() {
                  <strong>주문하기</strong>
             </p>
         </nav>
-        <form action="#">
+        <form action="#" id="frm" method="post">
         <input type="hidden" name="uid" value="${sessUser.uid}">
             <table>
                 <tr>
@@ -207,9 +247,20 @@ $(function() {
 		                        <article>
 		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}"><img class="thm" src="${product.thumb1}"></a>
 		                            <div>
+
 		                                <h2><a class="prdN" href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}">${product.prodName}</a></h2>
 		                                <p class="dsc">${product.descript}</p>
+
 		                                <input type="hidden" name="prodNo" value="${product.prodNo}">
+		                                <input type="hidden" name="thumb1" value="${product.thumb1}">
+		                                <input type="hidden" name="prodName" value="${product.prodName}">
+		                                <input type="hidden" name="descript" value="${product.descript}">
+		                                <input type="hidden" name="count" value="${product.count}">
+		                                <input type="hidden" name="price" value="${product.price}">
+		                                <input type="hidden" name="discount" value="${product.discount}">
+		                                <input type="hidden" name="point" value="${product.point}">
+		                                <input type="hidden" name="delivery" value="${product.delivery}">
+		                                <input type="hidden" name="total" value="${product.total}">
 		                            </div>
 		                        </article>
 		                    </td>

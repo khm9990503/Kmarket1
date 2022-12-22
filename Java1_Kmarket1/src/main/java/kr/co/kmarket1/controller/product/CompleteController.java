@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket1.dao.CateDao;
+import kr.co.kmarket1.dao.OrderDao;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
+import kr.co.kmarket1.vo.OrderVO;
 
 @WebServlet("/product/complete.do")
 public class CompleteController extends HttpServlet {
@@ -31,7 +33,12 @@ public class CompleteController extends HttpServlet {
 		List<Cate2VO> cate2s = CD.selectCates_2();
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
-				
+		
+		String ordNo = req.getParameter("ordNo");
+		
+		List<OrderVO> orders =  OrderDao.getInstance().selectOrder(ordNo);
+		req.setAttribute("orders", orders);		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/complete.jsp");
 		dispatcher.forward(req, resp);
 	}

@@ -165,8 +165,7 @@ public class SQL {
 	public static final String SELECT_CART = "select * from `km_product_cart` where `cartNo` in (?)";
 	
 	// product - order(item)
-	public static final String INSERT_ORDERITEM = "insert into `km_product_order_item` set "
-												+ "`ordNo`=?, "
+	public static final String INSERT_ORDER_ITEM = "insert into `km_product_order_item` set "
 												+ "`prodNo`=?, "
 												+ "`count`=?, "
 												+ "`price`=?, "

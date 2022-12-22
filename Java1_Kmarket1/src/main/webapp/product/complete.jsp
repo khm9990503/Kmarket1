@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="./_header.jsp" />
 <script type="text/javascript">
 $(function() {
@@ -79,51 +81,63 @@ $(function() {
                 </tr>
 
                 <tr class="total">
+                 
                     <td colspan="4"></td>
                     <td>
+                    
                         <table border="0">
+                        <c:forEach var="order" items="${orders}">
                             <tr>
                                 <td>총 상품금액</td>
-                                <td><span>34,000</span>원</td>
+                                <td><span>${order.ordPrice}</span>원</td>
                             </tr>
                             <tr>
                                 <td>총 할인금액</td>
-                                <td><span>-2,000</span>원</td>
+                                <td><span>-${order.ordDiscount}</span>원</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td><span>3,000</span>원</td>
+                                <td><span>${order.ordDelivery}</span>원</td>
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
-                                <td><span>-3,000</span>원</td>
+                                <td><span>-${order.usedPoint}</span>원</td>
                             </tr>
                             <tr>
                                 <td>총 결제금액</td>
-                                <td><span>35,000</span>원</td>
+                                <td><span>${order.ordTotPrice}</span>원</td>
                             </tr>
+                         </c:forEach>   
                         </table>
                     </td>
+                
                 </tr>
 
             </table>
-        </article>    
+        </article>
+        <c:forEach var="order" items="${orders}">    
         <article class="order">
             <h1>주문정보</h1>
             <table border="0">
+            
                 <tr>
                     <td>주문번호</td>
-                    <td>2008101324568</td>
+                    <td>${order.ordNo }</td>
                     <td rowspan="3">총 결제금액</td>
-                    <td rowspan="3"><span>35,000</span>원</td>
+                    <td rowspan="3"><span>${order.ordTotPrice}</span>원</td>
                 </tr>
                 <tr>
                     <td>결제방법</td>
-                    <td>신용카드</td>
+                    <c:if test="${order.ordPayment eq '1'}"><td>신용카드</td></c:if>
+                    <c:if test="${order.ordPayment eq '2'}"><td>체크카드</td></c:if>
+                    <c:if test="${order.ordPayment eq '3'}"><td>실시간 계좌이체</td></c:if>
+                    <c:if test="${order.ordPayment eq '4'}"><td>무통장입금</td></c:if>
+                    <c:if test="${order.ordPayment eq '5'}"><td>휴대폰결제</td></c:if>
+                    <c:if test="${order.ordPayment eq '6'}"><td>카카오페이</td></c:if>
                 </tr>
                 <tr>
                     <td>주문자/연락처</td>
-                    <td>홍길동/010-1234-1234</td>
+                    <td>${order.recipName} / ${order.recipHP}</td>
                 </tr>
             </table>
         </article>
@@ -133,24 +147,18 @@ $(function() {
             <table>
                 <tr>
                     <td>수취인</td>
-                    <td>홍길동</td>                    
-                    <td>주문자 정보</td>
-                    </tr>
+                    <td>${order.recipName}</td>                    
                     <tr>
                     <td>연락처</td>
-                    <td>010-1234-1234</td>
-                    <td rowspan="2">
-                        홍길동<br/>
-                        010-1234-1234
-                    </td>
-                    </tr>
+                    <td>${order.recipHP}</td>
                     <tr>
                     <td>배송지 주소</td>
-                    <td>부산광역시 강남구 대연동 123 10층</td>
+                    <td>${order.recipAddr1}</td>
                     </tr>
+            
             </table>
         </article>
-
+	</c:forEach>
         <!-- 경고 -->
         <article class="alert">
             <h1>꼭 알아두세요.</h1>

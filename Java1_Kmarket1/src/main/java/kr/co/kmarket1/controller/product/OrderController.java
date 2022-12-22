@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
@@ -21,6 +22,9 @@ import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
+
+import kr.co.kmarket1.vo.MemberVO;
+
 import kr.co.kmarket1.vo.OrderItemVO;
 import kr.co.kmarket1.vo.OrderVO;
 import kr.co.kmarket1.vo.ProductVO;
@@ -36,6 +40,11 @@ public class OrderController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		// 세션에서 아이디 불러오기
+		HttpSession session = req.getSession();
+		MemberVO vo = (MemberVO) session.getAttribute("sessUser");
+		String uid = vo.getUid();
+		
 		// cate1,2 리스트 불러오기 - 구홍모 12/11
 		CateDao CD = CateDao.getInstance();
 		List<Cate1VO> cate1s = CD.selectCates_1();
@@ -43,7 +52,7 @@ public class OrderController extends HttpServlet {
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
 		
-		// 상품번호 수신 - 구홍모 
+		// 상품번호 수신 - 구홍모 //
 		String cartNo = req.getParameter("cartNo");
 		String prodNo = req.getParameter("prodNo");
 		String count = req.getParameter("count");
@@ -117,5 +126,30 @@ public class OrderController extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData);
+		/*
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
+		String price = req.getParameter("price");
+		String discount = req.getParameter("discount");
+		String point = req.getParameter("point");
+		String delivery = req.getParameter("delivery");
+		String total = req.getParameter("total");
+		
+		OrderItemVO item = new OrderItemVO();
+		item.setProdNo(prodNo);
+		item.setCount(count);
+		item.setPrice(price);
+		item.setDiscount(discount);
+		item.setPoint(point);
+		item.setDelivery(delivery);
+		item.setTotal(total);
+		
+		OrderItemDao.getInstance().insertOrderItem(item);
+		JsonObject json2 = new JsonObject();
+		String jsonData2 = json2.toString();
+		
+		PrintWriter out2 = resp.getWriter();
+		out2.print(jsonData2);
+		*/
 	}
 }

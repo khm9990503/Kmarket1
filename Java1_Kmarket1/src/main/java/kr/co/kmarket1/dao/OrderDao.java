@@ -1,5 +1,8 @@
 package kr.co.kmarket1.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +20,42 @@ public class OrderDao extends DBHelper{
 	// 로거 생성
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void selectOrder() {}
+	public List<OrderVO> selectOrder(String ordNo) {
+		List<OrderVO> orders = new ArrayList<>();
+		try {
+			logger.info("selectOrder");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_product_order` where `ordNo`=?");
+			psmt.setString(1, ordNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				OrderVO order = new OrderVO();
+				order.setOrdNo(rs.getInt(1));
+				order.setOrdUid(rs.getString(2));
+				order.setOrdCount(rs.getInt(3));
+				order.setOrdPrice(rs.getInt(4));
+				order.setOrdDiscount(rs.getInt(5));
+				order.setOrdDelivery(rs.getInt(6));
+				order.setSavePoint(rs.getInt(7));
+				order.setUsedPoint(rs.getInt(8));
+				order.setOrdTotPrice(rs.getInt(9));
+				order.setRecipName(rs.getString(10));
+				order.setRecipHP(rs.getString(11));
+				order.setRecipZip(rs.getString(12));
+				order.setRecipAddr1(rs.getString(13));
+				order.setRecipAddr2(rs.getString(14));
+				order.setOrdPayment(rs.getString(15));
+				order.setOrdComplete(rs.getInt(16));
+				
+				orders.add(order);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return orders;
+	}
 	public void selectOrders() {}
 	public int insertOrder(OrderVO vo) {
 		int ordNo = 0;

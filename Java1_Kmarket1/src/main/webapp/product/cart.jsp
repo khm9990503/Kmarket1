@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp" />
 <script>
-	
 	$(function(){
 		
 		// 전체선택
@@ -41,7 +40,6 @@
 				alert('삭제할 상품을 선택해주세요.');
 				return false;
 			}
-
 			let isCheck = confirm('정말 삭제하시겠습니까?');
 			if(isCheck){
 				$.ajax({
@@ -57,7 +55,6 @@
 							}
 						}
 					});
-
 				}else{
 					return;
 				}
@@ -98,7 +95,6 @@
 					var total = parseInt($(this).parents('tr').find('input[name=total]').val());
 					itemSum = itemSum + total;
 				}
-				
 			});
 		$('.totalCount').text(totalCount);
 		$('.totalPrice').text(totalPrice);			
@@ -140,7 +136,7 @@
                 HOME > <strong>장바구니</strong>
             </p>
         </nav>
-        <form action="#">
+        <form action="/Java1_Kmarket1/product/cart.do" method="post" enctype="multipart/form-data"> 
             <table>
                 <tr>
                 	<th><input type="checkbox" name="allCheck" class="allCheck"></th>
