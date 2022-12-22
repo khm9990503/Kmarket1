@@ -40,6 +40,7 @@
                     <td>1</td>
                     <td>16,000원</td>
                 </tr>
+
                 <tr>
                     <td>
                         <article>
@@ -97,6 +98,7 @@
                         </table>
                     </td>
                 </tr>
+
             </table>
         </article>    
         <article class="order">
