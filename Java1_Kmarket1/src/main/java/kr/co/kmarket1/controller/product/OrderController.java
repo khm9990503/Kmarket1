@@ -21,6 +21,7 @@ import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
 import kr.co.kmarket1.vo.Cate2VO;
+import kr.co.kmarket1.vo.OrderItemVO;
 import kr.co.kmarket1.vo.OrderVO;
 import kr.co.kmarket1.vo.ProductVO;
 
@@ -106,6 +107,7 @@ public class OrderController extends HttpServlet {
 		int ordNo = OrderDao.getInstance().insertOrder(vo);
 		
 		if(ordNo > 0) {
+			
 			CartDao.getInstance().deleteCartByChk(cartNo);
 		}
 		
