@@ -53,7 +53,6 @@ public class CartController extends HttpServlet {
 		String prodCate2 = req.getParameter("prodCate2");
 		String prodNo = req.getParameter("prodNo");
 		String cartNo = req.getParameter("cartNo");
-		String cart = req.getParameter("cart");
 		
 		// 장바구니 출력
 		CartDao Cartdao = CartDao.getInstance();
@@ -88,27 +87,5 @@ public class CartController extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData);
-		
-		MultipartRequest mr = new MultipartRequest(req, "UTF-8");
-		
-		String cartNo = mr.getParameter("cartNo");
-		String uid = mr.getParameter("uid");
-		String prodNo = mr.getParameter("prodNo");
-		String count = mr.getParameter("count");
-		String price = mr.getParameter("price");
-		String discount = mr.getParameter("discount");
-		String point = mr.getParameter("point");
-		String delivery = mr.getParameter("delivery");
-		String total = mr.getParameter("total");
-		
-		CartDao Cartdao = CartDao.getInstance();
-		List<CartVO> carts = Cartdao.selectCartsByUid(uid);
-		
-		req.setAttribute("prodNo", prodNo);
-		req.setAttribute("cartNo", cartNo);
-		req.setAttribute("carts", carts);
-		
-		resp.sendRedirect("/Java1_Kmarket1/product/order.do?prodNo="+prodNo);
-		
 	}
 }

@@ -136,7 +136,7 @@
                 HOME > <strong>장바구니</strong>
             </p>
         </nav>
-        <form action="/Java1_Kmarket1/product/cart.do" method="post" enctype="multipart/form-data"> 
+        <form action="/Java1_Kmarket1/product/cart.do"> 
             <table>
                 <tr>
                 	<th><input type="checkbox" name="allCheck" class="allCheck"></th>

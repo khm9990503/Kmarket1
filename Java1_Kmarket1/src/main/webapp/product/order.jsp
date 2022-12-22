@@ -173,7 +173,7 @@ $(function() {
 				}
 			}
 		});
-		
+
 	});
 	
 });
@@ -189,7 +189,7 @@ $(function() {
                  <strong>주문하기</strong>
             </p>
         </nav>
-        <form action="#" id="frm" method="post">
+        <form action="#">
         <input type="hidden" name="uid" value="${sessUser.uid}">
             <table>
                 <tr>

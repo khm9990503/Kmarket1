@@ -126,6 +126,6 @@ public class OrderController extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData);
-		
+
 	}
 }
