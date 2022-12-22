@@ -29,8 +29,13 @@ $(function(){
 		let group = $('input[name=group]').val();
 		let cate = $('select[name=cate]').val();
 		let cate2 = $(this).val();
+		
 		location.href = "/Java1_Kmarket1/admin/cs/list.do?pg=1&group="+group+"&cate="+cate+"&cate2="+cate2;
-	})
+		
+	});
+	
+
+
 	// 전체 체크박스 클릭 이벤트
 	$('input[name=selectAll]').on("click",function(){
 		let isCheck = $(this).is(":checked");
@@ -110,6 +115,7 @@ $(function(){
 		let group = $('input[name=group]').val();
 		let cate = $(this).val();
 		location.href = "/Java1_Kmarket1/admin/cs/list.do?pg=1&group="+group+"&cate="+cate;
+	
 	});
 });
 </script>
@@ -135,29 +141,29 @@ $(function(){
 	    </nav>
     </c:when>
     </c:choose>
-    <select name="cate">
+    <select name="cate" id="cate">
     	<c:choose>
     	<c:when test="${group.equals('notice')}">
-    	<option value="0">유형선택</option>
-    	<option value="service">고객서비스</option>
-    	<option value="deal">안전거래</option>
-    	<option value="danger">위해상품</option>
-    	<option value="lucky">이벤트당첨</option>
+    	<option value="0" ${cate == '0'? 'selected="selected"' : '' } >유형선택</option>
+    	<option value="service" ${cate == 'service'? 'selected="selected"' : '' }>고객서비스</option>
+    	<option value="deal" ${cate == 'deal'? 'selected="selected"' : '' }>안전거래</option>
+    	<option value="danger" ${cate == 'danger'? 'selected="selected"' : '' }>위해상품</option>
+    	<option value="lucky" ${cate == 'lucky'? 'selected="selected"' : '' }>이벤트당첨</option>
     	</c:when>
     	<c:when test="${group.equals('qna') || group.equals('faq') }">
-    	<option value="0">1차유형</option>
-    	<option value="member">회원</option>
-    	<option value="event">쿠폰/이벤트</option>
-    	<option value="order">주문/결제</option>
-    	<option value="deli">배송</option>
-    	<option value="cancle">취소/반품/교환</option>
-    	<option value="trip">여행/항공/숙박</option>
-    	<option value="safe">안전거래</option>
+    	<option value="0" ${cate == '0'? 'selected="selected"' : '' }>1차유형</option>
+    	<option value="member" ${cate == 'member'? 'selected="selected"' : '' }>회원</option>
+    	<option value="event" ${cate == 'event'? 'selected="selected"' : '' }>쿠폰/이벤트</option>
+    	<option value="order" ${cate == 'order'? 'selected="selected"' : '' }>주문/결제</option>
+    	<option value="deli" ${cate == 'deli'? 'selected="selected"' : '' }>배송</option>
+    	<option value="cancle" ${cate == 'cancle'? 'selected="selected"' : '' }>취소/반품/교환</option>
+    	<option value="trip" ${cate == 'trip'? 'selected="selected"' : '' }>여행/항공/숙박</option>
+    	<option value="safe" ${cate == 'safe'? 'selected="selected"' : '' }>안전거래</option>
     	</c:when>
     	</c:choose>
     </select>
     <c:if test="${group.equals('qna') || group.equals('faq') }">
-    <select name="cate2">
+    <select name="cate2" id="cate2">
     	<option value="0">2차유형</option>
     </select>
     </c:if>
