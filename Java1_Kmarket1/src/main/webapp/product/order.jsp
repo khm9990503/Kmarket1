@@ -173,42 +173,6 @@ $(function() {
 				}
 			}
 		});
-		/*
-		let prodNo = $('input[name=prodNo]').val();
-		let thumb1 = $('input[name=thumb1]').val();
-		let prodName = $('input[name=prodName]').val();
-		let descript = $('input[name=descript]').val();
-		let price = $('input[name=price]').val();
-		let discount = $('input[name=discount]').val();
-		let count = $('input[name=count]').val();
-		let total = $('input[name=total]').val();
-		
-		let jsonData2 = {
-				"ordNo":ordNo,
-				"prodNo":prodNo,
-				"thumb1":thumb1,
-				"prodName":prodName,
-				"descript":descript,
-				"price":price,
-				"discount":discount,
-				"count":count,
-				"total":total
-		};
-		
-		$.ajax({
-			url:"/Java1_Kmarket1/product/order.do",
-			method:"post",
-			data: jsonData2,
-			dataType: 'json',
-			success:function(data){
-				if(data){
-					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+ordNo;
-				}else{
-					alert("나중에 다시 시도해주세요.");
-				}
-			}
-		});
-		*/
 		
 	});
 	
@@ -250,17 +214,6 @@ $(function() {
 
 		                                <h2><a class="prdN" href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}">${product.prodName}</a></h2>
 		                                <p class="dsc">${product.descript}</p>
-
-		                                <input type="hidden" name="prodNo" value="${product.prodNo}">
-		                                <input type="hidden" name="thumb1" value="${product.thumb1}">
-		                                <input type="hidden" name="prodName" value="${product.prodName}">
-		                                <input type="hidden" name="descript" value="${product.descript}">
-		                                <input type="hidden" name="count" value="${product.count}">
-		                                <input type="hidden" name="price" value="${product.price}">
-		                                <input type="hidden" name="discount" value="${product.discount}">
-		                                <input type="hidden" name="point" value="${product.point}">
-		                                <input type="hidden" name="delivery" value="${product.delivery}">
-		                                <input type="hidden" name="total" value="${product.total}">
 		                            </div>
 		                        </article>
 		                    </td>
