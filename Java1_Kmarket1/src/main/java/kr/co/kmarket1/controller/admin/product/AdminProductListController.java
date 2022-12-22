@@ -23,7 +23,10 @@ public class AdminProductListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// 검색
 		String search = req.getParameter("search");
+		// 검색 카테고리
 		String type   = req.getParameter("type");
 		
 		//페이징 처리
