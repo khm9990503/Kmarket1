@@ -3,7 +3,7 @@
   <display-name>Java1_Kmarket1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index_.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.jsp</welcome-file>
@@ -37,7 +37,7 @@
   <security-constraint>
   	<web-resource-collection>
   		<web-resource-name>free pages</web-resource-name>
-  		<url-pattern>/index.jsp</url-pattern>
+  		<url-pattern>/index_.jsp</url-pattern>
   	</web-resource-collection>
   </security-constraint>
 </web-app>

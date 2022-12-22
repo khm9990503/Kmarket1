@@ -120,7 +120,7 @@
                         <ol>
                         	<c:forEach var="ca2" items="${cate2s}">
                         		<c:if test="${ca1.cate1==ca2.cate1}">
-		                            <li><a href="/Java1_Kmarket1/product/list.do">${ca2.c2Name}</a></li>
+		                            <li><a href="/Java1_Kmarket1/product/list.do?prodCate1=${ca2.cate1}&prodCate2=${ca2.cate2}">${ca2.c2Name}</a></li>
 	                            </c:if>
                             </c:forEach>
                         </ol>

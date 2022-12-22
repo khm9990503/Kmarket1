@@ -30,7 +30,7 @@
                     	<a href="/Java1_Kmarket1/admin/index.do">관리자</a>
                     	<a href="/Java1_Kmarket1/member/logout.do">로그아웃</a>
 	                    <a href="#">마이페이지</a>
-	                    <a href="#">
+	                    <a href="/Java1_Kmarket1/product/cart.do">
 	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 	                        장바구니
 	                    </a>

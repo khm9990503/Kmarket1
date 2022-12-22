@@ -180,7 +180,24 @@ public class SQL {
 												+ "`point`=?, "
 												+ "`delivery`=?, "
 												+ "`total`=?";
-	
+	// product - order
+	public static final String INSERT_ORDER = "insert into `km_product_order` set "
+												+ "`ordUid`=?, "
+												+ "`ordCount`=?, "
+												+ "`ordPrice`=?, "
+												+ "`ordDiscount`=?, "
+												+ "`ordDelivery`=?, "
+												+ "`savePoint`=?, "
+												+ "`usedPoint`=?, "
+												+ "`ordTotPrice`=?, "
+												+ "`recipName`=?, "
+												+ "`recipHp`=?, "
+												+ "`recipZip`=?, "
+												+ "`recipAddr1`=?, "
+												+ "`recipAddr2`=?, "
+												+ "`ordPayment`=?, "
+												+ "`ordComplete`=?, "
+												+ "`ordDate`=NOW()";
 	// ARTICLE
 	public static final String INSERT_ARTICLE 	= "insert into `km_article` set "
 												+ "`group`=?, "
