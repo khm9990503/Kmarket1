@@ -70,8 +70,9 @@
         <nav>
             <h3>상품수정</h3>
             <p>
-                HOME > 상품관리 >
-                <strong>상품수정</strong>
+               <a href="/Java1_Kmarket1/admin/index.do">HOME</a>>
+            	<a href="/Java1_Kmarket1/admin/product/list.do">상품관리</a>>
+            	<a href=""><strong>상품수정</strong></a>
             </p>
         </nav>
         <!--상품수정 컨텐츠 시작-->

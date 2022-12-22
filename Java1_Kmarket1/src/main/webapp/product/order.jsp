@@ -28,7 +28,7 @@ $(function() {
 	$('.btOrd').click(function() {
 		
 		// 장바구니 번호 들고오기
-		cartNo_arr = [];
+		let cartNo_arr = [];
 		$('input[name=CartNo]').each(function () {
 			let cart = $(this).val();
 			cartNo_arr.push(cart);
@@ -36,6 +36,12 @@ $(function() {
 		let cartNo = cartNo_arr.toString();
 		console.log(cartNo);
 		
+		// 상품번호 들고오기
+		let prodNo_arr = []; 
+		$('input[name=prodNo]').each(function() {
+			let prodNo = $(this).val();
+			prodNo_arr.push(prodNo);
+		});
 		// 데이터 들고오기
 		let ordNo = $('input[name=ordNo]').val();
 		let recipName = $('input[name=orderer]').val();
@@ -53,12 +59,86 @@ $(function() {
 		let ordTotPrice = parseInt($('.finTot').text());
 		let ordPayment = $('input[name=payment]:checked').val();
 		
+		// complete에 보낼 정보를 리스트에 넣기
+		let thm_arr = [];
+		let prdN_arr = [];
+		let dsc_arr = [];
+		let cnt_arr = [];
+		let prc_arr = [];
+		let dc_arr = [];
+		let pt_arr = [];
+		let deli_arr = [];
+		let tot_arr = [];
+		let cate1_arr = [];
+		let cate2_arr = [];
+		$('.thm').each(function(){
+			let thm = $(this).attr("src");
+			thm_arr.push(thm);
+		});
+		$('.prdN').each(function(){
+			let prdN = $(this).text();
+			prdN_arr.push(prdN);
+		});
+		$('.dsc').each(function(){
+			let dsc = $(this).text();
+			dsc_arr.push(dsc);
+		});
+		$('.cnt').each(function(){
+			let cnt = $(this).text();
+			cnt_arr.push(cnt);
+		});
+		$('.prc').each(function(){
+			let prc = $(this).text();
+			prc_arr.push(prc);
+		});
+		$('.dc').each(function(){
+			let dc = $(this).text();
+			dc_arr.push(dc);
+		});
+		$('.pt').each(function(){
+			let pt = $(this).text();
+			pt_arr.push(pt);
+		});
+		$('.deli').each(function(){
+			let deli = $(this).text();
+			deli_arr.push(deli);
+		});
+		$('.tot').each(function(){
+			let tot = $(this).text();
+			tot_arr.push(tot);
+		});
+		$('input[name=ca1]').each(function(){
+			let ca1 = $(this).val();
+			cate1_arr.push(ca1);
+		});
+		$('input[name=ca2]').each(function(){
+			let ca2 = $(this).val();
+			cate2_arr.push(ca2);
+		});
+		
+		
+		// 세션 스토리지에 저장
+		myStorage = window.sessionStorage;
+		myStorage.setItem("thm_arr",thm_arr);
+		myStorage.setItem("prdN_arr",prdN_arr);
+		myStorage.setItem("dsc_arr",dsc_arr);
+		myStorage.setItem("cnt_arr",cnt_arr);
+		myStorage.setItem("prc_arr",prc_arr);
+		myStorage.setItem("dc_arr",dc_arr);
+		myStorage.setItem("pt_arr",pt_arr);
+		myStorage.setItem("deli_arr",deli_arr);
+		myStorage.setItem("tot_arr",tot_arr);
+		myStorage.setItem("prodNo_arr",prodNo_arr);
+		myStorage.setItem("cate1_arr",cate1_arr);
+		myStorage.setItem("cate2_arr",cate2_arr);
+		
 		if(ordPayment == null){
 			alert('결제수단을 선택해주세요.');
 			return false;
 		}
 		
 		let jsonData ={
+			"prodNo_arr":prodNo_arr,	
 			"cartNo":cartNo,	
 			"recipName":recipName,	
 			"recipHp":recipHp,	
@@ -85,7 +165,9 @@ $(function() {
 			dataType:"json",
 			success:function(data){
 				if(data.result > 0){
-					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+ordNo;
+					
+					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result;
+
 				}else{
 					alert("나중에 다시 시도해주세요.");
 				}
@@ -163,11 +245,12 @@ $(function() {
                 		<tr>
 		                    <td>
 		                        <article>
-		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}"><img src="${product.thumb1}"></a>
+		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}"><img class="thm" src="${product.thumb1}"></a>
 		                            <div>
-		                                <h2><a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}">${product.prodName}</a></h2>
-		                                <p>${product.descript}</p>
-		                                <input type="hidden" name="ordNo" value="${ordNo}">
+
+		                                <h2><a class="prdN" href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}">${product.prodName}</a></h2>
+		                                <p class="dsc">${product.descript}</p>
+
 		                                <input type="hidden" name="prodNo" value="${product.prodNo}">
 		                                <input type="hidden" name="thumb1" value="${product.thumb1}">
 		                                <input type="hidden" name="prodName" value="${product.prodName}">
@@ -181,12 +264,12 @@ $(function() {
 		                            </div>
 		                        </article>
 		                    </td>
-		                    <td>${count}</td>
-		                    <td>${product.price}</td>
-		                    <td>${product.discount}%</td>
-		                    <td>${product.point}</td>
-		                    <td>${product.delivery==0?'무료배송':product.delivery}</td>
-		                    <td>${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
+		                    <td class="cnt">${count}</td>
+		                    <td class="prc">${product.price}</td>
+		                    <td class="dc">${product.discount}%</td>
+		                    <td class="pt">${product.point}</td>
+		                    <td class="deli">${product.delivery==0?'무료배송':product.delivery}</td>
+		                    <td class="tot">${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
 		                </tr>
                 	</c:when>
                 	<c:when test="${product == null}">
@@ -196,17 +279,19 @@ $(function() {
 		                        <article>
 		                        	<input type="hidden" name="CartNo" value="${cart.cartNo}">
 		                        	<input type="hidden" name="prodNo" value="${cart.prodNo}">
-		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}"><img src="${cart.thumb1}"></a>
+		                        	<input type="hidden" name="ca1" value="${cart.prodCate1}">
+		                        	<input type="hidden" name="ca2" value="${cart.prodCate2}">
+		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}"><img class="thm" src="${cart.thumb1}"></a>
 		                            <div>
-		                                <h2><a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}">${cart.prodName}</a></h2>
-		                                <p>${cart.descript}</p>
+		                                <h2><a class="prdN" href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}">${cart.prodName}</a></h2>
+		                                <p class="dsc">${cart.descript}</p>
 		                            </div>
 		                        </article>
 		                    </td>
-		                    <td>${cart.count}</td>
+		                    <td class="cnt">${cart.count}</td>
 		                    <td class="prc">${cart.price}</td>
 		                    <td class="dc">${cart.discount}%</td>
-		                    <td>${cart.point}</td>
+		                    <td class="pt">${cart.point}</td>
 		                    <td class="deli">${cart.delivery==0?'무료배송':cart.delivery}</td>
 		                    <td class="tot">${cart.total}</td>
 		                </tr>
