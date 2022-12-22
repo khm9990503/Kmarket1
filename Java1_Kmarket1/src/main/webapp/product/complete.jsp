@@ -87,6 +87,10 @@
                                 <td><span>3,000</span>원</td>
                             </tr>
                             <tr>
+                                <td>포인트 할인</td>
+                                <td><span>-3,000</span>원</td>
+                            </tr>
+                            <tr>
                                 <td>총 결제금액</td>
                                 <td><span>35,000</span>원</td>
                             </tr>

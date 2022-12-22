@@ -18,9 +18,84 @@ $(function() {
 				return false;
 			}
 			$('.pointDC').text(point);
+			let finTot = parseInt($('.finTot').text());
+			let result = finTot-point;
+			$('.pointDC').removeAttr("style");
+			$('.finTot').text(result);
+			
 		}
 	});
-	
+	$('.btOrd').click(function() {
+		
+		// 장바구니 번호 들고오기
+		cartNo_arr = [];
+		$('input[name=CartNo]').each(function () {
+			let cart = $(this).val();
+			cartNo_arr.push(cart);
+		});
+		let cartNo = cartNo_arr.toString();
+		
+		// 데이터 들고오기
+		let recipName = $('input[name=orderer]').val();
+		let recipHp = $('input[name=hp]').val();
+		let recipZip = $('input[name=zip]').val();
+		let recipAddr1 = $('input[name=addr1]').val();
+		let recipAddr2 = $('input[name=addr2]').val();
+		let ordUid = $('input[name=uid]').val();
+		let ordCount = $('.ordCount').text();
+		let ordPrice = parseInt($('.ordPrice').text());
+		let ordDiscount = parseInt($('.ordDiscount').text());
+		let ordDelivery = parseInt($('.ordDelivery').text());
+		let savePoint = parseInt($('.savePoint').text());
+		let usedPoint = parseInt($('.pointDC').text());
+		let ordTotPrice = parseInt($('.finTot').text());
+		let ordPayment = $('input[name=payment]:checked').val();
+		
+		if(ordPayment == null){
+			alert('결제수단을 선택해주세요.');
+			return false;
+		}
+		
+		let jsonData ={
+			"cartNo":cartNo,	
+			"recipName":recipName,	
+			"recipHp":recipHp,	
+			"recipZip":recipZip,	
+			"recipAddr1":recipAddr1,	
+			"recipAddr2":recipAddr2,	
+			"ordUid":ordUid,	
+			"ordCount":ordCount,	
+			"ordPrice":ordPrice,	
+			"ordDiscount":ordDiscount,	
+			"ordDelivery":ordDelivery,	
+			"savePoint":savePoint,	
+			"usedPoint":usedPoint,	
+			"ordTotPrice":ordTotPrice,	
+			"ordPayment":ordPayment,	
+		};
+		//console.log(jsonData);
+		//console.log(ordDelivery);
+		$.ajax({
+			url:"/Java1_Kmarket1/product/order.do",
+			method:"post",
+			data:jsonData,
+			dataType:"json",
+			success:function(data){
+				if(data.result > 0){
+					let prodNo_arr = []; 
+					$('input[name=prodNo]').each(function() {
+						let prodNo = $(this).val();
+						prodNo_arr.push(prodNo);
+					});
+					let prodNos = prodNo_arr.toString();
+					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result+"&prodNo="+prodNos;
+				}else{
+					alert("나중에 다시 시도해주세요.");
+				}
+			}
+		});
+		
+	});
 	
 });
 </script>
@@ -36,6 +111,7 @@ $(function() {
             </p>
         </nav>
         <form action="#">
+        <input type="hidden" name="uid" value="${sessUser.uid}">
             <table>
                 <tr>
                     <th style="width: 70%">상품명</th>
@@ -58,15 +134,16 @@ $(function() {
 		                            <div>
 		                                <h2><a href="/Java1_Kmarket1/product/view.do?prodCate1=${product.prodCate1}&prodCate2=${product.prodCate2}&prodNo=${product.prodNo}">${product.prodName}</a></h2>
 		                                <p>${product.descript}</p>
+		                                <input type="hidden" name="prodNo" value="${product.prodNo}">
 		                            </div>
 		                        </article>
 		                    </td>
 		                    <td>${count}</td>
-		                    <td class="prc">${product.price}</td>
-		                    <td class="dc">${product.discount}%</td>
+		                    <td>${product.price}</td>
+		                    <td>${product.discount}%</td>
 		                    <td>${product.point}</td>
-		                    <td class="deli">${product.delivery==0?'무료배송':product.delivery}</td>
-		                    <td class="tot">${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
+		                    <td>${product.delivery==0?'무료배송':product.delivery}</td>
+		                    <td>${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
 		                </tr>
                 	</c:when>
                 	<c:when test="${product == null}">
@@ -74,6 +151,8 @@ $(function() {
                 		<tr>
 		                    <td>
 		                        <article>
+		                        	<input type="hidden" name="CartNo" value="${cart.cartNo}">
+		                        	<input type="hidden" name="prodNo" value="${cart.prodNo}">
 		                            <a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}"><img src="${cart.thumb1}"></a>
 		                            <div>
 		                                <h2><a href="/Java1_Kmarket1/product/view.do?prodCate1=${cart.prodCate1}&prodCate2=${cart.prodCate2}&prodNo=${cart.prodNo}">${cart.prodName}</a></h2>
@@ -98,13 +177,13 @@ $(function() {
                 <table border="0">
                     <tr>
                         <td>총</td>
-                        <td>${product==null?cartList.size():'1'}</td>
+                        <td class="ordCount">${product==null?cartList.size():'1'}</td>
                     </tr>
                     <tr>
                         <td>상품금액</td>
                         <c:choose>
                         <c:when test="${product==null}">
-                        <td>
+                        <td class="ordPrice">
                         	<c:set var="sum" value="0"/>
                         	<c:forEach var="cart" items="${cartList}">
                         	<c:set var="sum" value="${sum+cart.price}"/>
@@ -113,7 +192,7 @@ $(function() {
                         </td>
                         </c:when>
                         <c:otherwise>
-                        <td>
+                        <td class="ordPrice">
                         	${product.price}
                         </td>
                         </c:otherwise>
@@ -123,16 +202,16 @@ $(function() {
                         <td>할인금액</td>
                         <c:choose>
                         <c:when test="${product==null}">
-                        <td>
-                        	<c:set var="sum" value="0"/>
-                        	<c:forEach var="cart" items="${cartList}">
-                        	<c:set var="sum" value="${sum+Math.round(cart.price*(cart.discount/100))}"/>
-                        	</c:forEach>
+                       	<c:set var="sum" value="0"/>
+                       	<c:forEach var="cart" items="${cartList}">
+                       	<c:set var="sum" value="${sum+Math.round(cart.price*(cart.discount/100))}"/>
+                       	</c:forEach>
+                        <td class="ordDiscount">
                         	<c:out  value="${sum}"/>
                         </td>
                         </c:when>
                         <c:otherwise>
-                        <td>
+                        <td class="ordDiscount">
                         	${Math.round(product.price*(product.discount/100))}
                         </td>
                         </c:otherwise>
@@ -142,7 +221,7 @@ $(function() {
                         <td>배송비</td>
                         <c:choose>
                         <c:when test="${product==null}">
-                        <td>
+                        <td class="ordDelivery">
                         	<c:set var="sum" value="0"/>
                         	<c:forEach var="cart" items="${cartList}">
                         	<c:set var="sum" value="${sum+cart.delivery}"/>
@@ -151,7 +230,7 @@ $(function() {
                         </td>
                         </c:when>
                         <c:otherwise>
-                        <td>
+                        <td class="ordDelivery">
                         	${Math.round(product.price*(product.discount/100))}
                         </td>
                         </c:otherwise>
@@ -159,17 +238,32 @@ $(function() {
                     </tr>
                     <tr>
                         <td>포인트 할인</td>
-                        <td class="pointDC"></td>
+                        <td class="pointDC" style="font-size: 0;">0</td>
                     </tr>
                     <tr>
                         <td>전체주문금액</td>
-                        <td>25,000</td>
+                        <c:choose>
+                        <c:when test="${product==null}">
+                        <td class="finTot">
+                        	<c:set var="sum" value="0"/>
+                        	<c:forEach var="cart" items="${cartList}">
+                        	<c:set var="sum" value="${sum+cart.total}"/>
+                        	</c:forEach>
+                        	<c:out  value="${sum}"/>
+                        </td>
+                        </c:when>
+                        <c:otherwise>
+                        <td class="finTot">
+                        	${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}
+                        </td>
+                        </c:otherwise>
+                        </c:choose>
                     </tr>
                     <tr>
                         <td>적립 포인트</td>
                         <c:choose>
                         <c:when test="${product==null}">
-                        <td>
+                        <td class="savePoint">
                         	<c:set var="sum" value="0"/>
                         	<c:forEach var="cart" items="${cartList}">
                         	<c:set var="sum" value="${sum+cart.point}"/>
@@ -178,14 +272,14 @@ $(function() {
                         </td>
                         </c:when>
                         <c:otherwise>
-                        <td>
+                        <td class="savePoint">
                         	${product.point}
                         </td>
                         </c:otherwise>
                         </c:choose>
                     </tr>
                 </table>
-                <input type="button" name="" value="결제하기">
+                <input type="button" class="btOrd" value="결제하기">
             </div>
              <!-- 배송정보 -->
             <article class="delivery">

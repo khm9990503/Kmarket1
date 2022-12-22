@@ -43,6 +43,7 @@
 			let discount = $('input[name=discount]').val();
 			let point = $('input[name=point]').val();
 			let delivery = $('input[name=delivery]').val();
+			let thumb1 = $('input[name=thumb1]').val();
 			let total = $('.total > span').text();
 			
 			let jsonData = {

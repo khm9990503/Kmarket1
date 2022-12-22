@@ -155,8 +155,8 @@ public class CartDao extends DBHelper{
 		try {
 			logger.info("deleteCartByChk start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement("delete from `km_product_cart` where `cartNo`=?");
-			psmt.setString(1, chks);
+			psmt = conn.prepareStatement("delete from `km_product_cart` where `cartNo` in ("+chks+")");
+			//psmt.setString(1, chks);
 			result = psmt.executeUpdate();
 			close();
 		}catch (Exception e) {
