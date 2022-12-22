@@ -18,6 +18,7 @@ import kr.co.kmarket1.dao.CartDao;
 import kr.co.kmarket1.dao.CateDao;
 import kr.co.kmarket1.dao.OrderDao;
 import kr.co.kmarket1.dao.OrderItemDao;
+import kr.co.kmarket1.dao.PointDao;
 import kr.co.kmarket1.dao.ProductDao;
 import kr.co.kmarket1.vo.CartVO;
 import kr.co.kmarket1.vo.Cate1VO;
@@ -75,7 +76,7 @@ public class OrderController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String[] prodNo_arr = req.getParameterValues("prodNo_arr");
+		// order 주문 등록을 위한 수신
 		String cartNo = req.getParameter("cartNo");
 		String recipName = req.getParameter("recipName");
 		String recipHp = req.getParameter("recipHp");
@@ -116,7 +117,6 @@ public class OrderController extends HttpServlet {
 		int ordNo = OrderDao.getInstance().insertOrder(vo);
 		
 		if(ordNo > 0) {
-			
 			CartDao.getInstance().deleteCartByChk(cartNo);
 		}
 		
@@ -126,5 +126,6 @@ public class OrderController extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData);
+
 	}
 }
