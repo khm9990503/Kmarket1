@@ -65,6 +65,7 @@ public class OrderController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String[] prodNo_arr = req.getParameterValues("prodNo_arr");
 		String cartNo = req.getParameter("cartNo");
 		String recipName = req.getParameter("recipName");
 		String recipHp = req.getParameter("recipHp");

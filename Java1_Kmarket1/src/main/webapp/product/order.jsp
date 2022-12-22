@@ -35,6 +35,12 @@ $(function() {
 		});
 		let cartNo = cartNo_arr.toString();
 		
+		// 상품번호 들고오기
+		let prodNo_arr = []; 
+		$('input[name=prodNo]').each(function() {
+			let prodNo = $(this).val();
+			prodNo_arr.push(prodNo);
+		});
 		// 데이터 들고오기
 		let recipName = $('input[name=orderer]').val();
 		let recipHp = $('input[name=hp]').val();
@@ -57,6 +63,7 @@ $(function() {
 		}
 		
 		let jsonData ={
+			"prodNo_arr":prodNo_arr,	
 			"cartNo":cartNo,	
 			"recipName":recipName,	
 			"recipHp":recipHp,	
@@ -82,13 +89,8 @@ $(function() {
 			dataType:"json",
 			success:function(data){
 				if(data.result > 0){
-					let prodNo_arr = []; 
-					$('input[name=prodNo]').each(function() {
-						let prodNo = $(this).val();
-						prodNo_arr.push(prodNo);
-					});
-					let prodNos = prodNo_arr.toString();
-					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result+"&prodNo="+prodNos;
+					
+					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result;
 				}else{
 					alert("나중에 다시 시도해주세요.");
 				}
