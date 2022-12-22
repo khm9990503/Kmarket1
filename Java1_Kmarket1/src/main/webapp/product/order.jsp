@@ -173,42 +173,6 @@ $(function() {
 				}
 			}
 		});
-		/*
-		let prodNo = $('input[name=prodNo]').val();
-		let thumb1 = $('input[name=thumb1]').val();
-		let prodName = $('input[name=prodName]').val();
-		let descript = $('input[name=descript]').val();
-		let price = $('input[name=price]').val();
-		let discount = $('input[name=discount]').val();
-		let count = $('input[name=count]').val();
-		let total = $('input[name=total]').val();
-		
-		let jsonData2 = {
-				"ordNo":ordNo,
-				"prodNo":prodNo,
-				"thumb1":thumb1,
-				"prodName":prodName,
-				"descript":descript,
-				"price":price,
-				"discount":discount,
-				"count":count,
-				"total":total
-		};
-		
-		$.ajax({
-			url:"/Java1_Kmarket1/product/order.do",
-			method:"post",
-			data: jsonData2,
-			dataType: 'json',
-			success:function(data){
-				if(data){
-					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+ordNo;
-				}else{
-					alert("나중에 다시 시도해주세요.");
-				}
-			}
-		});
-		*/
 		
 	});
 	
