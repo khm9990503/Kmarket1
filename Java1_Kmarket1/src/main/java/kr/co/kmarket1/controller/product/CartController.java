@@ -64,6 +64,7 @@ public class CartController extends HttpServlet {
 		String prodCate2 = req.getParameter("prodCate2");
 		String prodNo = req.getParameter("prodNo");
 		String cartNo = req.getParameter("cartNo");
+		String cart = req.getParameter("cart");
 		
 		// 장바구니 출력
 		CartDao Cartdao = CartDao.getInstance();
@@ -84,7 +85,12 @@ public class CartController extends HttpServlet {
 	
 		// 선택 삭제
 		String chks = req.getParameter("chks");
-		int result = CartDao.getInstance().deleteCartByChk(chks);
+		
+		CartDao dao = CartDao.getInstance();
+		
+		int result = dao.deleteCartByChk(chks);
+		List<CartVO> cartList = dao.selectCartByChk(chks);
+		req.setAttribute("cartList", cartList);
 		
 		// JSON 출력
 		JsonObject json = new JsonObject();
@@ -96,29 +102,5 @@ public class CartController extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData);
-		
-		/*String ordNo = req.getParameter("ordNo");
-		String prodNo = req.getParameter("prodNo");
-		String count = req.getParameter("count");
-		String price = req.getParameter("price");
-		String discount = req.getParameter("discount");
-		String point = req.getParameter("point");
-		String delivery = req.getParameter("delivery");
-		String total = req.getParameter("total");
-		
-		OrderItemVO item = new OrderItemVO();
-		item.setOrdNo(0);
-		item.setProdNo(0);
-		item.setCount(0);
-		item.setPrice(0);
-		item.setDiscount(0);
-		item.setPoint(0);
-		item.setDelivery(0);
-		item.setTotal(0);
-		
-		OrderItemDao.getInstance().insertOrderItem(item);
-		
-		resp.sendRedirect("/Java1_Kmarket1/product/order.do");
-		*/
 	}
 }

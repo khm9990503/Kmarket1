@@ -40,59 +40,6 @@
                     <td>1</td>
                     <td>16,000원</td>
                 </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <img src="https://via.placeholder.com/80x80" alt="">
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>17,000원</td>
-                    <td>1,000원</td>
-                    <td>1</td>
-                    <td>16,000원</td>
-                </tr>
-                <tr>
-                    <td>
-                        <article>
-                            <img src="https://via.placeholder.com/80x80" alt="">
-                            <div>
-                                <h2><a href="/Java1_Kmarket1/product/view.do">상품명</a></h2>
-                                <p>상품설명</p>
-                            </div>
-                        </article>
-                    </td>
-                    <td>17,000원</td>
-                    <td>1,000원</td>
-                    <td>1</td>
-                    <td>16,000원</td>
-                </tr>
-                <tr class="total">
-                    <td colspan="4"></td>
-                    <td>
-                        <table border="0">
-                            <tr>
-                                <td>총 상품금액</td>
-                                <td><span>34,000</span>원</td>
-                            </tr>
-                            <tr>
-                                <td>총 할인금액</td>
-                                <td><span>-2,000</span>원</td>
-                            </tr>
-                            <tr>
-                                <td>배송비</td>
-                                <td><span>3,000</span>원</td>
-                            </tr>
-                            <tr>
-                                <td>총 결제금액</td>
-                                <td><span>35,000</span>원</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
             </table>
         </article>    
         <article class="order">
