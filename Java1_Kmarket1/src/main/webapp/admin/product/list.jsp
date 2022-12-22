@@ -1,6 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+	$(function(){		
+		// 체크박스 전체 선택, 해제
+		$('#checkAll').click(function(){
+			let checked = $(this).is(':checked');
+	        if(checked){
+	            $('input:checkbox[name=check]').prop('checked',true); 
+	        }else{
+	            $('input:checkbox[name=check]').prop('checked',false); 
+	        }
+	    });
+		
+		// 개별체크 선택 및 해제시 전체 체크 활성 및 비활성
+		$('input:checkbox[name=check]').click(function(){
+			let checked = $('input:checkbox[name=check]:checked').length;
+			// console.log(checked);
+			let size = $('input[name=size]').val();
+			if (checked == size){
+				$('#checkAll').prop('checked', true);
+			}else{
+				$('#checkAll').prop('checked', false);
+			}
+		});	   
+		
+		// 선택삭제
+		
+	});
+</script>
 
     <section id="admin-product-list">
         <nav>
@@ -27,7 +55,7 @@
             </div>
             <table>
                 <tr>
-                    <th><input type="checkbox" name="all"/></th>
+                    <th><input type="checkbox" name="all" id="checkAll"/></th>
                     <th>이미지</th>
                     <th>상품코드</th>
                     <th>상품명</th>
@@ -41,7 +69,7 @@
                 </tr>
                 <c:forEach items="${products}" var="vo">
 	                <tr>
-	                    <td><input type="checkbox" name="상품코드"/></td>
+	                    <td><input type="checkbox" name="check"/><input type="hidden" name="size" value="${products.size()}"/></td>
 	                    <td><img src="${vo.thumb1}" class="thumb"></td>
 	                    <td><a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">${vo.prodNo}</a></td>
 	                    <td><a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">${vo.prodName}</a> </td>
@@ -59,7 +87,7 @@
                 </c:forEach>
             </table>
             
-            <input type="button" value="선택삭제" />
+            <input type="button" name="del" value="선택삭제" />
 
 			<div class="paging">
 	        	<c:if test="${pageGroupStart > 1}">
