@@ -219,31 +219,24 @@ public class AdminProductListDao extends DBHelper{
 		return vo;
 	}
 	
-	// 검색
-	public void selectProducts() {
+	// 선택삭제
+	public int selectdelete(String prodNo) {
+		int result = 0;
 		
 		try {
-			logger.info("");
+			logger.info("선택삭제");
+			conn = getConnection();
 			
-		}catch(Exception e) {
+			psmt = conn.prepareStatement(SQL.SELECT_DELETE);
+			psmt.setString(1, prodNo);
+			result = psmt.executeUpdate();
 			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-	}
-	
-	
-	
-	
-	
-	// 검색
-	public void selectProductByKeyword() {
-		
-		try {
-			logger.info("");
-			
-		}catch(Exception e) {
-			
-		}
-		
+		logger.debug("result : " + result);
+		return result;
 	}
 	
 	
