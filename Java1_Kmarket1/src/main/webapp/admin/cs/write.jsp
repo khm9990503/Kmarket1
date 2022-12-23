@@ -24,6 +24,25 @@ $(function(){
 			}
 		});
 	});
+	// 글 작성 유효성 검사
+	$('.write form').submit(function() {
+		let cate2 = $('select[name=cate2]').val(); // 카테고리 유효성
+		let title = $('input[name=title]').val(); // 제목 유효성
+		let content = $('textarea[name=content]').val(); // 내용 유효성
+		
+		if(cate2 == 0){
+			alert('카테고리를 선택해주세요.');
+			return false;
+		}
+		if(title == ''){
+			alert('제목을 입력해주세요.')
+			return false;
+		}
+		if(content == ''){
+			alert('내용을 입력해주세요.')
+			return false;
+		}
+	});
 });
 </script>
 <section id="csWrite">
@@ -50,7 +69,7 @@ $(function(){
     <article>
         <form action="/Java1_Kmarket1/admin/cs/write.do" method="post">
        	<input type="hidden" name="group" value="${group}">
-       	<input type="hidden" name="uid" value="uid">
+       	<input type="hidden" name="uid" value="${sessUser.uid}">
            <table>
                <tr>
                    <td>유형</td>

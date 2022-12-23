@@ -16,7 +16,7 @@
 		// 개별체크 선택 및 해제시 전체 체크 활성 및 비활성
 		$('input:checkbox[name=check]').click(function(){
 			let checked = $('input:checkbox[name=check]:checked').length;
-			// console.log(checked);
+// 			console.log(checked);
 			let size = $('input[name=size]').val();
 			if (checked == size){
 				$('#checkAll').prop('checked', true);
@@ -26,8 +26,43 @@
 		});	   
 		
 		// 선택삭제
-		
+		$('#delete').click(function () {
+			if ($('input[name=check]:checked').length == 0) {
+				alert('선택된 상품이 없습니다.');
+				return false;
+		    }
+		    let prodNo = [];
+		    $('input[name=check]:checked').each(function (e) {
+		    	prodNo.push($(this).data("no"));
+	    	});
+		    if (confirm('선택된 상품을 삭제하시겠습니까?')) {
+		    	let jsonData = {
+	    			'prodNo': prodNo
+    			};
+// 		    	console.log(jsonData);
+		    	$.ajax({
+		    		type: 'post',
+		        	url: '/Java1_Kmarket1/admin/product/delete.do',
+		        	data: jsonData,
+		        	dataType: 'json',
+		        	success: function (data) {
+		        		if (data.result > 0) {
+		        			$('input[name=check]:checked').parents('tr').remove();
+		        			alert('삭제 성공');
+		        			if ($('input[name=check]').length == 0) {
+		        				$('input:checkbox[name=checkAll]').prop('checked', false);
+	        				}
+	        			}else {
+	        				alert('실패');
+        				}
+	        		}
+	        	});
+	    	}
+	    });
 	});
+		
+		
+		
 </script>
 
     <section id="admin-product-list">
@@ -69,7 +104,7 @@
                 </tr>
                 <c:forEach items="${products}" var="vo">
 	                <tr>
-	                    <td><input type="checkbox" name="check"/><input type="hidden" name="size" value="${products.size()}"/></td>
+	                    <td><input type="checkbox" name="check" data-no="${vo.prodNo}"/><input type="hidden" name="size" value="${products.size()}"/></td>
 	                    <td><img src="${vo.thumb1}" class="thumb"></td>
 	                    <td><a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">${vo.prodNo}</a></td>
 	                    <td><a href="/Java1_Kmarket1/admin/product/modify.do?prodNo=${vo.prodNo}">${vo.prodName}</a> </td>
@@ -87,14 +122,14 @@
                 </c:forEach>
             </table>
             
-            <input type="button" name="del" value="선택삭제" />
+            <input type="button" id="delete" value="선택삭제" />
 
 			<div class="paging">
 	        	<c:if test="${pageGroupStart > 1}">
 		            <a href="/Java1_Kmarket1/admin/product/list.do?pg=${pageGroupStart - 1}" class="prev"><&nbsp;이전</a>
 	            </c:if>
 	            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		            <a href="/Java1_Kmarket1/admin/product/list.do?pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+		            <a href="/Java1_Kmarket1/admin/product/list.do?pg=${num}" class="num ${num == currentPage ? 'on':'off'} ">${num}</a>
 	            </c:forEach>
 	            <c:if test="${pageGroupEnd < lastPageNum}">
 		            <a href="/Java1_Kmarket1/admin/product/list.do?pg=${pageGroupEnd + 1}" class="next">다음&nbsp;></a>

@@ -35,10 +35,13 @@ public class SQL {
 	
 	// admin list 상품 불러오기
 	public static final String SELECT_ADMIN_PRODUCT_LIST = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT ?,10";
+	public static final String SELECT_ADMIN_PRODUCT_LIST_SELLER = "SELECT * FROM `km_product` WHERE `seller`=? ORDER BY `prodNo` DESC LIMIT ?,10";
 	public static final String SELECT_ADMIN_PRODUCT_LIST_SEARCH = "SELECT * from `km_product` WHERE ? LIKE ? ORDER BY `prodNo` DESC LIMIT 10";
 	
 	//리스트 페이지
 	public static final String COUNT_LIST_TOTAL = "SELECT COUNT(*) FROM `km_product`";
+	//리스트 페이지
+	public static final String COUNT_LIST_TOTAL_SELLER = "SELECT COUNT(*) FROM `km_product` where `seller`=?";
 	
 	// admin list 삭제
 	public static final String DELETE_ADMIN_LIST = "DELETE FROM `km_product` WHERE `prodNo`=?";
@@ -48,6 +51,8 @@ public class SQL {
 	public static final String UPDATE_ADMIN_PRODUCT = "UPDATE `km_product` "
 														+ "SET `prodName`=?, `descript`=?, `company`=?, `seller`=?, `price`=?, `point`=?, `discount`=?, `stock`=?, `delivery`=?, `thumb1`=?, `thumb2`=?, `thumb3`=?, `detail`=?, `rdate`=now() "
 														+ "WHERE `prodNo` = ?";
+	// 선택삭제
+	public static final String SELECT_DELETE = "DELETE FROM `km_product` WHERE `prodNo`=?";
 
 	//member
 	// terms 불러오기

@@ -23,7 +23,7 @@ $(function(){
 			}
 		});
 	});
-	// 문의글 작성 유효성 검사
+	// 글 수정 유효성 검사
 	$('.write form').submit(function() {
 		let cate2 = $('select[name=cate2]').val(); // 카테고리 유효성
 		let title = $('input[name=title]').val(); // 제목 유효성
@@ -69,7 +69,7 @@ $(function(){
                 <article>
                     <form action="/Java1_Kmarket1/cs/qna/write.do" method="post">
                     	<input type="hidden" name="group" value="qna">
-                    	<input type="hidden" name="uid" value="uid">
+                    	<input type="hidden" name="uid" value="${sessUser.uid}">
                         <table>
                             <tr>
                                 <td>문의유형</td>
