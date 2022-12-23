@@ -167,7 +167,7 @@ public class SQL {
 			+"JOIN `km_product` as b ON a.prodNo = b.prodNo where `cartNo` in (?)";
 	// product - 장바구니 전체합계(total)
 	
-	public static final String SELECT_CART = "select * from `km_product_cart` where `cartNo` in (?)";
+	public static final String SELECT_CART = "select * from `km_product_cart` where `prodNo` = ?";
 	
 	// product - order(item)
 	public static final String INSERT_ORDER_ITEM = "insert into `km_product_order_item` set "

@@ -148,7 +148,9 @@
                     <th>배송비</th>
                     <th>소계</th>
                 </tr>
-                
+                <c:if test="${carts.size() == 0}">
+                <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
+                </c:if>
                 <c:forEach var="cart" items="${carts}">
                 <tr>
                 	<td>
@@ -182,7 +184,7 @@
                     </c:if>
                     <td>${cart.total}</td>
                 </tr>
-                <tr class="empty"><td colspan="7">장바구니에 상품이 없습니다.</td></tr>
+                
             </c:forEach>    
             </table>
             <input type="button" name="del" class="btnDelete" value="선택삭제">

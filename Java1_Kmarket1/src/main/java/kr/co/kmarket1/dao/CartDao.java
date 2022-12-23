@@ -21,6 +21,7 @@ public class CartDao extends DBHelper{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void insertCart(CartVO cart) {
+		
 		try {
 			logger.info("insertCart start...");
 			conn = getConnection();
@@ -40,20 +41,20 @@ public class CartDao extends DBHelper{
 		}
 	}
 	
-	public CartVO selectCart(String cartNo) {
-		
-		CartVO cart = null;
-		
+	// 장바구니 상품 중복체크
+	public int selectCart(String prodNo) {
+		int result = 0;
 		try {
 			logger.info("selectCart start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_CART);
-			psmt.setString(1, cartNo);
+			psmt.setString(1, prodNo);
 			
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				cart = new CartVO();
+				result = 1;
+				CartVO cart = new CartVO();
 				cart.setCartNo(rs.getInt(1));
 				cart.setUid(rs.getString(2));
 				cart.setProdNo(rs.getInt(3));
@@ -69,7 +70,7 @@ public class CartDao extends DBHelper{
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return cart;
+		return result;
 	}
 	// uid로 장바구니 목록 불러오기
 	public List<CartVO> selectCartsByUid(String uid) {
@@ -182,14 +183,26 @@ public class CartDao extends DBHelper{
 		return carts;
 	}
 	
-	public void updateCart() {}
+	public void updateCart(String count, String cartNo) {
+		try {
+			logger.info("updateCart start");
+			conn = getConnection();
+			psmt = conn.prepareStatement("update `km_product_cart` set `count=`count`+? where `cartNo`=?");
+			psmt.setString(1, cartNo);
+			psmt.setString(2, count);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public int deleteCartByChk(String chks) {
 		int result = 0;
 		try {
 			logger.info("deleteCartByChk start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement("delete from `km_product_cart` where `cartNo` in ("+chks+")");
-			//psmt.setString(1, chks);
 			result = psmt.executeUpdate();
 			close();
 		}catch (Exception e) {

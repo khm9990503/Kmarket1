@@ -108,10 +108,20 @@ public class ViewController extends HttpServlet {
 		cart.setThumb1(thumb1);
 		cart.setTotal(total);
 
-		CartDao.getInstance().insertCart(cart);
+		String cartNo = req.getParameter("cartNo");
+		
+		// 중복일 시 수량 +
+		int result = CartDao.getInstance().selectCart(prodNo);
+
+		if(result == 1) {
+			CartDao.getInstance().updateCart(count, cartNo);
+		}else {
+			CartDao.getInstance().insertCart(cart);
+		}
 		
 		// JSON 출력
 		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
