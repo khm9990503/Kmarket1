@@ -367,7 +367,7 @@ input[type=checkbox] {
     letter-spacing: -1px;
 }
 
-#admin-product-list .paging > .num > a {
+#admin-product-list .paging > .num {
     display: inline-block;
     min-width: 14px;
     margin: 0 2px;
@@ -380,7 +380,7 @@ input[type=checkbox] {
     text-align: center;
     text-decoration: none;
 }
-#admin-product-list .paging > .num > a.on {
+#admin-product-list .paging > .on {
     color: #fe434c;
     font-weight: bold;
 }
