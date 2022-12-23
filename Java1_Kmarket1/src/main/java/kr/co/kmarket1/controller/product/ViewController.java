@@ -111,7 +111,7 @@ public class ViewController extends HttpServlet {
 		String cartNo = req.getParameter("cartNo");
 		
 		// 중복일 시 수량 +
-		int result = CartDao.getInstance().selectCart(prodNo);
+		int result = CartDao.getInstance().selectCart(prodNo, uid);
 
 		if(result == 1) {
 			CartDao.getInstance().updateCart(count, cartNo);

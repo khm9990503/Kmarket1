@@ -42,13 +42,14 @@ public class CartDao extends DBHelper{
 	}
 	
 	// 장바구니 상품 중복체크
-	public int selectCart(String prodNo) {
+	public int selectCart(String prodNo, String uid) {
 		int result = 0;
 		try {
 			logger.info("selectCart start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_CART);
 			psmt.setString(1, prodNo);
+			psmt.setString(2, uid);
 			
 			rs = psmt.executeQuery();
 			
@@ -187,9 +188,7 @@ public class CartDao extends DBHelper{
 		try {
 			logger.info("updateCart start");
 			conn = getConnection();
-			psmt = conn.prepareStatement("update `km_product_cart` set `count=`count`+? where `cartNo`=?");
-			psmt.setString(1, cartNo);
-			psmt.setString(2, count);
+			psmt = conn.prepareStatement("update `km_product_cart` set `count=`count`+ ? where `cartNo`=?");
 			psmt.executeUpdate();
 			close();
 			
