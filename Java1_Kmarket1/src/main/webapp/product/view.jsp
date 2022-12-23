@@ -150,17 +150,17 @@
                 <nav>
                     <div class="org_price">
                     <c:if test="${product.discount != '0'}">
-                        <del>${product.price}</del>
+                        <del><fmt:formatNumber value="${product.price}" pattern="#,###"/></del>
                         <span>${product.discount}%</span>
                     </c:if>
                     </div>
                     <div class="dis_price">
                        <c:choose>
                        	<c:when test="${product.discount == '0'}">
-                           <ins class="dis-price">${product.price}</ins>
+                           <ins class="dis-price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></ins>
                         </c:when>
                        	<c:when test="${product.discount != '0'}">
-                           <ins class="dis-price">${Math.round(product.price*(100-product.discount)/100)}</ins>
+                           <ins class="dis-price"><fmt:formatNumber value="${Math.round(product.price*(100-product.discount)/100)}" pattern="#,###"/></ins>
                         </c:when>
                        </c:choose>
                     </div>
@@ -171,7 +171,7 @@
 	                       		<span class="delivery">무료배송</span>
 	                       	</c:when>
 	                       	<c:when test="${product.delivery != '0' }">
-	                       		<span class="delivery">배송비 : ${product.delivery}원</span>
+	                       		<span class="delivery">배송비 : <fmt:formatNumber value="${product.delivery}" pattern="#,###"/>원</span>
 	                       	</c:when>
 	                       </c:choose>
                     <c:set var="arrival" value="<%=new Date(new Date().getTime() + 60*60*24*1000*3)%>"/>
