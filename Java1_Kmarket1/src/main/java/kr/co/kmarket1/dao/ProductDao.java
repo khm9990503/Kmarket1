@@ -513,7 +513,7 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProductsSold start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1` FROM `km_product` ORDER BY `sold` DESC LIMIT 5");
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`prodCate1`,`prodCate2` FROM `km_product` ORDER BY `sold` DESC LIMIT 5");
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
 				product.setProdNo(rs.getInt(1));
@@ -521,6 +521,8 @@ public class ProductDao extends DBHelper{
 				product.setPrice(rs.getInt(3));
 				product.setDiscount(rs.getInt(4));
 				product.setThumb1(rs.getString(5));
+				product.setProdCate1(rs.getInt(6));
+				product.setProdCate2(rs.getInt(7));
 				
 				products.add(product);
 			}
@@ -537,7 +539,7 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProductsHit start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `hit` DESC LIMIT 8");
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery`,`prodCate1`,`prodCate2` FROM `km_product` ORDER BY `hit` DESC LIMIT 8");
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
 				product.setProdNo(rs.getInt(1));
@@ -546,6 +548,8 @@ public class ProductDao extends DBHelper{
 				product.setDiscount(rs.getInt(4));
 				product.setThumb1(rs.getString(5));
 				product.setDelivery(rs.getInt(6));
+				product.setProdCate1(rs.getInt(7));
+				product.setProdCate2(rs.getInt(8));
 				
 				products.add(product);
 			}
@@ -562,7 +566,7 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProductsScore start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `score` DESC LIMIT 8");
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery`,`prodCate1`,`prodCate2` FROM `km_product` ORDER BY `score` DESC LIMIT 8");
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
 				product.setProdNo(rs.getInt(1));
@@ -571,6 +575,8 @@ public class ProductDao extends DBHelper{
 				product.setDiscount(rs.getInt(4));
 				product.setThumb1(rs.getString(5));
 				product.setDelivery(rs.getInt(6));
+				product.setProdCate1(rs.getInt(7));
+				product.setProdCate2(rs.getInt(8));
 				
 				products.add(product);
 			}
@@ -587,7 +593,7 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProductsLates start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `prodNo` DESC LIMIT 8");
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery`,`prodCate1`,`prodCate2` FROM `km_product` ORDER BY `prodNo` DESC LIMIT 8");
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
 				product.setProdNo(rs.getInt(1));
@@ -596,6 +602,8 @@ public class ProductDao extends DBHelper{
 				product.setDiscount(rs.getInt(4));
 				product.setThumb1(rs.getString(5));
 				product.setDelivery(rs.getInt(6));
+				product.setProdCate1(rs.getInt(7));
+				product.setProdCate2(rs.getInt(8));
 				
 				products.add(product);
 			}
@@ -612,7 +620,7 @@ public class ProductDao extends DBHelper{
 			logger.info("selectProductsDiscount start...");
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery` FROM `km_product` ORDER BY `discount` DESC LIMIT 8");
+			rs = stmt.executeQuery("SELECT `prodNo`,`prodName`,`price`,`discount`,`thumb1`,`delivery`,`prodCate1`,`prodCate2` FROM `km_product` ORDER BY `discount` DESC LIMIT 8");
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
 				product.setProdNo(rs.getInt(1));
@@ -621,6 +629,8 @@ public class ProductDao extends DBHelper{
 				product.setDiscount(rs.getInt(4));
 				product.setThumb1(rs.getString(5));
 				product.setDelivery(rs.getInt(6));
+				product.setProdCate1(rs.getInt(7));
+				product.setProdCate2(rs.getInt(8));
 				
 				products.add(product);
 			}

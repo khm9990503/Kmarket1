@@ -135,7 +135,7 @@
                     <ol>
                     	<c:forEach var="best" items="${bests}" varStatus="b">
                         <li>
-                            <a href="/Java1_Kmarket1/product/view.do?prodNo=${best.prodNo}">
+                            <a href="/Java1_Kmarket1/product/view.do?prodNo=${best.prodNo}&prodCate1=${best.prodCate1}&prodCate2=${best.prodCate2}">
                                 <div class="thumb">
                                     <i>1</i>
                                     <img src="${best.thumb1}" alt="BestItem">
@@ -181,7 +181,7 @@
                     </h3>
                     <c:forEach var="hit" items="${hits}" varStatus="h">
                     <article>
-                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${hit.prodNo}">
+                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${hit.prodNo}&prodCate1=${hit.prodCate1}&prodCate2=${hit.prodCate2}">
                             <div class="thumb">
                                 <img src="${hit.thumb1}" alt="HitItem">
                             </div>
@@ -224,7 +224,7 @@
                     </h3>
                     <c:forEach var="score" items="${scores}" varStatus="s">
                     <article>
-                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${score.prodNo}">
+                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${score.prodNo}&prodCate1=${score.prodCate1}&prodCate2=${score.prodCate2}">
                             <div class="thumb">
                                 <img src="${score.thumb1}" alt="ScoreItem">
                             </div>
@@ -267,7 +267,7 @@
                     </h3>
                     <c:forEach var="late" items="${lates}" varStatus="l">
                     <article>
-                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${late.prodNo}">
+                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${late.prodNo}&prodCate1=${late.prodCate1}&prodCate2=${late.prodCate2}">
                             <div class="thumb">
                                 <img src="${late.thumb1}" alt="LateItem">
                             </div>
@@ -310,7 +310,7 @@
                     </h3>
                     <c:forEach var="discount" items="${discounts}" varStatus="d">
                     <article>
-                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${discount.prodNo}">
+                        <a href="/Java1_Kmarket1/product/view.do?prodNo=${discount.prodNo}&prodCate1=${discount.prodCate1}&prodCate2=${discount.prodCate2}">
                             <div class="thumb">
                                 <img src="${discount.thumb1}" alt="DCItem">
                             </div>
