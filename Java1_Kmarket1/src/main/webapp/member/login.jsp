@@ -23,9 +23,11 @@
 	
 	function checkCapsLock(event)  {
 		  if (event.getModifierState("CapsLock")) {
+			  $('.bubble').show();
 			  $('#capsLock').text("CapsLock 이 켜져있습니다.");
 			  $('#capsLock').show();
 		  }else {
+			  $('.bubble').hide();
 			  $('#capsLock').hide();
 		  }
 		}
@@ -56,7 +58,7 @@
                                     <i class="fa fa-eye fa-lg" id="eye"></i>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="bubble">
                             	<td></td>
                             	<td><p id="capsLock"></p></td>
                             </tr>

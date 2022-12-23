@@ -102,7 +102,7 @@
                        </td>
                    </tr>
                    <tr class="fax">
-                       <th>팩스번호</th>
+                       <th>팩스</th>
                        <td>
                            <input type="text" name="kms_fax" placeholder="팩스번호 입력">
                            <span class="msgFax">&nbsp;&nbsp;- 표시 포함, 지역번호 포함, 예) 02-234-1234</span>
