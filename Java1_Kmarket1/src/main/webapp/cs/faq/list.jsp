@@ -10,9 +10,11 @@ $(function() {
 		if(isblock){
 			// 더보기 닫기
 			$(this).parent().children('li:nth-child(n+4)').css("display","none");
+			$('.more > a').text("더보기");
 		}else{
 			// 더보기 열기
 			$(this).parent().children().css("display","block");
+			$(this).children().text("간단히 보기");
 		}
 	});
 });
@@ -41,8 +43,36 @@ $(function() {
                 </aside>
                 <article>
                     <nav>
+                        <c:choose>
+                    	<c:when test="${cate==null || cate.equals('member')}">
                         <h1>회원</h1>
-                        <h2>가장 자주 묻는 질문입니다.</h2>
+                        <h2>회원 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('event')}">
+                        <h1>쿠폰/이벤트</h1>
+                        <h2>쿠폰/이벤트 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('order')}">
+                        <h1>주문/결제</h1>
+                        <h2>주문/결제 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('deli')}">
+                        <h1>배송</h1>
+                        <h2>배송 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('cancle')}">
+                        <h1>취소/반품/교환</h1>
+                        <h2>취소/반품/교환 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('trip')}">
+                        <h1>여행/항공/숙박</h1>
+                        <h2>여행/항공/숙박 내용입니다.</h2>
+                        </c:when>
+                    	<c:when test="${cate.equals('safe')}">
+                        <h1>안전거래</h1>
+                        <h2>안전거래 내용입니다.</h2>
+                        </c:when>
+                        </c:choose>
                     </nav>
                     <c:forEach var="articles" items="${articlesList}" varStatus="i">
                     <div>

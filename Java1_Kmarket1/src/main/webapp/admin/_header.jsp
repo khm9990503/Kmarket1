@@ -75,9 +75,9 @@
 			            <li>
 			                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
 			                <ol>
-			                    <li><a href="/Java1_Kmarket1/admin/cs/list.do?group=notice">공지사항</a></li>
-			                    <li><a href="/Java1_Kmarket1/admin/cs/list.do?group=faq">자주묻는질문</a></li>
-			                    <li><a href="/Java1_Kmarket1/admin/cs/list.do?group=qna">문의하기</a></li>
+			                    <li class="lev"><a href="/Java1_Kmarket1/admin/cs/list.do?group=notice">공지사항</a></li>
+			                    <li class="lev"><a href="/Java1_Kmarket1/admin/cs/list.do?group=faq">자주묻는질문</a></li>
+			                    <li class="lev"><a href="/Java1_Kmarket1/admin/cs/list.do?group=qna">문의하기</a></li>
 			                </ol>
 			            </li>
 			        </ul>

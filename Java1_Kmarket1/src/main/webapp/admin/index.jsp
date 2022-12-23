@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
-
     <section id="admin-index">
         <nav>
             <h3>관리자 메인</h3>
