@@ -157,25 +157,27 @@ $(function() {
 		};
 		//console.log(jsonData);
 		//console.log(ordDelivery);
-		$.ajax({
-			url:"/Java1_Kmarket1/product/order.do",
-			method:"post",
-			async: false,
-			data:jsonData,
-			dataType:"json",
-			success:function(data){
-				if(data.result > 0){
-					
-					location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result;
-
-				}else{
-					alert("나중에 다시 시도해주세요.");
-				}
-			}
-		});
-
+		
+		let isCheck = confirm('해당 상품을 주문하시겠습니까?');
+		if(isCheck){
+			$.ajax({
+				url:"/Java1_Kmarket1/product/order.do",
+				method:"post",
+				async: false,
+				data:jsonData,
+				dataType:"json",
+				success:function(data){
+					if(data.result > 0){
+								location.href = "/Java1_Kmarket1/product/complete.do?ordNo="+data.result;
+					}else{
+						alert('나중에 다시 시도해주세요.');
+					}
+				}	
+			});
+		}else{
+			return;
+		}
 	});
-	
 });
 </script>
     <section class="order">

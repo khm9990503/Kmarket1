@@ -56,7 +56,8 @@ public class CartController extends HttpServlet {
 		
 		// 장바구니 출력
 		CartDao Cartdao = CartDao.getInstance();
-		List<CartVO> carts = Cartdao.selectCartsByUid(uid); // 해당 uid를 가진 회원의 장바구니 가져오기
+		List<CartVO> carts = null;
+		carts = Cartdao.selectCartsByUid(uid); // 해당 uid를 가진 회원의 장바구니 가져오기
 		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);

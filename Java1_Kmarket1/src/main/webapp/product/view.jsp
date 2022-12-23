@@ -64,10 +64,23 @@
 				dataType: 'json',
 				success: function(data){
 					if(${sessUser != null}){
-						if(confirm("장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?")){
-							location.href = "/Java1_Kmarket1/product/cart.do";
-						}else{
-							return;
+						if(data.result == 1){
+							// 장바구니에 이미 있는 경우
+							if(confirm("이미 있는 상품입니다. 장바구니에 추가하시겠습니까?")){
+								if(confirm("장바구니로 이동하시겠습니까?")){
+									location.href = "/Java1_Kmarket1/product/cart.do";
+								}else{
+									return;
+								}
+							}else{
+								return;
+							}
+						}else {
+							if(confirm('장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')){
+								location.href = "/Java1_Kmarket1/product/cart.do";
+							}else{
+								return;
+							}
 						}
 					}else{
 						alert('로그인 후 이용 가능합니다.');
@@ -85,6 +98,14 @@
 				alert('로그인 후 이용 가능합니다.');				
 				return;
 			}
+		});
+	});
+</script>
+<script>
+	$(function () {
+		$('a[href^="#"]').on('click', function() {  
+		    $('html, body').animate({scrollTop: $(this.hash).offset().top - 50}, 1000);
+		    return false;
 		});
 	});
 </script>
@@ -114,7 +135,7 @@
         
         <article class="info">
             <div class="image">
-                <img src="${product.thumb3}" alt="상품이미지"/>
+                <img src="${product.thumb2}" alt="상품이미지"/>
             </div>
             <div class="summary">
                 <nav>
@@ -124,7 +145,7 @@
                 <nav>
                     <h3>${product.prodName}</h3>
                     <p>${product.descript}</p>
-                    <h5 class="rating star${product.score}"><a href="#">상품평보기</a></h5>
+                    <h5 class="rating star${product.score}"><a href="#review">상품평보기</a></h5>
                 </nav>
                 <nav>
                     <div class="org_price">
@@ -191,7 +212,8 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="${product.detail}" alt="상세페이지1">
+            <img src="${product.thumb3}" alt="상세페이지1">
+            <img src="${product.detail}" alt="상세페이지2">
         </article>
 
         <!-- 상품 정보 제공 고시 내용 -->
@@ -286,7 +308,7 @@
         </article>
         
         <!-- 상품 리뷰 내용 -->
-        <article class="review">
+        <article class="review" id="review">
             <nav>
                 <h1>상품리뷰</h1>
             </nav>
@@ -306,17 +328,17 @@
             <div class="paging">
 	            <span class="prev">
 		            <c:if test="${pageGroupStart > 1}">
-		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${pageGroupStart - 1}#review"><&nbsp;이전</a>
 		            </c:if>
 		        </span>
 		        <span class="num">
 		            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${num}#review" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
 		            </c:forEach>
 		        </span>
 		        <span class="next">
 		            <c:if test="${pageGroupEnd < lastPageNum}">
-		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${pageGroupEnd + 1}#review">다음&nbsp;></a>
 		            </c:if>
 	            </span>
         </div>
