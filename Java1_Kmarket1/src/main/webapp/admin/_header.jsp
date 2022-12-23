@@ -72,6 +72,8 @@
 			                    <li><a href="#">배송관리</a></li>
 			                </ol>
 			            </li>
+			            <c:choose>
+                   		 <c:when test="${sessUser.level == '7'}">
 			            <li>
 			                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
 			                <ol>
@@ -80,5 +82,7 @@
 			                    <li><a href="/Java1_Kmarket1/admin/cs/list.do?group=qna">문의하기</a></li>
 			                </ol>
 			            </li>
+			            	</c:when>
+			            </c:choose>
 			        </ul>
 			    </aside>
