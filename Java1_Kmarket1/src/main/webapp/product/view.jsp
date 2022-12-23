@@ -286,7 +286,7 @@
         </article>
         
         <!-- 상품 리뷰 내용 -->
-        <article class="review">
+        <article id="review" class="review">
             <nav>
                 <h1>상품리뷰</h1>
             </nav>
@@ -311,7 +311,7 @@
 		        </span>
 		        <span class="num">
 		            <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${num}" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
+		                <a href="/Java1_Kmarket1/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${prodNo}&pg=${num}#review" class="num ${num == currentPage ? 'current':'off'}">${num}</a>
 		            </c:forEach>
 		        </span>
 		        <span class="next">

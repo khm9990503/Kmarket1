@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket1.dao.AdminProductListDao;
 import kr.co.kmarket1.dao.ProductDao;
+import kr.co.kmarket1.vo.MemberVO;
 import kr.co.kmarket1.vo.ProductVO;
 
 
@@ -23,7 +25,13 @@ public class AdminProductListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 세션에서 유저정보 들고오기
+		HttpSession session = req.getSession();
 		
+		MemberVO vo = (MemberVO) session.getAttribute("sessUser");
+		
+		int level = vo.getLevel();
+		String seller = vo.getCeo();
 		// 검색
 		String search = req.getParameter("search");
 		// 검색 카테고리
@@ -51,8 +59,11 @@ public class AdminProductListController extends HttpServlet{
 		pageGroupEnd= currentPageGroup * 10; //끝번호
 		
 		//전체 게시물 갯수
-		total = dao.selectCountTotal();
-		
+		if(level == 7) {
+			total = dao.selectCountTotal();
+		}else {
+			total = dao.selectCountTotalSeller(seller);
+		}
 		//마지막 페이지 번호
 		if(total % 10 == 0){
 			lastPageNum = total / 10;
@@ -75,13 +86,21 @@ public class AdminProductListController extends HttpServlet{
 		
 		
 		List<ProductVO> products = new ArrayList<>();
-		// search 검색, type 카테고리
-		if(search != null && type != null) {
-			products = dao.searchProductList(type, search);
+		if(level ==7 ) {
+			// search 검색, type 카테고리
+			if(search != null && type != null) {
+				products = dao.searchProductList(type, search);
+			}else {
+				products = dao.selectAdminProductList(start);
+			}
 		}else {
-			products = dao.selectAdminProductList(start);
+			// search 검색, type 카테고리
+			if(search != null && type != null) {
+				products = dao.searchProductList(seller, type, search);
+			}else {
+				products = dao.selectAdminProductList(seller, start);
+			}
 		}
-		
 		req.setAttribute("products", products);
 		
 		// view forward
