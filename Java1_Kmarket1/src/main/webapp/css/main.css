@@ -179,16 +179,16 @@ main > aside > .category .fa-angle-right {
 }
 
 main > aside > .category ol {
-    position: absolute;
-    left: 215px;
-    top: 0;
-    display: none;
-    width: 215px;
-    height: 100%;
-    border: 1px solid #787f89;
-    background: #fff;
-    box-sizing: border-box;
-    z-index: 10000;
+      position: absolute;
+      left: 215px;
+      top: 0;
+      display: none;
+      width: 215px;
+      height: 100%;
+      border: 1px solid #787f89;
+      background: #fff;
+      box-sizing: border-box;
+      z-index: 10000;
 }
 main > aside > .category ol > li {
     width: 100%;
@@ -201,7 +201,10 @@ main > aside > .category ol > li a {
 	font-weight: bold;
 	font-size: 1em;
 }
-
+main > aside .category ol > li > a:hover {
+     color: #41ab47;
+     text-decoration: underline;
+ }
 main > aside > .best {
     width: 215px;
     height: auto;
