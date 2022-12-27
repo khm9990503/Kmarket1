@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
-<!-- <script src="/Java1_Kmarket1/js/AdminProductRegister.js/"></script> -->
 <script type="text/javascript">
 	$(function(){
 		$("select[name=category1]").click(function(){
@@ -51,6 +50,12 @@
 			let dis = $('#discount').val();
 			$('.step_val').text("할인가 : "+(price-(price/100*dis)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +"원 ("+(price/100*dis).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원 할인)");
 		}
+		
+		$('.btnSb').click(function() {
+			let point = $('input[name=point]').val();
+			let pt = point.replaceAll(',','');
+			$('input[name=point]').val(pt);
+		});
 	});
 </script>
 <script>
@@ -221,8 +226,7 @@
                     </tr>
                 </table>                                
             </section>
-            <img alt="" src="/Java1_Kmarket1/thumb/20221210133441_51376.jpg">
-            <input type="submit" value="등록하기"/>
+            <input type="submit" class="btnSb" value="등록하기"/>
         </form>
     </article>
 

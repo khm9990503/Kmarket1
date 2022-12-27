@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp" />
 <script>
 	$(function(){
@@ -97,11 +98,11 @@
 				}
 			});
 		$('.totalCount').text(totalCount);
-		$('.totalPrice').text(totalPrice);			
-		$('.totalDiscount').text('-'+totalDiscount);			
-		$('.totalDelivery').text(totalDelivery);			
-		$('.totalPoint').text(totalPoint);			
-		$('.itemSum').text(itemSum+'원');			
+		$('.totalPrice').text(Number(totalPrice).toLocaleString());			
+		$('.totalDiscount').text('-'+Number(totalDiscount).toLocaleString());			
+		$('.totalDelivery').text(Number(totalDelivery).toLocaleString());			
+		$('.totalPoint').text(Number(totalPoint).toLocaleString());			
+		$('.itemSum').text(Number(itemSum).toLocaleString()+'원');			
 			
 		});
 		
@@ -173,16 +174,16 @@
                         </article>
                     </td>
                     <td>${cart.count}</td>
-                    <td>${cart.price}</td>
+                    <td><fmt:formatNumber value="${cart.price}" pattern="#,###"/></td>
                     <td>${cart.discount}%</td>
-                    <td>${cart.point}</td>
+                    <td><fmt:formatNumber value="${cart.point}" pattern="#,###"/></td>
                     <c:if test="${cart.delivery > 0}">
-                    <td>${cart.delivery}</td>
+                    <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###"/></td>
                     </c:if>
                     <c:if test="${cart.delivery eq '0'}">
                     <td>무료배송</td>
                     </c:if>
-                    <td>${cart.total}</td>
+                    <td><fmt:formatNumber value="${cart.total}" pattern="#,###"/></td>
                 </tr>
                 
             </c:forEach>    

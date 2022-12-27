@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp" />
    <section class="list">
        <!-- 제목, 페이지 네비게이션 -->
@@ -47,16 +48,16 @@
                        <li>
                        <c:choose>
                        	<c:when test="${product.discount == '0'}">
-                           <ins class="dis-price">${product.price}</ins>
+                           <ins class="dis-price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></ins>
                         </c:when>
                        	<c:when test="${product.discount != '0'}">
-                           <ins class="dis-price">${Math.round(product.price*(100-product.discount)/100)}</ins>
+                           <ins class="dis-price"><fmt:formatNumber value="${Math.round(product.price*(100-product.discount)/100)}" pattern="#,###"/></ins>
                         </c:when>
                        </c:choose>
                        </li>
                        <li>
                        <c:if test="${product.discount != '0'}">
-                           <del class="org-price">${product.price}</del>
+                           <del class="org-price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></del>
                            <span class="discount">${product.discount}%</span>
                        </li>
                        </c:if>
@@ -66,7 +67,7 @@
 	                       		<span class="free-delivery">무료배송</span>
 	                       	</c:when>
 	                       	<c:when test="${product.delivery != '0' }">
-	                       		<span class="delivery">배송비 : ${product.delivery}원</span>
+	                       		<span class="delivery">배송비 : <fmt:formatNumber value="${product.delivery}" pattern="#,###"/>원</span>
 	                       	</c:when>
 	                       </c:choose>
                        </li>
