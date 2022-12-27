@@ -137,7 +137,7 @@
                         <li>
                             <a href="/Java1_Kmarket1/product/view.do?prodNo=${best.prodNo}&prodCate1=${best.prodCate1}&prodCate2=${best.prodCate2}">
                                 <div class="thumb">
-                                    <i>1</i>
+                                    <i>${b.count}</i>
                                     <img src="${best.thumb1}" alt="BestItem">
                                 </div>
                                 <h2>${best.prodName}</h2>

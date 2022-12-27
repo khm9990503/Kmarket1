@@ -56,6 +56,66 @@
 			let pt = point.replaceAll(',','');
 			$('input[name=point]').val(pt);
 		});
+		// 상품등록 유효성 검사
+		$('#admin-product-register form').submit(function() {
+			let cate2 = $('select[name=category2]').val(); // 카테고리 유효성
+			let price = $('input[name=price]').val(); // price 유효성
+			let prodName = $('input[name=prodName]').val(); // prodName 유효성
+			let company = $('input[name=company]').val(); // company 유효성
+			let seller = $('input[name=seller]').val(); // seller 유효성
+			let stock = $('input[name=stock]').val(); // stock 유효성
+			let delivery = $('input[name=delivery]').val(); // delivery 유효성
+			let thumb1 = $('input[name=thumb1]').val(); // thumb1 유효성
+			let thumb2 = $('input[name=thumb2]').val(); // thumb2 유효성
+			let thumb3 = $('input[name=thumb3]').val(); // thumb3 유효성
+			let detail = $('input[name=detail]').val(); // detail 유효성
+			
+			if(cate2 == 0){
+				alert('카테고리를 선택해주세요.');
+				return false;
+			}
+			if(prodName == ''){
+				alert('상품이름을 입력해주세요.')
+				return false;
+			}
+			if(price == ''){
+				alert('판매가격을 입력해주세요.')
+				return false;
+			}
+			if(company == ''){
+				alert('제조사를 입력해주세요.')
+				return false;
+			}
+			if(seller == ''){
+				alert('판매자를 입력해주세요.')
+				return false;
+			}
+			if(stock == ''){
+				alert('재고수량을 입력해주세요.')
+				return false;
+			}
+			if(delivery == ''){
+				alert('배송비를 입력해주세요.')
+				return false;
+			}
+			if(thumb1 == ''){
+				alert('썸네일1을 첨부해주세요.')
+				return false;
+			}
+			if(thumb1 == ''){
+				alert('썸네일2을 첨부해주세요.')
+				return false;
+			}
+			if(thumb1 == ''){
+				alert('썸네일3을 첨부해주세요.')
+				return false;
+			}
+			if(detali == ''){
+				alert('상세설명을 첨부해주세요.')
+				return false;
+			}
+			
+		});
 	});
 </script>
 <script>
@@ -104,7 +164,7 @@
                                 <td>2차 분류</td>
                                 <td>
                                     <select name="category2">
-                                        <option value="cate0">2차 분류 선택</option>
+                                        <option value="0">2차 분류 선택</option>
                                         <!-- ajax로 cate2 넣을자리 -->
                                     </select>
                                 </td>
