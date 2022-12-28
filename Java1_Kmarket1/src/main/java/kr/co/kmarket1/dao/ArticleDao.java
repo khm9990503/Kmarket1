@@ -96,12 +96,39 @@ public class ArticleDao extends DBHelper{
 		return articles;
 	}
 	// CS인덱스용 리스트 불러오기
-	public List<ArticleVO> selectArticlesByGroupIdx(String group, int top) {
+	public List<ArticleVO> selectArticlesByGroupIdxQ(String group, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
-			logger.info("selectArticlesByGroupIdx start...");
+			logger.info("selectArticlesByGroupIdxQ start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement("select * from `km_article` where `group`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?;");
+			psmt = conn.prepareStatement("select a.*,b.c2Name from `km_article` as a join `km_article_cate` as b on a.cate2=b.cate2 where `group`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?");
+			psmt.setString(1, group);
+			psmt.setInt(2, top);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO article = new ArticleVO();
+				article.setNo(rs.getInt(1));
+				article.setGroup(rs.getString(4));
+				article.setCate(rs.getString(5));
+				article.setTitle(rs.getString(7));
+				article.setUid(rs.getString(11).substring(0,3));
+				article.setRdate(rs.getString(13).substring(2,10));
+				article.setC2Name(rs.getString(14));
+				
+				articles.add(article);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	public List<ArticleVO> selectArticlesByGroupIdxN(String group, int top) {
+		List<ArticleVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesByGroupIdxN start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("select * from `km_article` where `group`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?");
 			psmt.setString(1, group);
 			psmt.setInt(2, top);
 			rs = psmt.executeQuery();
@@ -128,7 +155,7 @@ public class ArticleDao extends DBHelper{
 		try {
 			logger.info("selectArticlesByCate start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement("select * from `km_article` where `group`=? AND `cate`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10;");
+			psmt = conn.prepareStatement("SELECT a.*,b.c2Name from `km_article` AS a JOIN `km_article_cate` AS b ON a.cate2=b.cate2  where `group`=? AND a.cate=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10");
 			psmt.setString(1, group);
 			psmt.setString(2, cate);
 			psmt.setInt(3, top);
@@ -139,9 +166,11 @@ public class ArticleDao extends DBHelper{
 				article.setComment(rs.getInt(3));
 				article.setGroup(rs.getString(4));
 				article.setCate(rs.getString(5));
+				article.setCate2(rs.getString(6));
 				article.setTitle(rs.getString(7));
 				article.setUid(rs.getString(11).substring(0,3));
 				article.setRdate(rs.getString(13).substring(2,10));
+				article.setC2Name(rs.getString(14));
 				
 				articles.add(article);
 			}
