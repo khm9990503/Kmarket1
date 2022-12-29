@@ -76,6 +76,9 @@
 			let price = $(cls).text();
 			$(cls).text(Number(price).toLocaleString());
 		}
+		$('#top').click(function(){
+            $(window).scrollTop(0);
+        });
 	});
 </script>
         <main>
