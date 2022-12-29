@@ -107,7 +107,7 @@ public class CSListController extends HttpServlet{
 			if(cate==null) {
 				articles = AD.selectArticlesByGroup(group, start);
 			}else {
-				articles = AD.selectArticlesByCate(group, cate, start);
+				articles = AD.selectArticlesByCateN(group, cate, start);
 			}
 		}else if(group.equals("faq")) {
 			artiCate2s = CateDao.getInstance().selectArtiCates_2();
@@ -130,6 +130,7 @@ public class CSListController extends HttpServlet{
 		}
 		
 		req.setAttribute("cate", cate);
+		req.setAttribute("cate2", cate2);
 		req.setAttribute("pg", pg);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
