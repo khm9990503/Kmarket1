@@ -70,7 +70,10 @@ $(function() {
                     	<c:forEach var="article" items="${articles}">
                         <tr>
                             <td>
-                                <a href="/Java1_Kmarket1/cs/qna/view.do?no=${article.no}&cate=${article.cate}">${article.title }</a>
+                                <a href="/Java1_Kmarket1/cs/qna/view.do?no=${article.no}&cate=${article.cate}">
+                                [${article.c2Name}]
+                                ${article.title}
+                                </a>
                             </td>
                             <c:choose>
                             	<c:when test="${article.comment == 0}">

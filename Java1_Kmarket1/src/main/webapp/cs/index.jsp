@@ -71,7 +71,7 @@
                 <ul>
                 	<c:forEach var="qna" items="${qnas}">
                     <li>
-                        <a href="/Java1_Kmarket1/cs/qna/list.do?group=${qna.group}&cate=${qna.cate}" class="title">${qna.title }</a>
+                        <a href="/Java1_Kmarket1/cs/qna/view.do?no=${qna.no}&cate=${qna.cate}" class="title">[${qna.c2Name}]${qna.title }</a>
                         <p>
                             <span class="uid">${qna.uid}***</span>
                             <span class="date">${qna.rdate }</span>

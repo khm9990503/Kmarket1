@@ -44,10 +44,10 @@ $(function() {
       		tag += "</div>";
    			tag += "</article>";
  			tag += "</td>";
-			tag += "<td>"+prcs[i]+"원</td>";
+			tag += "<td>"+Number(prcs[i]).toLocaleString()+"원</td>";
 			tag += "<td>"+dcs[i]+"</td>";
 			tag += "<td>"+cnts[i]+"</td>";
-			tag += "<td>"+tots[i]+"</td>";
+			tag += "<td>"+Number(tots[i]).toLocaleString()+"원</td>";
 			tag += "</tr>";
 		$('.total').before(tag);
 	}
@@ -75,7 +75,7 @@ $(function() {
                 <tr>
                     <th>상품명</th>
                     <th>상품금액</th>
-                    <th>할인금액</th>
+                    <th>할인</th>
                     <th>수량</th>
                     <th>주문금액</th>
                 </tr>
@@ -89,23 +89,23 @@ $(function() {
                         <c:forEach var="order" items="${orders}">
                             <tr>
                                 <td>총 상품금액</td>
-                                <td><span>${order.ordPrice}</span>원</td>
+                                <td><span><fmt:formatNumber value="${order.ordPrice}" pattern="#,###"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>총 할인금액</td>
-                                <td><span>-${order.ordDiscount}</span>원</td>
+                                <td><span><fmt:formatNumber value="${order.ordDiscount * -1}" pattern="#,###"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td><span>${order.ordDelivery}</span>원</td>
+                                <td><span><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
-                                <td><span>-${order.usedPoint}</span>원</td>
+                                <td><span><fmt:formatNumber value="${order.usedPoint * -1}" pattern="#,###"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>총 결제금액</td>
-                                <td><span>${order.ordTotPrice}</span>원</td>
+                                <td><span><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###"/></span>원</td>
                             </tr>
                          </c:forEach>   
                         </table>
@@ -124,7 +124,7 @@ $(function() {
                     <td>주문번호</td>
                     <td>${order.ordNo }</td>
                     <td rowspan="3">총 결제금액</td>
-                    <td rowspan="3"><span>${order.ordTotPrice}</span>원</td>
+                    <td rowspan="3"><span><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###"/></span>원</td>
                 </tr>
                 <tr>
                     <td>결제방법</td>

@@ -13,14 +13,14 @@
 		let discount = parseInt($('input[name=discount]').val());
 		let delivery = parseInt($('input[name=delivery]').val());
 		let totalPrice = 1 * Math.round(price*(100-discount)/100) + delivery;
-		$('.total > span').text(totalPrice);
+		$('.total > span').text(totalPrice.toLocaleString());
 		
 		$('.increase').on('click', function(){
 			let quantity = $(this).parent("div").find("input").val();
 			$(this).parent("div").find("input").val(++quantity);
 			let count = parseInt($('input[name=num]').val());
 			let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
-			$('.total > span').text(totalPrice);
+			$('.total > span').text(totalPrice.toLocaleString());
 		});
 		
 		$(".decrease").on("click", function(){
@@ -30,7 +30,7 @@
 			}
 			let count = parseInt($('input[name=num]').val());
 			let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
-			$('.total > span').text(totalPrice);
+			$('.total > span').text(totalPrice.toLocaleString());
 		});
 		
 		// 장바구니 클릭
@@ -44,7 +44,7 @@
 			let point = $('input[name=point]').val();
 			let delivery = $('input[name=delivery]').val();
 			let thumb1 = $('input[name=thumb1]').val();
-			let total = $('.total > span').text();
+			let total = $('.total > span').text().replaceAll(',','');
 			
 			let jsonData = {
 					"uid": uid,

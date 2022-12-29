@@ -5,6 +5,9 @@
 <jsp:include page="./_header.jsp" />
 <script>
 $(function() {
+	let isOnce = 0;
+	
+	
 	$('.btnPoint').click(function() {
 		let point = $(this).prev().val();
 		let userPoint = ${sessUser.point};
@@ -17,12 +20,18 @@ $(function() {
 				alert('현재 포인트보다 많이 사용할 수 없습니다.');
 				return false;
 			}
-			$('.pointDC').text(point);
-			let finTot = parseInt($('.finTot').text());
-			let result = finTot-point;
-			$('.pointDC').removeAttr("style");
-			$('.finTot').text(result);
 			
+			if(isOnce == 0){
+				$('.pointDC').text(Number(point).toLocaleString());
+				const finTot = parseInt($('.finTot').text().replaceAll(',',''));
+				let result = finTot-point;
+				$('.pointDC').removeAttr("style");
+				$('.finTot').text(result.toLocaleString());
+				isOnce = 1;
+			}else{
+				alert('한 번 적용이 가능합니다.');
+				return false;
+			}
 		}
 	});
 	$('.btOrd').click(function() {
@@ -51,12 +60,12 @@ $(function() {
 		let recipAddr2 = $('input[name=addr2]').val();
 		let ordUid = $('input[name=uid]').val();
 		let ordCount = parseInt($('.ordCount').text());
-		let ordPrice = parseInt($('.ordPrice').text());
-		let ordDiscount = parseInt($('.ordDiscount').text());
-		let ordDelivery = parseInt($('.ordDelivery').text());
-		let savePoint = parseInt($('.savePoint').text());
-		let usedPoint = parseInt($('.pointDC').text());
-		let ordTotPrice = parseInt($('.finTot').text());
+		let ordPrice = parseInt($('.ordPrice').text().replaceAll(',',''));
+		let ordDiscount = parseInt($('.ordDiscount').text().replaceAll(',',''));
+		let ordDelivery = parseInt($('.ordDelivery').text().replaceAll(',',''));
+		let savePoint = parseInt($('.savePoint').text().replaceAll(',',''));
+		let usedPoint = parseInt($('.pointDC').text().replaceAll(',',''));
+		let ordTotPrice = parseInt($('.finTot').text().replaceAll(',',''));
 		let ordPayment = $('input[name=payment]:checked').val();
 		
 		// complete에 보낼 정보를 리스트에 넣기
@@ -88,7 +97,7 @@ $(function() {
 			cnt_arr.push(cnt);
 		});
 		$('.prc').each(function(){
-			let prc = $(this).text();
+			let prc = $(this).text().replaceAll(',','');
 			prc_arr.push(prc);
 		});
 		$('.dc').each(function(){
@@ -96,15 +105,15 @@ $(function() {
 			dc_arr.push(dc);
 		});
 		$('.pt').each(function(){
-			let pt = $(this).text();
+			let pt = $(this).text().replaceAll(',','');
 			pt_arr.push(pt);
 		});
 		$('.deli').each(function(){
-			let deli = $(this).text();
+			let deli = $(this).text().replaceAll(',','');
 			deli_arr.push(deli);
 		});
 		$('.tot').each(function(){
-			let tot = $(this).text();
+			let tot = $(this).text().replaceAll(',','');
 			tot_arr.push(tot);
 		});
 		$('input[name=ca1]').each(function(){
@@ -220,11 +229,18 @@ $(function() {
 		                        </article>
 		                    </td>
 		                    <td class="cnt">${count}</td>
-		                    <td class="prc">${product.price}</td>
+		                    <td class="prc"><fmt:formatNumber value="${product.price}" pattern="#,###"/></td>
 		                    <td class="dc">${product.discount}%</td>
-		                    <td class="pt">${product.point}</td>
-		                    <td class="deli">${product.delivery==0?'무료배송':product.delivery}</td>
-		                    <td class="tot">${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}</td>
+		                    <td class="pt"><fmt:formatNumber value="${product.point}" pattern="#,###"/></td>
+		                    <c:choose>
+		                    	<c:when test="${product.delivery==0}">
+		                    		<td class="deli">무료배송</td>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<td class="deli"><fmt:formatNumber value="${product.delivery}" pattern="#,###"/></td>
+		                    	</c:otherwise>
+		                    </c:choose>
+		                    <td class="tot"><fmt:formatNumber value="${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}" pattern="#,###"/></td>
 		                </tr>
                 	</c:when>
                 	<c:when test="${product == null}">
@@ -244,11 +260,18 @@ $(function() {
 		                        </article>
 		                    </td>
 		                    <td class="cnt">${cart.count}</td>
-		                    <td class="prc">${cart.price}</td>
+		                    <td class="prc"><fmt:formatNumber value="${cart.price}" pattern="#,###"/></td>
 		                    <td class="dc">${cart.discount}%</td>
-		                    <td class="pt">${cart.point}</td>
-		                    <td class="deli">${cart.delivery==0?'무료배송':cart.delivery}</td>
-		                    <td class="tot">${cart.total}</td>
+		                    <td class="pt"><fmt:formatNumber value="${cart.point}" pattern="#,###"/></td>
+             		        <c:choose>
+		                    	<c:when test="${cart.delivery==0}">
+		                    		<td class="deli">무료배송</td>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<td class="deli"><fmt:formatNumber value="${cart.delivery}" pattern="#,###"/></td>
+		                    	</c:otherwise>
+		                    </c:choose>
+		                    <td class="tot"><fmt:formatNumber value="${cart.total}" pattern="#,###"/></td>
 		                </tr>
 		                </c:forEach>
                 	</c:when>
@@ -271,12 +294,12 @@ $(function() {
                         	<c:forEach var="cart" items="${cartList}">
                         	<c:set var="sum" value="${sum+cart.price}"/>
                         	</c:forEach>
-                        	<c:out  value="${sum}"/>
+                        	<fmt:formatNumber value="${sum}" pattern="#,###"/>
                         </td>
                         </c:when>
                         <c:otherwise>
                         <td class="ordPrice">
-                        	${product.price}
+                        	<fmt:formatNumber value="${product.price * count}" pattern="#,###"/>
                         </td>
                         </c:otherwise>
                         </c:choose>
@@ -290,12 +313,12 @@ $(function() {
                        	<c:set var="sum" value="${sum+Math.round(cart.price*(cart.discount/100))}"/>
                        	</c:forEach>
                         <td class="ordDiscount">
-                        	<c:out  value="${sum}"/>
+                        	<fmt:formatNumber value="${sum}" pattern="#,###"/>
                         </td>
                         </c:when>
                         <c:otherwise>
                         <td class="ordDiscount">
-                        	${Math.round(product.price*(product.discount/100))}
+                        	<fmt:formatNumber value="${Math.round(product.price*(product.discount/100)) * count}" pattern="#,###"/>
                         </td>
                         </c:otherwise>
                         </c:choose>
@@ -309,12 +332,12 @@ $(function() {
                         	<c:forEach var="cart" items="${cartList}">
                         	<c:set var="sum" value="${sum+cart.delivery}"/>
                         	</c:forEach>
-                        	<c:out  value="${sum}"/>
+                        	<fmt:formatNumber value="${sum}" pattern="#,###"/>
                         </td>
                         </c:when>
                         <c:otherwise>
                         <td class="ordDelivery">
-                        	${Math.round(product.price*(product.discount/100))}
+                        	<fmt:formatNumber value="${product.delivery}" pattern="#,###"/>
                         </td>
                         </c:otherwise>
                         </c:choose>
@@ -332,12 +355,12 @@ $(function() {
                         	<c:forEach var="cart" items="${cartList}">
                         	<c:set var="sum" value="${sum+cart.total}"/>
                         	</c:forEach>
-                        	<c:out  value="${sum}"/>
+                        	<fmt:formatNumber value="${sum}" pattern="#,###"/>
                         </td>
                         </c:when>
                         <c:otherwise>
                         <td class="finTot">
-                        	${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}
+                        	<fmt:formatNumber value="${Math.round(product.price*(100-product.discount)/100)*count+product.delivery}" pattern="#,###"/>
                         </td>
                         </c:otherwise>
                         </c:choose>
@@ -349,14 +372,14 @@ $(function() {
                         <td class="savePoint">
                         	<c:set var="sum" value="0"/>
                         	<c:forEach var="cart" items="${cartList}">
-                        	<c:set var="sum" value="${sum+cart.point}"/>
+                        	<c:set var="sum" value="${sum+(cart.point*cart.count)}"/>
                         	</c:forEach>
-                        	<c:out  value="${sum}"/>
+                        	<fmt:formatNumber value="${sum}" pattern="#,###"/>
                         </td>
                         </c:when>
                         <c:otherwise>
                         <td class="savePoint">
-                        	${product.point}
+                        	<fmt:formatNumber value="${product.point * count}" pattern="#,###"/>
                         </td>
                         </c:otherwise>
                         </c:choose>
@@ -401,7 +424,7 @@ $(function() {
             <article class="discount">
                 <h1>할인정보</h1>
                 <div>
-                    <p>현재 포인트 : <span class="userPoint">${sessUser.point}</span>점</p>
+                    <p>현재 포인트 : <span class="userPoint"><fmt:formatNumber value="${sessUser.point}" pattern="#,###"/></span>점</p>
                     <label>
                         <input type="number" name="point" />점
                         <input type="button" class="btnPoint" value="적용"/>

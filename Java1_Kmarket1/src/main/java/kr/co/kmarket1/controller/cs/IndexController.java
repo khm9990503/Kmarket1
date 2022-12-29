@@ -28,8 +28,8 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArticleDao ad = ArticleDao.getInstance();
-		List<ArticleVO> notices = ad.selectArticlesByGroupIdx("notice",5);
-		List<ArticleVO> qnas = ad.selectArticlesByGroupIdx("qna",5);
+		List<ArticleVO> notices = ad.selectArticlesByGroupIdxN("notice",5);
+		List<ArticleVO> qnas = ad.selectArticlesByGroupIdxQ("qna",5);
 		
 		req.setAttribute("notices", notices);
 		req.setAttribute("qnas", qnas);

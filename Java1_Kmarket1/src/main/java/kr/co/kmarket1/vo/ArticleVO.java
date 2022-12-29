@@ -23,6 +23,8 @@ public class ArticleVO {
 	
 	private String fname;
 	
+	private String c2Name;
+	
 	public int getNo() {
 		return no;
 	}
@@ -149,5 +151,13 @@ public class ArticleVO {
 	
 	public void setCate2(String cate2) {
 		this.cate2 = cate2;
+	}
+	
+	public String getC2Name() {
+		return c2Name;
+	}
+	
+	public void setC2Name(String c2Name) {
+		this.c2Name = c2Name;
 	}
 }

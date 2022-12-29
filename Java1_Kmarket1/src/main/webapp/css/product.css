@@ -717,6 +717,9 @@
     font-size: 20px;
     font-weight: bold;
 }
+#product > .order > form > .final > table tr:nth-last-child(2) td:last-child:after{
+	content: "원";
+}
 #product > .order > form > .final > input[type=button] {
     width: 100%;
     height: 56px;
