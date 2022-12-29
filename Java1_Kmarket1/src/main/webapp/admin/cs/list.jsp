@@ -3,6 +3,31 @@
 <jsp:include page="../_header.jsp"/>
 <script>
 $(function(){
+	// 
+	let ca = $("select[name=cate]").val();
+	let jsonData = {
+			"cate":ca
+	}
+	$.ajax({
+		url:'/Java1_Kmarket1/cs/qna/artiCate2list.do',
+		method:'POST',
+		data:jsonData,
+		dataType:'json',
+		success:function(data){
+			//console.log(data)
+			for(let vo of data){
+				let ca2 = $('input[name=cate2]').val();
+				//console.log(ca2);
+				let tag = null;
+				if(ca2==vo.artiCate2){
+					tag = "<option class='opt' value="+vo.artiCate2+" selected>"+vo.c2Name+"</option>";
+				}else{
+					tag = "<option class='opt' value="+vo.artiCate2+">"+vo.c2Name+"</option>";
+				}
+                $('select[name=cate2]').append(tag); // select에 option을 뒤에 붙임
+            }
+		}
+	});
 	// 1차 유형 선택 시 2차 유형 카테고리 불러오기
 	$("select[name=cate]").on("click",function(){
 		let cate = $(this).val(); // 선택된 option의 value = select의 value
@@ -144,21 +169,21 @@ $(function(){
     <select name="cate" id="cate">
     	<c:choose>
     	<c:when test="${group.equals('notice')}">
-    	<option value="0" ${cate == '0'? 'selected="selected"' : '' } >유형선택</option>
-    	<option value="service" ${cate == 'service'? 'selected="selected"' : '' }>고객서비스</option>
-    	<option value="deal" ${cate == 'deal'? 'selected="selected"' : '' }>안전거래</option>
-    	<option value="danger" ${cate == 'danger'? 'selected="selected"' : '' }>위해상품</option>
-    	<option value="lucky" <c:if test="${cate eq 'lucky'}">selected</c:if>>이벤트당첨</option>
+    	<option value="0">유형선택</option>
+    	<option value="service" ${cate == 'service'? 'selected' : '' }>고객서비스</option>
+    	<option value="deal" ${cate == 'deal'? 'selected' : '' }>안전거래</option>
+    	<option value="danger" ${cate == 'danger'? 'selected' : '' }>위해상품</option>
+    	<option value="lucky" ${cate == 'danger'? 'selected' : '' }>이벤트당첨</option>
     	</c:when>
     	<c:when test="${group.equals('qna') || group.equals('faq') }">
     	<option value="0">1차유형</option>
-    	<option value="member">회원</option>
-    	<option value="event">쿠폰/이벤트</option>
-    	<option value="order">주문/결제</option>
-    	<option value="deli">배송</option>
-    	<option value="cancle">취소/반품/교환</option>
-    	<option value="trip">여행/항공/숙박</option>
-    	<option value="safe">안전거래</option>
+    	<option value="member" ${cate == 'member'? 'selected' : '' }>회원</option>
+    	<option value="event" ${cate == 'event'? 'selected' : '' }>쿠폰/이벤트</option>
+    	<option value="order" ${cate == 'order'? 'selected' : '' }>주문/결제</option>
+    	<option value="deli" ${cate == 'deli'? 'selected' : '' }>배송</option>
+    	<option value="cancle" ${cate == 'cancle'? 'selected' : '' }>취소/반품/교환</option>
+    	<option value="trip" ${cate == 'trip'? 'selected' : '' }>여행/항공/숙박</option>
+    	<option value="safe" ${cate == 'safe'? 'selected' : '' }>안전거래</option>
     	</c:when>
     	</c:choose>
     </select>

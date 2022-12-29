@@ -150,6 +150,36 @@ public class ArticleDao extends DBHelper{
 		return articles;
 	}
 	// 공지사항 리스트 불러오기 
+	public List<ArticleVO> selectArticlesByCateN(String group, String cate, int top) {
+		List<ArticleVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesByCateN start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * from `km_article` where `group`=? AND `cate`=? and `parent`=0 ORDER BY `no` DESC LIMIT ?,10");
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			psmt.setInt(3, top);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO article = new ArticleVO();
+				article.setNo(rs.getInt(1));
+				article.setComment(rs.getInt(3));
+				article.setGroup(rs.getString(4));
+				article.setCate(rs.getString(5));
+				article.setCate2(rs.getString(6));
+				article.setTitle(rs.getString(7));
+				article.setUid(rs.getString(11).substring(0,3));
+				article.setRdate(rs.getString(13).substring(2,10));
+				
+				articles.add(article);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	// 문의하기 리스트 불러오기 
 	public List<ArticleVO> selectArticlesByCate(String group, String cate, int top) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {

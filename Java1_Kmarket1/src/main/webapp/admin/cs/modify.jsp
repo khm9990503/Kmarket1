@@ -3,8 +3,33 @@
 <jsp:include page="../_header.jsp"/>
 <script type="text/javascript">
 $(function(){
+	let ca = $("select[name=cate]").val();
+	let jsonData = {
+			"cate":ca
+	}
+	$.ajax({
+		url:'/Java1_Kmarket1/cs/qna/artiCate2list.do',
+		method:'POST',
+		data:jsonData,
+		dataType:'json',
+		success:function(data){
+			//console.log(data)
+			for(let vo of data){
+				let ca2 = $('input[name=cate2]').val();
+				let tag = null;
+				if(ca2==vo.artiCate2){
+					tag = "<option class='opt' value="+vo.artiCate2+" selected>"+vo.c2Name+"</option>";
+				}else{
+					tag = "<option class='opt' value="+vo.artiCate2+">"+vo.c2Name+"</option>";
+				}
+                $('select[name=cate2]').append(tag); // select에 option을 뒤에 붙임
+            }
+		}
+	});
+	
+	
 	// 1차 유형 선택 시 2차 유형 카테고리 불러오기
-	$("select[name=cate]").on("click",function(){
+	$("select[name=cate]").on("change",function(){
 		let cate = $(this).val(); // 선택된 option의 value = select의 value
 		let jsonData = {
 				"cate":cate
@@ -24,7 +49,7 @@ $(function(){
 			}
 		});
 	});
-	// 문의글 작성 유효성 검사
+	// 글수정 유효성 검사
 	$('.write form').submit(function() {
 		let cate2 = $('select[name=cate2]').val(); // 카테고리 유효성
 		let title = $('input[name=title]').val(); // 제목 유효성
@@ -69,6 +94,7 @@ $(function(){
     <article>
         <form action="/Java1_Kmarket1/admin/cs/modify.do" method="post">
        	<input type="hidden" name="group" value="${group}">
+       	<input type="hidden" name="cate2" value="${article.cate2}">
        	<input type="hidden" name="uid" value="${sessUser.uid}">
        	<input type="hidden" name="no" value="${no}">
            <table>
@@ -79,20 +105,20 @@ $(function(){
 					    	<c:choose>
 					    	<c:when test="${group.equals('notice')}">
 					    	<option value="0">유형선택</option>
-					    	<option value="service">고객서비스</option>
-					    	<option value="deal">안전거래</option>
-					    	<option value="danger">위해상품</option>
-					    	<option value="lucky">이벤트당첨</option>
+					    	<option value="service" ${article.cate=='service'?'selected':''}>고객서비스</option>
+					    	<option value="deal" ${article.cate=='deal'?'selected':''}>안전거래</option>
+					    	<option value="danger" ${article.cate=='danger'?'selected':''}>위해상품</option>
+					    	<option value="lucky" ${article.cate=='lucky'?'selected':''}>이벤트당첨</option>
 					    	</c:when>
 					    	<c:when test="${group.equals('qna') || group.equals('faq') }">
 					    	<option value="0">1차유형</option>
-					    	<option value="member">회원</option>
-					    	<option value="event">쿠폰/이벤트</option>
-					    	<option value="order">주문/결제</option>
-					    	<option value="deli">배송</option>
-					    	<option value="cancle">취소/반품/교환</option>
-					    	<option value="trip">여행/항공/숙박</option>
-					    	<option value="safe">안전거래</option>
+					    	<option value="member" ${article.cate=='member'?'selected':''}>회원</option>
+					    	<option value="event" ${article.cate=='event'?'selected':''}>쿠폰/이벤트</option>
+					    	<option value="order" ${article.cate=='order'?'selected':''}>주문/결제</option>
+					    	<option value="deli" ${article.cate=='deli'?'selected':''}>배송</option>
+					    	<option value="cancle" ${article.cate=='cancle'?'selected':''}>취소/반품/교환</option>
+					    	<option value="trip" ${article.cate=='trip'?'selected':''}>여행/항공/숙박</option>
+					    	<option value="safe" ${article.cate=='safe'?'selected':''}>안전거래</option>
 					    	</c:when>
 					    	</c:choose>
 					   </select>
