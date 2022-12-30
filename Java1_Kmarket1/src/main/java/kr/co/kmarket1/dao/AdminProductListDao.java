@@ -246,6 +246,7 @@ public class AdminProductListDao extends DBHelper{
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
+			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -262,6 +263,7 @@ public class AdminProductListDao extends DBHelper{
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
+			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}

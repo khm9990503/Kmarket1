@@ -34,6 +34,7 @@ public class TermsDao extends DBHelper{
 				vo.setLocation(rs.getString(3));
 				vo.setFinance(rs.getString(4));
 			}
+			close();
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
@@ -57,6 +58,7 @@ public class TermsDao extends DBHelper{
 				vo.setFinance(rs.getString(4));
 				vo.setTax(rs.getString(5));
 			}
+			close();
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
