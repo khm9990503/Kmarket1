@@ -17,14 +17,14 @@
 ## member
 ### 로그인 :  http://3.35.170.228:8080/Java1_Kmarket1/member/login.do
 ### 회원가입 :  http://3.35.170.228:8080/Java1_Kmarket1/member/join.do
-### 약관동의 :  http://3.35.170.228:8080/Java1_Kmarket1/member/signup.do
+### 약관동의 :  http://3.35.170.228:8080/Java1_Kmarket1/member/signup.do?type=normal
 ### 회원가입 :  http://3.35.170.228:8080/Java1_Kmarket1/member/register.do (일반회원)
 ### 회원가입 :  http://3.35.170.228:8080/Java1_Kmarket1/member/registerSeller.do (판매회원)
 
 ## admin
-### 관리자 메인 :  http://3.35.170.228:8080/Java1_Kmarket1/admin/index.do
-### 상품관리/목록 :  http://3.35.170.228:8080/Java1_Kmarket1/admin/product/list.do
-### 상품관리/등록 :  http://3.35.170.228:8080/Java1_Kmarket1/admin/product/register.do
+### 관리자 메인 :  http://3.35.170.228:8080/Java1_Kmarket1/admin/index.do (로그인 후 이용가능)
+### 상품관리/목록 :  http://3.35.170.228:8080/Java1_Kmarket1/admin/product/list.do (로그인 후 이용가능)
+### 상품관리/등록 :  http://3.35.170.228:8080/Java1_Kmarket1/admin/product/register.do (로그인 후 이용가능)
 
 ## cs 
 ### 고객센터 메인 :  http://3.35.170.228:8080/Java1_Kmarket1/cs/index.do
